@@ -3,11 +3,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "SolidStateDemo",
+    name: "DeirdreDevPublish",
+    platforms: [
+        .macOS(.v10_15),
+    ],
     products: [
         .library(
-            name: "SolidStateDemo",
-            targets: ["SolidStateDemo"]
+            name: "DeirdreDevPublish",
+            targets: ["DeirdreDevPublish"]
         )
     ],
     dependencies: [
@@ -15,12 +18,12 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "SolidStateDemo",
+            name: "DeirdreDevPublish",
             dependencies: ["Publish"]
         ),
         .testTarget(
-            name: "SolidStateDemoTests",
-            dependencies: ["SolidStateDemo"]
+            name: "DeirdreDevPublishTests",
+            dependencies: ["DeirdreDevPublish"]
         )
     ]
 )

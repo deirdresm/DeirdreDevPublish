@@ -3,8 +3,17 @@ import Publish
 import Plot
 
 // This type acts as the configuration for your website.
-struct SolidStateWebsite: Website, SolidStateSite {
-    typealias ItemMetadata = WebsiteItemMetadata
+struct SolidStateSite: Website, SolidStateWebsite {
+
+    struct ItemMetadata: WebsiteItemMetadata {
+        var layout: String?
+        var permalink: String
+        var title: String
+        var description: String
+        var date: String
+        var author: String?
+        var image: String
+    }
 
     enum SectionID: String, WebsiteSectionID {
         // Add the sections that you want your website to contain here:
@@ -13,22 +22,11 @@ struct SolidStateWebsite: Website, SolidStateSite {
         case about
     }
 
-    struct StylesheetInfo {
-        let name: String
-        let noscript: Bool
-        let integrity: String?
-
-        init(_ name: String, _ noscript: Bool = false, _ integrity: String? = nil) {
-            self.name = name
-            self.noscript = noscript
-            self.integrity = integrity
-        }
-    }
-
     // Update these properties to configure your website:
     var siteLogo = "/assets/images/logo.png"
     var url = URL(string: "https://deirdre.dev")!
     var name = "deirdre.dev"
+    var bio = ""
     var description = "Swift Makes Me Happy"
     var language: Language { .english }
     var imagePath: Path? { nil }
@@ -38,8 +36,8 @@ struct SolidStateWebsite: Website, SolidStateSite {
 
     // front page metadata
 
-    var logo: String
-    var bannerTitle: String
+    var logo: String = "fa-code-branch"
+    var bannerTitle: String = "Deirdre Saoirse Moen"
     var bannerDescription: String = "macOS, iOS, and Apple Technologies Senior Software Engineer"
 
     // contact info
@@ -52,8 +50,14 @@ struct SolidStateWebsite: Website, SolidStateSite {
     ]}
 }
 
+public var styleFiles = [
+    StylesheetInfo("main.css"),
+    StylesheetInfo("noscript.css", true),
+    StylesheetInfo("fontawesome-all.min.css")
+]
+
 // This will generate your website using the built-in Foundation theme:
-try SolidStateWebsite().publish(using: [
+try SolidStateSite().publish(using: [
     .generateHTML(withTheme: .solidState, indentation: .tabs(1)),
 //    .copyResources(),
     .copyFiles(at: "Resources/SolidStateTheme/assets/js", to: "assets", includingFolder: true),

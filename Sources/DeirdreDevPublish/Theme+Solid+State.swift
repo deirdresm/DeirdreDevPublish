@@ -9,40 +9,19 @@ import Foundation
 import Publish
 import Plot
 
-public protocol SolidStateSite {
-    associatedtype ItemMetadata: WebsiteItemMetadata
-    associatedtype IndexMetadata: WebsiteItemMetadata
+public protocol SolidStateWebsite: Website {
+    var logo: String { get }
+    var bannerTitle: String { get }
+    var bannerDescription: String { get }
 
-    var layout: String { get }
-    var permalink: String { get }
-    var title: String { get }
-    var description: String { get }
-    var date: String { get }
     var author: String { get }
     var avatar: String { get }
     var bio: String { get }
     var icon: String { get }
     var contacts: [(ContactPoint, String)] { get }
-    var image: String { get }
 }
 
-struct FrontPageMetadata: WebsiteItemMetadata {
-    let logo: String
-    let bannerTitle: String
-    let bannerDescription: String
-}
-
-public struct PostItemMetadata: WebsiteItemMetadata {
-    var layout: String?
-    var permalink: String
-    var title: String
-    var description: String
-    var date: String
-    var author: String?
-    var image: String
-}
-
-struct StylesheetInfo: WebsiteItemMetadata {
+public struct StylesheetInfo: WebsiteItemMetadata {
     let name: String
     let noscript: Bool
     let integrity: String?
@@ -51,6 +30,10 @@ struct StylesheetInfo: WebsiteItemMetadata {
         self.name = name
         self.noscript = noscript
         self.integrity = integrity
+    }
+
+    var path: Path {
+        return Path("/assets/css/\(name)")
     }
 }
 
@@ -73,13 +56,7 @@ public enum ContactPoint {
     }
 }
 
-private let styleFiles = [
-    StylesheetInfo("main.css"),
-    StylesheetInfo("noscript.css", true),
-    StylesheetInfo("fontawesome-all.min.css")
-]
-
-extension Theme where Site == SolidStateWebsite {
+public extension Theme where Site: SolidStateWebsite {
     /// HTML5Up's Solid State, in Publish form.
     static var solidState: Self {
         Theme(
@@ -298,6 +275,26 @@ private extension Node where Context == HTML.DocumentContext {
                 return .socialImageLink(url)
             })
         )
+    }
+}
+
+
+/// Add a `<noscript>` HTML element within the current context.
+/// - parameter nodes: The element's attributes and child elements.
+public extension Node where Context == HTML.HeadContext {
+    static func noscriptHead(_ nodes: Node<HTML.HeadContext>...) -> Node {
+        .element(named: "noscript", nodes: nodes)
+    }
+
+    /// Link the HTML page to an external CSS stylesheet.
+    /// - sheet path: stylesheetInfo structure.
+    static func stylesheet(sheet: StylesheetInfo) -> Node {
+        switch sheet.noscript {
+        case true:
+            return .noscriptHead(.stylesheet(sheet.path.absoluteString))
+        default:
+            return .stylesheet(sheet.path.absoluteString)
+        }
     }
 }
 
