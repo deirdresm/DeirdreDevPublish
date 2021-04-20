@@ -278,26 +278,6 @@ private extension Node where Context == HTML.DocumentContext {
     }
 }
 
-
-/// Add a `<noscript>` HTML element within the current context.
-/// - parameter nodes: The element's attributes and child elements.
-public extension Node where Context == HTML.HeadContext {
-    static func noscriptHead(_ nodes: Node<HTML.HeadContext>...) -> Node {
-        .element(named: "noscript", nodes: nodes)
-    }
-
-    /// Link the HTML page to an external CSS stylesheet.
-    /// - sheet path: stylesheetInfo structure.
-    static func stylesheet(sheet: StylesheetInfo) -> Node {
-        switch sheet.noscript {
-        case true:
-            return .noscriptHead(.stylesheet(sheet.path.absoluteString))
-        default:
-            return .stylesheet(sheet.path.absoluteString)
-        }
-    }
-}
-
 private extension Node where Context == HTML.BodyContext {
     
     static func pageWrapper(_ nodes: Node...) -> Node {

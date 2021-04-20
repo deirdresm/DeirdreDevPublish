@@ -6,23 +6,26 @@
 //
 
 import Foundation
-import Publish
 import Plot
+import Publish
 
 public extension Node where Context == HTML.HeadContext {
-    static func stylesheet(_ path: Path, _ noScript: Bool = false) -> Node {
-        .stylesheet(path.absoluteString)
-    }
-
     /// Link the HTML page to an external CSS stylesheet with optional noscript wrapping.
     /// - parameter url: The URL of the stylesheet to link to.
     /// - parameter noscript: optional bool to saay whether to wrap in noscript.
     /// - parameter integrity: optional base64-encoded cryptographic hash
+
     static func stylesheet(_ url: URLRepresentable, _ noscript: Bool = false, integrity: String? = nil) -> Node {
-        .if(noscript,
-             .noscript(.stylesheet(url)),
-             else: (.stylesheet(url))
-        )
+//        .if(noscript,
+//             .noscript(.stylesheet(url)),
+//             else: (.stylesheet(url))
+//        )
+        switch noscript {
+        case true:
+            return .noscript(.stylesheet(url))
+        default:
+            return .stylesheet(url)
+        }
     }
 
     /// Add a `<noscript>` HTML element within the header too.
@@ -33,4 +36,18 @@ public extension Node where Context == HTML.HeadContext {
     }
 
 }
+
+
+//public extension Node where Context == HTML.HeadContext {
+//    /// Link the HTML page to an external CSS stylesheet.
+//    /// - sheet path: stylesheetInfo structure.
+//    static func stylesheet(sheet: StylesheetInfo) -> Node {
+//        switch sheet.noscript {
+//        case true:
+//            return .noscriptHead(.stylesheet(sheet.path.absoluteString))
+//        default:
+//            return .stylesheet(sheet.path.absoluteString)
+//        }
+//    }
+//}
 
