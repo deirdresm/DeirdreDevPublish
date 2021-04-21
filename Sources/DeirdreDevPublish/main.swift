@@ -60,9 +60,9 @@ public var styleFiles = [
 try SolidStateSite().publish(using: [
     .generateHTML(withTheme: .solidState, indentation: .tabs(1)),
 //    .copyResources(),
-    .copyFiles(at: "Resources/SolidStateTheme/assets/js", to: "assets", includingFolder: true),
-    .copyFiles(at: "Resources/SolidStateTheme/assets/css", to: "assets", includingFolder: true),
-    .copyFiles(at: "Resources/SolidStateTheme/assets/webfonts", to: "assets", includingFolder: true)]
+    .copyFiles(at: "Resources/DeirdreDevPublish/assets/js", to: "assets", includingFolder: true),
+    .copyFiles(at: "Resources/DeirdreDevPublish/assets/css", to: "assets", includingFolder: true),
+    .copyFiles(at: "Resources/DeirdreDevPublish/assets/webfonts", to: "assets", includingFolder: true)]
 //    additionalSteps: [
 //        // Add an item programmatically
 //        .addPage(),

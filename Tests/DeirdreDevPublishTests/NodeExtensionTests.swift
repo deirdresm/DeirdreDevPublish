@@ -17,7 +17,7 @@ import Plot
 import Publish
 import Files
 import ShellOut
-@testable import DeirdreDevPublish
+//@testable import DeirdreDevPublish
 
 //final class ControlFlowTests: XCTestCase {
 //    func testNoscriptCSSStylesheet() {

@@ -61,13 +61,13 @@ public extension Theme where Site: SolidStateWebsite {
     static var solidState: Self {
         Theme(
             htmlFactory: SolidStateHTMLFactory(),
-            resourcePaths: Set(styleFiles.map { Path("Resources/SolidStateTheme/assets/css/\($0.name)") })
+            resourcePaths: Set(["Resources/DeirdreDevPublish/assets/css/main.css"])
         )
     }
 }
 
-private struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
-    func makeIndexHTML(for index: Index,
+public struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
+    public func makeIndexHTML(for index: Index,
                        context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -97,7 +97,7 @@ private struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makeSectionHTML(for section: Section<Site>,
+    public func makeSectionHTML(for section: Section<Site>,
                          context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -115,7 +115,7 @@ private struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makeItemHTML(for item: Item<Site>,
+    public func makeItemHTML(for item: Item<Site>,
                       context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -140,7 +140,7 @@ private struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makePageHTML(for page: Page,
+    public func makePageHTML(for page: Page,
                       context: PublishingContext<Site>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -155,7 +155,7 @@ private struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makeTagListHTML(for page: TagListPage,
+    public func makeTagListHTML(for page: TagListPage,
                          context: PublishingContext<Site>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
@@ -184,7 +184,7 @@ private struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    func makeTagDetailsHTML(for page: TagDetailsPage,
+    public func makeTagDetailsHTML(for page: TagDetailsPage,
                             context: PublishingContext<Site>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
@@ -216,67 +216,6 @@ private struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
     }
 }
 
-private extension Node where Context == HTML.DocumentContext {
-    static func head<T: Website>(
-        for location: Location,
-        on site: T,
-        titleSeparator: String = " | ",
-        stylesheetPaths: [Path] = ["/assets/css/main.css", "/assets/css/noscript.css", "/assets/css/fontawesome-all.min.css" ],
-        rssFeedPath: Path? = .defaultForRSSFeed,
-        rssFeedTitle: String? = nil
-    ) -> Node {
-        var title = location.title
-
-        if title.isEmpty {
-            title = site.name
-        } else {
-            title.append(titleSeparator + site.name)
-        }
-
-        var description = location.description
-
-        if description.isEmpty {
-            description = site.description
-        }
-
-        return .head(
-            .encoding(.utf8),
-            .siteName(site.name),
-            .url(site.url(for: location)),
-            .title(title),
-            .description(description),
-            .twitterCardType(location.imagePath == nil ? .summary : .summaryLargeImage),
-            .forEach(stylesheetPaths, { .stylesheet($0) }),
-            .group([
-                .script(
-                    .src("/assets/js/skel.min.js")
-                ),
-                .script(
-                    .src("/assets/js/jquery.min.js")
-                ),
-                .script(
-                    .src("/assets/js/jquery.scrollex.min.js")
-                ),
-                .script(
-                    .src("/assets/js/util.js")
-                ),
-                .script(
-                    .src("/assets/js/main.js")
-                )
-            ]),
-            .viewport(.accordingToDevice),
-            .unwrap(site.favicon, { .favicon($0) }),
-            .unwrap(rssFeedPath, { path in
-                let title = rssFeedTitle ?? "Subscribe to \(site.name)"
-                return .rssFeedLink(path.absoluteString, title: title)
-            }),
-            .unwrap(location.imagePath ?? site.imagePath, { path in
-                let url = site.url(for: path)
-                return .socialImageLink(url)
-            })
-        )
-    }
-}
 
 private extension Node where Context == HTML.BodyContext {
     
@@ -343,6 +282,31 @@ private extension Node where Context == HTML.BodyContext {
         )
     }
 
+    /*
+     <!-- Header -->
+         <header id="header">
+             <h1><a href="index.html">Solid State</a></h1>
+             <nav>
+                 <a href="#menu">Menu</a>
+             </nav>
+         </header>
+
+     <!-- Menu -->
+         <nav id="menu">
+             <div class="inner">
+                 <h2>Menu</h2>
+                 <ul class="links">
+                     <li><a href="index.html">Home</a></li>
+                     <li><a href="generic.html">Generic</a></li>
+                     <li><a href="elements.html">Elements</a></li>
+                     <li><a href="#">Log In</a></li>
+                     <li><a href="#">Sign Up</a></li>
+                 </ul>
+                 <a href="#" class="close">Close</a>
+             </div>
+         </nav>
+
+     */
     static func header<T: Website>(
         for context: PublishingContext<T>,
         selectedSection: T.SectionID?
@@ -350,8 +314,7 @@ private extension Node where Context == HTML.BodyContext {
         let sectionIDs = T.SectionID.allCases
 
         return .header(
-            .id("header"),
-            .wrapper(
+                .id("header"),
                 .a(.class("site-name"), .href("/"), .text(context.site.name)),
                 .if(sectionIDs.count > 1,
                     .nav(
@@ -364,7 +327,6 @@ private extension Node where Context == HTML.BodyContext {
                         })
                     )
                 )
-            )
         )
     }
 

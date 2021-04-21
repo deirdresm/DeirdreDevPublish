@@ -15,16 +15,29 @@ public extension Node where Context == HTML.HeadContext {
     /// - parameter noscript: optional bool to saay whether to wrap in noscript.
     /// - parameter integrity: optional base64-encoded cryptographic hash
 
-    static func stylesheet(_ url: URLRepresentable, _ noscript: Bool = false, integrity: String? = nil) -> Node {
+//    static func stylesheet(_ url: URLRepresentable, _ noscript: Bool = false, integrity: String? = nil) -> Node {
+////        .if(noscript,
+////             .noscript(.stylesheet(url)),
+////             else: (.stylesheet(url))
+////        )
+//        switch noscript {
+//        case true:
+//            return .noscript(.stylesheet(url))
+//        default:
+//            return .stylesheet(url)
+//        }
+//    }
+
+    static func stylesheet(_ sheet: StylesheetInfo) -> Node {
 //        .if(noscript,
 //             .noscript(.stylesheet(url)),
 //             else: (.stylesheet(url))
 //        )
-        switch noscript {
+        switch sheet.noscript {
         case true:
-            return .noscript(.stylesheet(url))
+            return .noscript(.stylesheet(sheet.path))
         default:
-            return .stylesheet(url)
+            return .stylesheet(sheet.path)
         }
     }
 
