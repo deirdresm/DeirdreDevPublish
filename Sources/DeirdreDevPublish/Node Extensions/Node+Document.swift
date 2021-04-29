@@ -10,7 +10,7 @@ import Plot
 import Publish
 
 public extension Node where Context == HTML.DocumentContext {
-    static func head<T>(
+    static func head<T: SolidStateWebsite>(
         for location: Location,
         on site: T,
         titleSeparator: String = " | ",
@@ -18,7 +18,7 @@ public extension Node where Context == HTML.DocumentContext {
         noscriptStylesheetPaths: [Path] = ["/assets/css/noscript.css"],
         rssFeedPath: Path? = .defaultForRSSFeed,
         rssFeedTitle: String? = nil
-    ) -> Node  where T: SolidStateWebsite {
+    ) -> Node {
         var title = location.title
 
         if title.isEmpty {

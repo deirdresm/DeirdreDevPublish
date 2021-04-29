@@ -33,10 +33,16 @@ struct SolidStateSite: Website, SolidStateWebsite {
     var author = "Deirdre Saoirse Moen"
     var avatar = "/asssets/images/avatar.jpg"
     var icon = "/assets/images/favicon.png"
+    var featuredPages = ["/about"]
+    var featuredPostCount = 5
+
+    var stylesheetPaths: [Path] = ["/assets/css/main.css", "/assets/css/fontawesome-all.min.css" ]
+    var noscriptStylesheetPaths: [Path] = ["/assets/css/noscript.css"]
 
     // front page metadata
 
     var logo: String = "fa-code-branch"
+    var logoAlt: String = "Deirdre Saoirse Moen, Sounds Like Weird"
     var bannerTitle: String = "Deirdre Saoirse Moen"
     var bannerDescription: String = "macOS, iOS, and Apple Technologies Senior Software Engineer"
 
@@ -50,19 +56,23 @@ struct SolidStateSite: Website, SolidStateWebsite {
     ]}
 }
 
-public var styleFiles = [
-    StylesheetInfo("main.css"),
-    StylesheetInfo("noscript.css", true),
-    StylesheetInfo("fontawesome-all.min.css")
-]
+//public var styleFiles = [
+//    StylesheetInfo("main.css"),
+//    StylesheetInfo("noscript.css", true),
+//    StylesheetInfo("fontawesome-all.min.css")
+//]
+//
 
 // This will generate your website using the built-in Foundation theme:
 try SolidStateSite().publish(using: [
     .generateHTML(withTheme: .solidState, indentation: .tabs(1)),
-//    .copyResources(),
+    .copyResources(),
     .copyFiles(at: "Resources/DeirdreDevPublish/assets/js", to: "assets", includingFolder: true),
     .copyFiles(at: "Resources/DeirdreDevPublish/assets/css", to: "assets", includingFolder: true),
-    .copyFiles(at: "Resources/DeirdreDevPublish/assets/webfonts", to: "assets", includingFolder: true)]
+    .copyFiles(at: "Resources/DeirdreDevPublish/assets/webfonts", to: "assets", includingFolder: true),
+    .copyFiles(at: "Content/assets/icons", to: "assets", includingFolder: true),
+    .copyFiles(at: "Content/assets/images", to: "assets", includingFolder: true)
+    ]
 //    additionalSteps: [
 //        // Add an item programmatically
 //        .addPage(),

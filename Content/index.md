@@ -1,8 +1,5 @@
 ---
 title: Solid State
-logo: fa-gem
-bannerTitle: This is Solid State
-bannerDescription: Another free + fully responsive site template by [HTML5 UP](http://html5up.net)
 ---
 
 ## Magna arcu feugiat

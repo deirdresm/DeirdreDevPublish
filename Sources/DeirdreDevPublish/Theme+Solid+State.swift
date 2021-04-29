@@ -11,8 +11,11 @@ import Plot
 
 public protocol SolidStateWebsite: Website {
     var logo: String { get }
+    var logoAlt: String { get }
     var bannerTitle: String { get }
     var bannerDescription: String { get }
+    var featuredPages: [String] { get }
+    var featuredPostCount: Int { get }
 
     var author: String { get }
     var avatar: String { get }
@@ -37,26 +40,7 @@ public struct StylesheetInfo: WebsiteItemMetadata {
     }
 }
 
-public enum ContactPoint {
-    case twitter, dev, linkedIn, gitHub, stackoverflow
-
-    func url(_ handler: String) -> String {
-        switch self {
-        case .twitter:
-            return "https://twitter.com/\(handler)"
-        case .dev:
-            return "https://dev.to/\(handler)"
-        case .linkedIn:
-            return "https://www.linkedin.com/in/\(handler)/"
-        case .gitHub:
-            return "https://github.com/\(handler)"
-        case .stackoverflow:
-            return "https://stackoverflow.com/users/\(handler)"
-        }
-    }
-}
-
-public extension Theme where Site: SolidStateWebsite {
+extension Theme where Site == SolidStateSite {
     /// HTML5Up's Solid State, in Publish form.
     static var solidState: Self {
         Theme(
@@ -64,18 +48,27 @@ public extension Theme where Site: SolidStateWebsite {
             resourcePaths: Set(["Resources/DeirdreDevPublish/assets/css/main.css"])
         )
     }
+    
+//    static var spellOut: NSNumberFormatter {
+//        var formatter = NSNumberFormatter()
+//        formatter.locale = "EN_us"
+//        formatter.style = .spellOut
+//    }
 }
 
-public struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
-    public func makeIndexHTML(for index: Index,
-                       context: PublishingContext<Site>) throws -> HTML {
+struct SolidStateHTMLFactory: HTMLFactory {
+    func makeIndexHTML(for index: Index, context: PublishingContext<SolidStateSite>) throws -> HTML {
         HTML(
             .lang(context.site.language),
-            .head(for: index, on: context.site),
+            .head(for: index, on: context.site,
+                  stylesheetPaths: context.site.stylesheetPaths,
+                  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
             .body(
                 .class("is-preload"),
                 .pageWrapper(
                     .topHeader(for: context, selectedSection: nil),
+                    .topMenuBody(for: context, selectedSection: nil),
+                    .indexTopBanner(for: context),
                     .wrapper(
                         .h1(.text(index.title)),
                         .p(
@@ -90,21 +83,23 @@ public struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
                             ),
                             on: context.site
                         )
-                    ),
+                    ), // wrapper
                     .footer(for: context.site)
                 )
             )
         )
     }
 
-    public func makeSectionHTML(for section: Section<Site>,
-                         context: PublishingContext<Site>) throws -> HTML {
+    public func makeSectionHTML(for section: Section<SolidStateSite>, context: PublishingContext<SolidStateSite>) throws -> HTML {
         HTML(
             .lang(context.site.language),
-            .head(for: section, on: context.site),
+            .head(for: section, on: context.site,
+                  stylesheetPaths: context.site.stylesheetPaths,
+                  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
             .body(
                 .pageWrapper(
                     .topHeader(for: context, selectedSection: section.id),
+                    .topMenuBody(for: context, selectedSection: section.id),
                     .wrapper(
                         .h1(.text(section.title)),
                         .itemList(for: section.items, on: context.site)
@@ -115,15 +110,18 @@ public struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
         )
     }
 
-    public func makeItemHTML(for item: Item<Site>,
-                      context: PublishingContext<Site>) throws -> HTML {
+    public func makeItemHTML(for item: Item<SolidStateSite>,
+                      context: PublishingContext<SolidStateSite>) throws -> HTML {
         HTML(
             .lang(context.site.language),
-            .head(for: item, on: context.site),
+            .head(for: item, on: context.site,
+                  stylesheetPaths: context.site.stylesheetPaths,
+                  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
             .body(
                 .class("is-preload"),
                 .pageWrapper(
                     .topHeader(for: context, selectedSection: item.sectionID),
+                    .topMenuBody(for: context, selectedSection: item.sectionID),
                     .wrapper(
                         .article(
                             .div(
@@ -141,13 +139,16 @@ public struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
     }
 
     public func makePageHTML(for page: Page,
-                      context: PublishingContext<Site>) throws -> HTML {
+                      context: PublishingContext<SolidStateSite>) throws -> HTML {
         HTML(
             .lang(context.site.language),
-            .head(for: page, on: context.site),
+            .head(for: page, on: context.site,
+                  stylesheetPaths: context.site.stylesheetPaths,
+                  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
             .body(
                 .pageWrapper(
                     .topHeader(for: context, selectedSection: nil),
+                    .topMenuBody(for: context, selectedSection: nil),
                     .wrapper(.contentBody(page.body)),
                     .footer(for: context.site)
                 )
@@ -156,13 +157,17 @@ public struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
     }
 
     public func makeTagListHTML(for page: TagListPage,
-                         context: PublishingContext<Site>) throws -> HTML? {
+                         context: PublishingContext<SolidStateSite>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
-            .head(for: page, on: context.site),
+            .head(for: page, on: context.site,
+                  stylesheetPaths: context.site.stylesheetPaths,
+                  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
             .body(
                 .pageWrapper(
                     .header(for: context, selectedSection: nil),
+                    .topHeader(for: context, selectedSection: nil),
+                    .topMenuBody(for: context, selectedSection: nil),
                     .wrapper(
                         .h1("Browse all tags"),
                         .ul(
@@ -185,12 +190,16 @@ public struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
     }
 
     public func makeTagDetailsHTML(for page: TagDetailsPage,
-                            context: PublishingContext<Site>) throws -> HTML? {
+                            context: PublishingContext<SolidStateSite>) throws -> HTML? {
         HTML(
             .lang(context.site.language),
-            .head(for: page, on: context.site),
+            .head(for: page, on: context.site,
+                  stylesheetPaths: context.site.stylesheetPaths,
+                  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
             .body(
                 .header(for: context, selectedSection: nil),
+                .topHeader(for: context, selectedSection: nil),
+                .topMenuBody(for: context, selectedSection: nil),
                 .wrapper(
                     .h1(
                         "Tagged with ",
@@ -217,157 +226,3 @@ public struct SolidStateHTMLFactory<Site: Website>: HTMLFactory {
 }
 
 
-private extension Node where Context == HTML.BodyContext {
-    
-    static func pageWrapper(_ nodes: Node...) -> Node {
-        .div(.id("page-wrapper"), .group(nodes))
-    }
-
-    static func wrapper(_ nodes: Node...) -> Node {
-        .section(.id("wrapper"), .group(nodes))
-    }
-
-    static func topHeader<T: Website>(
-        for context: PublishingContext<T>,
-        selectedSection: T.SectionID?
-    ) -> Node {
-        let sectionIDs = T.SectionID.allCases
-
-        return .header(
-                .id("header"),
-                .h1(.a(.href("/"), .text(context.site.name))),
-                .if(sectionIDs.count > 1,
-
-                    // note that this theme has a nav with no dropdown items, but then uses JS to connect to a second nav with the dropdowns.
-                    .group(
-                        .nav(
-                            .a(.href("#menu"), .text("Menu"))
-                        ),
-
-                        .nav(
-                            .id("menu"),
-                            .div(
-                                .class("inner"),
-                                .h2("Menu"),
-                                .ul(
-                                    .class("links"),
-                                    .forEach(sectionIDs) { section in
-                                    .li(.a(
-                                        .class(section == selectedSection ? "selected" : ""),
-                                        .href(context.sections[section].path),
-                                        .text(context.sections[section].title)
-                                    ))
-                                })
-                            )
-                        )
-                    )
-                )
-            )
-    }
-
-    static func indexTopBanner<T: Website>(
-        for context: PublishingContext<T>,
-        selectedSection: T.SectionID?
-    ) -> Node {
-        return .section(
-            .id("banner"),
-            .div(.class("inner"),
-                .div(.class("logo"),
-                    .span(
-//                        .class("icon \(logo)")
-                    )
-                )
-//                .h2(context.metadata.bannerTitle)
-            )
-        )
-    }
-
-    /*
-     <!-- Header -->
-         <header id="header">
-             <h1><a href="index.html">Solid State</a></h1>
-             <nav>
-                 <a href="#menu">Menu</a>
-             </nav>
-         </header>
-
-     <!-- Menu -->
-         <nav id="menu">
-             <div class="inner">
-                 <h2>Menu</h2>
-                 <ul class="links">
-                     <li><a href="index.html">Home</a></li>
-                     <li><a href="generic.html">Generic</a></li>
-                     <li><a href="elements.html">Elements</a></li>
-                     <li><a href="#">Log In</a></li>
-                     <li><a href="#">Sign Up</a></li>
-                 </ul>
-                 <a href="#" class="close">Close</a>
-             </div>
-         </nav>
-
-     */
-    static func header<T: Website>(
-        for context: PublishingContext<T>,
-        selectedSection: T.SectionID?
-    ) -> Node {
-        let sectionIDs = T.SectionID.allCases
-
-        return .header(
-                .id("header"),
-                .a(.class("site-name"), .href("/"), .text(context.site.name)),
-                .if(sectionIDs.count > 1,
-                    .nav(
-                        .ul(.forEach(sectionIDs) { section in
-                            .li(.a(
-                                .class(section == selectedSection ? "selected" : ""),
-                                .href(context.sections[section].path),
-                                .text(context.sections[section].title)
-                            ))
-                        })
-                    )
-                )
-        )
-    }
-
-    static func itemList<T: Website>(for items: [Item<T>], on site: T) -> Node {
-        return .ul(
-            .class("item-list"),
-            .forEach(items) { item in
-                .li(.article(
-                    .h1(.a(
-                        .href(item.path),
-                        .text(item.title)
-                    )),
-                    .tagList(for: item, on: site),
-                    .p(.text(item.description))
-                ))
-            }
-        )
-    }
-
-    static func tagList<T: Website>(for item: Item<T>, on site: T) -> Node {
-        return .ul(.class("tag-list"), .forEach(item.tags) { tag in
-            .li(.a(
-                .href(site.path(for: tag)),
-                .text(tag.string)
-            ))
-        })
-    }
-
-    static func footer<T: Website>(for site: T) -> Node {
-        return .footer(
-            .p(
-                .text("Generated using "),
-                .a(
-                    .text("Publish"),
-                    .href("https://github.com/johnsundell/publish")
-                )
-            ),
-            .p(.a(
-                .text("RSS feed"),
-                .href("/feed.rss")
-            ))
-        )
-    }
-}

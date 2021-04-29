@@ -50,7 +50,6 @@ public extension Node where Context == HTML.HeadContext {
 
 }
 
-
 //public extension Node where Context == HTML.HeadContext {
 //    /// Link the HTML page to an external CSS stylesheet.
 //    /// - sheet path: stylesheetInfo structure.

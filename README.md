@@ -1,6 +1,10 @@
 ---
-title: Generic
+title: DeirdreDevPublish Readme
 
 ---
 
-# Title
+# Known Issues
+
+1. Not outputting the non-index top-level pages.
+
+
