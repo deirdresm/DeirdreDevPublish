@@ -2,18 +2,13 @@
 id: 1
 layout: post
 author: Deirdre Saoirse Moen
-permalink: /swift-on-sundays-march-17-2019/
+path: /swift-on-sundays-march-17-2019/
 title: Swift on Sundays, March 17, 2019
 date: 2019-03-17 20:46:14 -0700
 description: Short entry about a Swift on Sundays episode featuring CreateML and CoreML and how to integrate them into your project.
 image: 
   img: /assets/images/2019/03/machine_learning.jpg
-categories:
-  - swift
-tags:
-  - CoreML
-  - CreateML
-  - SwiftOnSundays
+tags: swift, coreml
 ---
 
 {% include featured-image.html %}
