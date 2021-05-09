@@ -212,53 +212,66 @@ extension Node where Context == HTML.BodyContext {
      </section>
      */
 
-    static func spotlightAlt(num: Int) {
-        switch num % 1 {
-        case 0: // even
-            return ""
-        case 1: // odd
-            return "alt"
+    static func spotlightAlt(num: Int) -> String {
+        return num % 1 == 0 ? "" : "alt"
+     }
+
+    static func showPostCount<T: SolidStateWebsite>(on site: T, num: Int, start: Int = 0) -> Int {
+
+        // return featuredPostCount - featuredPages.count or 1, whichever is >
+
+        if (site.featuredPostCount - site.featuredPages.count) < 1 {
+            return 1
+        } else {
+            return site.featuredPostCount - site.featuredPages.count
         }
     }
 
+
     // feature section for posts
-    static func feature<T: Website>(for items: [Item<T>], on site: T, num: Int, start: Int = 0) -> Node {
-        return .forEach(items) { item in
-                    .section(.id("post-\(num)",
-                            .class("wrapper alt \(spotlight(num)) style\(num+1)"),
-                            .a(
-                                .class("image"),
-                                .text("Publish"),
-                                .href(item.path),
-                                    .img(.class("image"),
-                                         .src(.unwrap(item.metadata.image))
-                                    )
-                            ),
-                            .div(.class("content"),
-                                 .a(.href(item.path),
-                                    .h2(.class("major")
-                                            .text(item.title)
-                                    )
-                                ),
-                                 .p(item.description)
+    static func feature<T: SolidStateWebsite>(for item: Item<T>, on site: T, num: Int, offset: Int) -> Node {
+        return .section(.id("post-\(num)"),
+                        .class("wrapper alt \(num % 1 == 0 ? "" : "alt") style\(num+offset)"),
+                        .a(
+                            .class("image"),
+                            .text("Publish"),
+                            .href(item.path),
+                            .img(.class("image"),
+                                 .src(item.metadata.image)
                             )
-                    )
-        )
+                        ),
+                        .div(.class("content"),
+                             .a(.href(item.path),
+                                .h2(.class("major"),
+                                    .text(item.title)
+                                )
+                             ),
+                             .p(text(item.description)
+                             )
+                        )
+                )
+     }
+
+
+    // feature section for posts
+    static func features<T: SolidStateWebsite>(for items: [Item<T>], on site: T, num: Int, start: Int = 0) -> Node {
+
+        let itemsPrefix = items.prefix(site.featuredPostCount - site.featuredPages.count)
+
+        return .forEach(itemsPrefix.enumerated()) { index, item in
+            feature(for: item, on: site, num: index, offset: start)
+        }
 
     }
 
-
     // feature section for pages
-    static func feature<T: Website>(for pages: [Page<T>], on site: T, num: Int, start: Int = 0) -> Node {
-        return .section(.id("feature-\(num)",
-                            .class("wrapper alt \(spotlight(num)) style\(num+1)"),
-                            .a(
-                                .class("image"),
+    func feature<T: SolidStateWebsite>(for pages: [Page], on site: T, num: Int, offset: Int = 0) -> Node {
+        return .section(.id("feature-\(num)"),
+                        .class("wrapper alt \(num % 1 == 0 ? "" : "alt") style\(num+1)"),
+                            .a(.class("image"),
                                 .text("Publish"),
                                 .href("https://github.com/johnsundell/publish")
-                            ),
-        )
-        )
-
+                        )
+                )
     }
 }

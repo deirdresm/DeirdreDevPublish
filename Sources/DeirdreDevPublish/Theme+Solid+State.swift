@@ -9,7 +9,18 @@ import Foundation
 import Publish
 import Plot
 
-public protocol SolidStateWebsite: Website {
+public protocol SolidStateItemMetadata {
+    var layout: String? { get }
+    var permalink: String { get }
+    var title: String { get }
+    var description: String { get }
+    var date: String { get }
+    var author: String? { get }
+    var image: String { get }
+}
+
+public protocol SolidStateWebsite: Website where ItemMetadata: SolidStateItemMetadata {
+
     var logo: String { get }
     var logoAlt: String { get }
     var bannerTitle: String { get }
@@ -76,6 +87,12 @@ struct SolidStateHTMLFactory: HTMLFactory {
                             .text(context.site.description)
                         ),
                         .h2("Latest content"),
+                        .features(for: context.allItems(
+                            sortedBy: \.date,
+                            order: .descending
+                        ),
+                        on: context.site, num: 6, start: 1),
+
                         .itemList(
                             for: context.allItems(
                                 sortedBy: \.date,

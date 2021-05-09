@@ -1,11 +1,17 @@
 import Foundation
 import Publish
 import Plot
+//import GistPublishPlugin
+
+// https://github.com/tanabe1478/YoutubePublishPlugin
+// https://github.com/alexito4/ItemPosterPublishPlugin
+// https://github.com/insidegui/TwitterPublishPlugin
+// https://github.com/tgymnich/FaviconPublishPlugin
 
 // This type acts as the configuration for your website.
 struct SolidStateSite: Website, SolidStateWebsite {
 
-    struct ItemMetadata: WebsiteItemMetadata {
+    struct ItemMetadata: WebsiteItemMetadata, SolidStateItemMetadata {
         var layout: String?
         var permalink: String
         var title: String
@@ -66,6 +72,7 @@ struct SolidStateSite: Website, SolidStateWebsite {
 // This will generate your website using the built-in Foundation theme:
 try SolidStateSite().publish(using: [
     .generateHTML(withTheme: .solidState, indentation: .tabs(1)),
+//    .plugins: [.gist(renderer: MyGistRenderer())],
     .copyResources(),
     .copyFiles(at: "Resources/DeirdreDevPublish/assets/js", to: "assets", includingFolder: true),
     .copyFiles(at: "Resources/DeirdreDevPublish/assets/css", to: "assets", includingFolder: true),
