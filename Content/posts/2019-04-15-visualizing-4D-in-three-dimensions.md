@@ -2,19 +2,14 @@
 id: 2
 layout: post
 author: Deirdre Saoirse Moen
-permalink: /visualizing-4d-in-three-dimensions/
+path: /visualizing-4d-in-three-dimensions/
 image: 
   img: /assets/images/2019/04/4d-in-3-dimensions.jpg
 title:  Visualizing 4D in Three Dimensions
 description: The cool quirks of trying to visualize four dimensions in three. After all, we are so used to visualizing three dimensions in two dimensions, but…four into three is quite a bit more difficult.
 date:   2019-04-15 20:46:14 -0700
-categories:
-  - geometry
 tags:
-  - 3D
-  - close-captioned-video
-  - computational-geometry
-  - video
+  - geometry
 ---
 
 {% include featured-image.html %}

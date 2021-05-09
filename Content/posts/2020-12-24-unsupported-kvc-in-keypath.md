@@ -3,7 +3,7 @@ id: 7
 layout: post
 author: Deirdre Saoirse Moen
 layout: post
-permalink: /unsupported-kvc-in-keypath/
+path: /unsupported-kvc-in-keypath/
 title: Unsupported KVC in Keypath
 description: I ran into a cryptic error with only two ten-year-old hits on Google. Here's why.
 image: 
@@ -12,12 +12,10 @@ image:
   caption: I ran into a cryptic error with only two ten-year-old hits on Google.
   
 date: 2020-12-24 11:29:14 -0700
-categories:
-  - swift
-  - Xcode
+tags:
+  - Swift
   - CoreData
   - NSPredicate
-tags:
   - Xcode
 ---
 {% include featured-image.html %}

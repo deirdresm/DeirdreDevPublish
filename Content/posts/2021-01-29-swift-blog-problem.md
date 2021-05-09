@@ -3,7 +3,7 @@ id: 9
 layout: post
 author: Deirdre Saoirse Moen
 layout: post
-permalink: /swift-blog-problem/
+path: /swift-blog-problem/
 title: The Swift Blog Problem
 description: It's easy to find beginner answers to Swift questions. Where are the next-level blogs?
 image: 
@@ -13,8 +13,8 @@ image:
   
 date: 2021-01-29 12:26:14 -0700
 categories:
-  - swift
-  - blog
+  - Swift
+  - Blog
 ---
 {% include featured-image.html %}
 

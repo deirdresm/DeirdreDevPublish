@@ -3,7 +3,7 @@ id: 3
 layout: post
 author: Deirdre Saoirse Moen
 layout: post
-permalink: /color-sphere/
+path: /color-sphere/
 title: Color Sphere
 description: One of a set of Swift projects I created to feed a database and use SceneKit and CoreML to evaluate colors.
 image: 
@@ -15,7 +15,8 @@ categories:
   - swift
   - portfolio
 tags:
-  - 3d
+  - Swift
+  - Portfolio
   - CoreML
   - SceneKit
 ---

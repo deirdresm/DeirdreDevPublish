@@ -2,7 +2,7 @@
 id: 11
 layout: post
 author: Deirdre Saoirse Moen
-permalink: /wrestling-with-publish/
+path: /wrestling-with-publish/
 title: Wrestling With Publish
 description: I've been working on converting this site from Jekyll to Publish, and here's a few cool sites I've found so far.
 image: 
@@ -11,12 +11,9 @@ image:
   caption: I learned a lot from reading the source of the Casperish theme for Publish.
   
 date: 2021-04-17 11:26:14 -0700
-categories:
-  - swift
-  - publish
 tags:
-  - swift
-  - publish
+  - Swift
+  - Publish
 ---
 {% include featured-image.html %}
 

@@ -2,7 +2,7 @@
 id: 8
 layout: post
 author: Deirdre Saoirse Moen
-permalink: /penrose-tiling/
+path: /penrose-tiling/
 title: Penrose Tiling in Swift
 description: Penrose Tiling in Swift, command-line edition
 image: 
@@ -11,10 +11,9 @@ image:
   caption: A fun little experiment.
   
 date: 2021-01-15 16:09:14 -0700
-categories:
-  - swift
-  - CIImage
 tags:
+  - Swift
+  - CIImage
   - Penrose
 ---
 {% include featured-image.html %}

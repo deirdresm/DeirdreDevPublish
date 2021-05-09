@@ -3,7 +3,7 @@ id: 10
 layout: post
 author: Deirdre Saoirse Moen
 layout: post
-permalink: /swiftuijam-experience/
+path: /swiftuijam-experience/
 title: The SwiftUIJam Experience
 description: Went to my first SwiftUI jam, here's what happened.
 image: 
@@ -12,12 +12,9 @@ image:
   caption: A fun jam for SwiftUI.
   
 date: 2021-02-21 12:26:14 -0700
-categories:
-  - swift
-  - blog
 tags:
-  - swiftui
-  - swiftuijam
+  - SwiftUI
+  - SwiftUIJam
 ---
 {% include featured-image.html %}
 
