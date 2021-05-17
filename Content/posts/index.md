@@ -1,5 +1,6 @@
 ---
 title: Greetings!
+imagePath: /assets/images/banner.jpg
 ---
 
 ## Magna arcu feugiat

@@ -1,6 +1,7 @@
 import Foundation
 import Publish
 import Plot
+import TwitterPublishPlugin
 //import GistPublishPlugin
 
 // https://github.com/tanabe1478/YoutubePublishPlugin
@@ -11,14 +12,26 @@ import Plot
 // This type acts as the configuration for your website.
 struct SolidStateSite: Website, SolidStateWebsite {
 
+    struct ImageMetadata: SolidStateImageMetadata, WebsiteItemMetadata {
+        var path: String // note: img in existing data from prior site
+        var title: String?
+        var caption: String?
+
+        static func == (lhs: SolidStateSite.ImageMetadata, rhs: SolidStateSite.ImageMetadata) -> Bool {
+            return lhs.path == rhs.path
+        }
+    }
+
     struct ItemMetadata: WebsiteItemMetadata, SolidStateItemMetadata {
         var layout: String?
-        var permalink: String
+        var path: String
         var title: String
         var description: String
         var date: String
         var author: String?
-        var image: String
+        var imagePath: String
+        var imageTitle: String?
+        var imageCaption: String?
     }
 
     enum SectionID: String, WebsiteSectionID {
@@ -33,7 +46,7 @@ struct SolidStateSite: Website, SolidStateWebsite {
     var url = URL(string: "https://deirdre.dev")!
     var name = "deirdre.dev"
     var bio = ""
-    var description = "Swift Makes Me Happy"
+    var description = "macOS, iOS &amp; Apple technologies software engineer"
     var language: Language { .english }
     var imagePath: Path? { nil }
     var author = "Deirdre Saoirse Moen"
@@ -47,7 +60,7 @@ struct SolidStateSite: Website, SolidStateWebsite {
 
     // front page metadata
 
-    var logo: String = "fa-code-branch"
+    var logo: String = "/assets/images/logo.png" // "fa-code-branch"
     var logoAlt: String = "Deirdre Saoirse Moen, Sounds Like Weird"
     var bannerTitle: String = "Deirdre Saoirse Moen"
     var bannerDescription: String = "macOS, iOS, and Apple Technologies Senior Software Engineer"
@@ -58,7 +71,8 @@ struct SolidStateSite: Website, SolidStateWebsite {
         // phone, email, facebook
         (.twitter, "deirdresm"),
         (.linkedIn, "desamo"),
-        (.gitHub, "deirdresm")
+        (.gitHub, "deirdresm"),
+        (.email, "deirdre@deirdre.net")
     ]}
 }
 
@@ -70,16 +84,51 @@ struct SolidStateSite: Website, SolidStateWebsite {
 //
 
 // This will generate your website using the built-in Foundation theme:
-try SolidStateSite().publish(using: [
-    .generateHTML(withTheme: .solidState, indentation: .tabs(1)),
-//    .plugins: [.gist(renderer: MyGistRenderer())],
-    .copyResources(),
-    .copyFiles(at: "Resources/DeirdreDevPublish/assets/js", to: "assets", includingFolder: true),
-    .copyFiles(at: "Resources/DeirdreDevPublish/assets/css", to: "assets", includingFolder: true),
-    .copyFiles(at: "Resources/DeirdreDevPublish/assets/webfonts", to: "assets", includingFolder: true),
-    .copyFiles(at: "Content/assets/icons", to: "assets", includingFolder: true),
-    .copyFiles(at: "Content/assets/images", to: "assets", includingFolder: true)
-    ]
+try SolidStateSite().publish(withTheme: .solidState,
+                             indentation: .tabs(1),
+                             additionalSteps: [
+                                .installPlugin(.twitter()),
+                                .addMarkdownFiles(),
+                                .copyResources(at: "Resources/DeirdreDevPublish/assets/js",
+                                               to: "assets",
+                                               includingFolder: true),
+                                .copyResources(at: "Resources/DeirdreDevPublish/assets/css",
+                                               to: "assets",
+                                               includingFolder: true),
+                                .copyResources(at: "Resources/DeirdreDevPublish/assets/webfonts",
+                                               to: "assets",
+                                               includingFolder: true),
+//                                .copyResources(at: "Resources/DeirdreDevPublish/assets/images",
+//                                               to: "assets",
+//                                               includingFolder: true),
+                                .copyFiles(at: "Content/assets/icons",
+                                                   to: "assets",
+                                                   includingFolder: true),
+                                .copyFiles(at: "Content/assets/images",
+                                                   to: "assets",
+                                                   includingFolder: true),
+//                                .copyFiles(at: "Content/assets/js",
+//                                                   to: "assets",
+//                                                   includingFolder: true),
+                                .copyFiles(at: "Content/assets/videos",
+                                                   to: "assets",
+                                                   includingFolder: true)
+//                                .copyFiles(at: "Resources/DeirdreDevPublish/assets/js", to: "assets", includingFolder: true),
+//                                .copyFiles(at: "Resources/DeirdreDevPublish/assets/css", to: "assets", includingFolder: true),
+//                                .copyFiles(at: "Resources/DeirdreDevPublish/assets/webfonts", to: "assets", includingFolder: true),
+//                                .copyFiles(at: "Content/assets/icons", to: "assets", includingFolder: true),
+//                                .copyFiles(at: "Content/assets/images", to: "assets", includingFolder: true)
+                             ]
+                             //    using: [
+//    .generateHTML(withTheme: .solidState, indentation: .tabs(1)),
+////    .plugins: [.gist(renderer: MyGistRenderer())],
+//    .copyResources(),
+//    .copyFiles(at: "Resources/DeirdreDevPublish/assets/js", to: "assets", includingFolder: true),
+//    .copyFiles(at: "Resources/DeirdreDevPublish/assets/css", to: "assets", includingFolder: true),
+//    .copyFiles(at: "Resources/DeirdreDevPublish/assets/webfonts", to: "assets", includingFolder: true),
+//    .copyFiles(at: "Content/assets/icons", to: "assets", includingFolder: true),
+//    .copyFiles(at: "Content/assets/images", to: "assets", includingFolder: true)
+//    ]
 //    additionalSteps: [
 //        // Add an item programmatically
 //        .addPage(),

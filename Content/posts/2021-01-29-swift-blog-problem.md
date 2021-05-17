@@ -6,15 +6,11 @@ layout: post
 path: /swift-blog-problem/
 title: The Swift Blog Problem
 description: It's easy to find beginner answers to Swift questions. Where are the next-level blogs?
-image: 
-  img: /assets/images/2021/01/swift_logo.png
-  title: Penrose Tiling in Swift Image Output
-  caption: A fun little experiment.
-  
-date: 2021-01-29 12:26:14 -0700
-categories:
-  - Swift
-  - Blog
+imagePath: /assets/images/2021/01/swift_logo.png
+imageTitle: Penrose Tiling in Swift Image Output
+imageCaption: A fun little experiment.
+date: 2021-01-29 12:26
+categories: swift, blog
 ---
 {% include featured-image.html %}
 

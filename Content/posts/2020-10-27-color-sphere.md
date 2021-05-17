@@ -6,19 +6,11 @@ layout: post
 path: /color-sphere/
 title: Color Sphere
 description: One of a set of Swift projects I created to feed a database and use SceneKit and CoreML to evaluate colors.
-image: 
-  img: /assets/images/2020/10/color-sphere-still.jpg
-  title: Sphere of Color
-  caption: One of a set of Swift projects I created to feed a database and use SceneKit and CoreML to evaluate colors.
-date: 2020-10-27 21:01:14 -0700
-categories:
-  - swift
-  - portfolio
-tags:
-  - Swift
-  - Portfolio
-  - CoreML
-  - SceneKit
+imagePath: /assets/images/2020/10/color-sphere-still.jpg
+imageTitle: Sphere of Color
+imageCaption: One of a set of Swift projects I created to feed a database and use SceneKit and CoreML to evaluate colors.
+date: 2020-10-27 21:01
+tags: swift, portfolio, coreml, scenekit
 ---
 
 

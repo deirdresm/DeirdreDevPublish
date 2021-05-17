@@ -8,15 +8,24 @@
 import Foundation
 import Publish
 import Plot
+import TwitterPublishPlugin
+
+public protocol SolidStateImageMetadata {
+    var path: String { get }
+    var title: String? { get }
+    var caption: String? { get }
+}
 
 public protocol SolidStateItemMetadata {
     var layout: String? { get }
-    var permalink: String { get }
+    var path: String { get }
     var title: String { get }
     var description: String { get }
     var date: String { get }
     var author: String? { get }
-    var image: String { get }
+    var imagePath: String { get }
+    var imageTitle: String? { get }
+    var imageCaption: String? { get }
 }
 
 public protocol SolidStateWebsite: Website where ItemMetadata: SolidStateItemMetadata {
@@ -68,6 +77,7 @@ extension Theme where Site == SolidStateSite {
 }
 
 struct SolidStateHTMLFactory: HTMLFactory {
+    // MARK: makeIndexHTML - generates the front page
     func makeIndexHTML(for index: Index, context: PublishingContext<SolidStateSite>) throws -> HTML {
         HTML(
             .lang(context.site.language),
@@ -77,29 +87,16 @@ struct SolidStateHTMLFactory: HTMLFactory {
             .body(
                 .class("is-preload"),
                 .pageWrapper(
-                    .topHeader(for: context, selectedSection: nil),
-                    .topMenuBody(for: context, selectedSection: nil),
+                    .topHeader(for: context, selectedSection: nil, isHome: true),
+//                    .topMenuBody(for: context, selectedSection: nil),
                     .indexTopBanner(for: context),
                     .wrapper(
-                        .h1(.text(index.title)),
-                        .p(
-                            .class("description"),
-                            .text(context.site.description)
-                        ),
-                        .h2("Latest content"),
-                        .features(for: context.allItems(
+                        .features(
+                            for: context.allItems(
                             sortedBy: \.date,
                             order: .descending
                         ),
-                        on: context.site, num: 6, start: 1),
-
-                        .itemList(
-                            for: context.allItems(
-                                sortedBy: \.date,
-                                order: .descending
-                            ),
-                            on: context.site
-                        )
+                        on: context.site, num: 6, start: 1)
                     ), // wrapper
                     .footer(for: context.site)
                 )
@@ -140,6 +137,17 @@ struct SolidStateHTMLFactory: HTMLFactory {
                     .topHeader(for: context, selectedSection: item.sectionID),
                     .topMenuBody(for: context, selectedSection: item.sectionID),
                     .wrapper(
+                        .header(
+                            .div(.class("inner"),
+                                 .h2(.text(item.title)),
+                                 .p(.text(item.description))
+                            )
+                        ),
+                        .featuredImage(for: item,
+                                       on: context.site,
+                                       url: item.imagePath,
+                                       text: item.metadata.title,
+                                       alt: item.description),
                         .article(
                             .div(
                                 .class("content"),
@@ -165,12 +173,28 @@ struct SolidStateHTMLFactory: HTMLFactory {
             .body(
                 .pageWrapper(
                     .topHeader(for: context, selectedSection: nil),
-                    .topMenuBody(for: context, selectedSection: nil),
-                    .wrapper(.contentBody(page.body)),
+//                    .topMenuBody(for: context, selectedSection: nil),
+                    .wrapper(
+                        .header(
+                            .div(.class("inner"),
+                                 .h2(.text(page.title)),
+                                 .p(.text(page.description))
+                            )
+                        ),
+                        .div(.class("wrapper"),
+                             .div(.class("inner"),
+                                  .featuredImage(for: page,
+                                                 on: context.site,
+                                                 url: page.imagePath,
+                                                 text: page.title,
+                                                 alt: page.description),
+                                  .contentBody(page.body)
+                            )
+                       )
+                    ),
                     .footer(for: context.site)
-                )
+                ))
             )
-        )
     }
 
     public func makeTagListHTML(for page: TagListPage,

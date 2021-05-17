@@ -5,13 +5,11 @@ author: Deirdre Saoirse Moen
 path: /migrating-to-jekyll/
 title:  Migrating to Jekyll
 description: This site had a 2020 in migrating from WordPress (php-based dynamic site) to Jekyll (ruby-based static site generator). Let me tell you all about it.
-image:
-  img: /assets/images/2020/10/monarch_butterflies.jpg
-  title: Migrating Monarch Butterflies
-  caption: Monarch Butterflies on tree branch in blue sky background, photo by JHVEPhoto/Depositphotos, used with permission
-date:   2020-10-31 12:03:14 -0700
-tags:
-  - Web
+imagePath: /assets/images/2020/10/monarch_butterflies.jpg
+imageTitle: Migrating Monarch Butterflies
+imageCaption: Monarch Butterflies on tree branch in blue sky background, photo by JHVEPhoto/Depositphotos, used with permission
+date:   2020-10-31 12:03
+tags: web
 ---
 
 {% include featured-image.html %}

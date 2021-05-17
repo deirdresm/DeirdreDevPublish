@@ -6,15 +6,11 @@ layout: post
 path: /swiftuijam-experience/
 title: The SwiftUIJam Experience
 description: Went to my first SwiftUI jam, here's what happened.
-image: 
-  img: /assets/images/2021/02/SwiftUI-Jam-Logo.png
-  title: SwiftUI Jam Logo
-  caption: A fun jam for SwiftUI.
-  
-date: 2021-02-21 12:26:14 -0700
-tags:
-  - SwiftUI
-  - SwiftUIJam
+imagePath: /assets/images/2021/02/SwiftUI-Jam-Logo.png
+imageTitle: SwiftUI Jam Logo
+imageCaption: A fun jam for SwiftUI.
+date: 2021-02-21 12:26
+tags: swift, swiftui, swiftuijam
 ---
 {% include featured-image.html %}
 

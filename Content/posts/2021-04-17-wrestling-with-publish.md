@@ -5,15 +5,11 @@ author: Deirdre Saoirse Moen
 path: /wrestling-with-publish/
 title: Wrestling With Publish
 description: I've been working on converting this site from Jekyll to Publish, and here's a few cool sites I've found so far.
-image: 
-  img: /assets/images/2021/04/CasperishTheme.png
-  title: Casperish Theme Description
-  caption: I learned a lot from reading the source of the Casperish theme for Publish.
-  
-date: 2021-04-17 11:26:14 -0700
-tags:
-  - Swift
-  - Publish
+imagePath: /assets/images/2021/04/CasperishTheme.png
+imageTitle: Casperish Theme Description
+imageCaption: I learned a lot from reading the source of the Casperish theme for Publish.
+date: 2021-04-17 11:26
+tags: swift, publish
 ---
 {% include featured-image.html %}
 

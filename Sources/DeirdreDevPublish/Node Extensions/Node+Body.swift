@@ -21,12 +21,15 @@ extension Node where Context == HTML.BodyContext {
 
     static func topHeader<T: SolidStateWebsite>(
         for context: PublishingContext<T>,
-        selectedSection: T.SectionID?
+        selectedSection: T.SectionID?,
+        isHome: Bool = false
     ) -> Node {
         let sectionIDs = T.SectionID.allCases
 
         return .header(
                     .id("header"),
+                    .if(isHome,
+                        .class("alt")),
                     .h1(.a(.href("/"), .text(context.site.name))),
                     .if(sectionIDs.count > 1,
 
@@ -136,7 +139,7 @@ extension Node where Context == HTML.BodyContext {
         )
     }
 
-    static func itemList<T: SolidStateWebsite>(for items: [Item<T>], on site: T) -> Node {
+    static func itemList<T: SolidStateWebsite>(for items: [Item<T>], on site: T, index: Bool = false) -> Node {
         return .ul(
             .class("item-list"),
             .forEach(items) { item in
@@ -181,36 +184,79 @@ extension Node where Context == HTML.BodyContext {
 
      */
 
-    static func footer<T: Website>(for site: T) -> Node {
-        return .footer(
+    static func contactList<T: SolidStateWebsite>(on site: T) -> Node {
+        return .ul(.class("contact"),
+                   .forEach(site.contacts) { (contact, handler) in
+                        .li(.class("\(contact.icon)"),
+                            .a(.href(contact.url(handler)),
+                                  .span(.class("label"),
+                                        .text(contact.alt(handler))
+                                  )) // span a
+                              ) // li
+
+                   }
+               ) // ul
+    }
+
+   static func footer<T: SolidStateWebsite>(for site: T) -> Node {
+        return //.footer(
             .section(.id("footer"),
-                     .div(.class("inner")),
-                     .h2(.class("major"),text("Get in touch")),
-                .text("Generated using "),
-                .a(
-                    .text("Publish"),
-                    .href("https://github.com/johnsundell/publish")
-                ),
-            .p(.a(
-                .text("RSS feed"),
-                .href("/feed.rss")
-            ))
-            )
-       )
+                     .div(.class("inner"),
+                          .h2(.class("major"),text("Get in touch")),
+                          .contactList(on: site),
+
+                          .ul(.class("copyright"),
+                              .li(.text("&copy; Deirdre Saoirse Moen.")),
+                              .li(.text("Apple store staircase photo &copy; by Rick Moen.")),
+                              .li(.text("Theme design: "),
+                                  .a(.text("HTML5 UP"),
+                                     .href("https://html5up.net"))
+                              ),
+                              .li(
+                              .text("Generated using "),
+                              .a(.text("Publish"),
+                                .href("https://github.com/johnsundell/publish")
+                              )),
+                              .li(.a(
+                                .text("RSS feed"),
+                                .href("/feed.rss")
+                              ))
+                            ) // ul
+                     ) // div inner
+            ) // section
+//        )
     }
 
     /*
+     <div class="{{ include.image_class }} image-wrapper" role="img" aria-label="{{ include.description }}"><span class="image fit">
+       <figure class="image">
+         <img src="{{ include.url }}" alt="{{ include.description }}">
+         <figcaption>{{ include.caption }}</figcaption>
+       </figure>
+     </span></div>>
 
-     <section id="feature-1" class="wrapper spotlight style1">
-       <div class="inner">
-         <a href="/features/about.html" class="image"><img src="/assets/images/rocket-square.png" alt="" /></a>
-         <div class="content">
-            <a href="/features/about.html"><h2 class="major">Welcome to deirdre.dev</h2></a>
-           <p>iOS and Apple technologies developer (iPadOS, watchOS, tvOS, macOS, etc.) Previously a Senior Software Engineer on Apple's Safari team.</p>
-         </div>
-       </div>
-     </section>
+     <div class="12u$" role="img" aria-label="{{ include.description }}"><span class="image fit">
+     {% figure [caption:include.description] [class:"image"] %}
+       <img src="{{ include.url }}" alt="{{ include.description }}">
+       <figcaption>{{ include.caption }}</figcaption>
+     {% endfigure %}
+     </span></div>>
+
      */
+
+    // TODO: aria-label and figcaption and role
+    static func imageWrapper<T: SolidStateWebsite>(for site: T, cssClass: String,
+                                                   imageUrl: String, imageDescrip: String,
+                                                   imageCaption: String) -> Node {
+        return .div(.class("\(cssClass) image-wrapper"),
+//                           .role("img"),
+                           .span(.class("image fit"),
+                                 .figure(.class("image"),
+                                         .img(.src(imageUrl),
+                                              .alt(imageDescrip))
+                                 )
+                           ))
+    }
 
     static func spotlightAlt(num: Int) -> String {
         return num % 1 == 0 ? "" : "alt"
@@ -231,13 +277,12 @@ extension Node where Context == HTML.BodyContext {
     // feature section for posts
     static func feature<T: SolidStateWebsite>(for item: Item<T>, on site: T, num: Int, offset: Int) -> Node {
         return .section(.id("post-\(num)"),
-                        .class("wrapper alt \(num % 1 == 0 ? "" : "alt") style\(num+offset)"),
+                        .class("wrapper \(num % 2 == 0 ? "" : "alt") spotlight style\(num+offset)"),
+                        .div(.class("inner"),
                         .a(
                             .class("image"),
-                            .text("Publish"),
                             .href(item.path),
-                            .img(.class("image"),
-                                 .src(item.metadata.image)
+                            .img(.src(item.metadata.imagePath)
                             )
                         ),
                         .div(.class("content"),
@@ -248,7 +293,8 @@ extension Node where Context == HTML.BodyContext {
                              ),
                              .p(text(item.description)
                              )
-                        )
+                        ) // div.content
+                        ) // div.inner
                 )
      }
 
@@ -267,11 +313,63 @@ extension Node where Context == HTML.BodyContext {
     // feature section for pages
     func feature<T: SolidStateWebsite>(for pages: [Page], on site: T, num: Int, offset: Int = 0) -> Node {
         return .section(.id("feature-\(num)"),
-                        .class("wrapper alt \(num % 1 == 0 ? "" : "alt") style\(num+1)"),
+                        .class("wrapper \(num % 2 == 0 ? "" : "alt") spotlight style\(num+1)"),
                             .a(.class("image"),
                                 .text("Publish"),
                                 .href("https://github.com/johnsundell/publish")
                         )
                 )
+    }
+
+    // TODO: try to clean up and make a FigureContext
+
+    /// Add a `<picture>` HTML element within the current context.
+    /// - parameter nodes: The element's attributes and child elements.
+    static func figure(_ nodes: Node<HTML.BodyContext>...) -> Node {
+        .element(named: "figure", nodes: nodes)
+    }
+
+    static func role(_ string: String) -> Self {
+        .attribute(named: "role", value: string)
+    }
+
+    static func ariaLabel(_ string: String) -> Self {
+        .attribute(named: "aria-label", value: string)
+    }
+
+    // TODO: find a cleaner way that dedups the function.
+    static func featuredImage<T: SolidStateWebsite>(for page: Page, on site: T,
+                                   url: Path?,
+                                  text: String,
+                                   alt: String) -> Node {
+        .unwrap(page.imagePath ?? site.imagePath, { path in
+            let url = site.url(for: path)
+            return .div(.class("4u 12u$(small)"),
+                        .role("img"),
+                        .ariaLabel("this is a test"),
+                        .span(.class("image fit"),
+                              .figure(.class("image"),
+                                      .img(.src(url),
+                                           .alt(alt))
+                                      ) // figure
+                              ) // span
+            ) // div
+        })
+    }
+
+    static func featuredImage<T: SolidStateWebsite>(for item: Item<T>, on site: T) -> Node {
+        .unwrap(item.imagePath ?? site.imagePath, { path in
+            let url = site.url(for: path)
+            return .div(.class("4u 12u$(small)"),
+                        .role("img"),
+                        .ariaLabel("this is a test"),
+                        .span(.class("image fit"),
+                              .figure(.class("image"),
+                                      .img(.src(path),
+                                           .alt(item.imageTitle ?? item.title))
+                                      ) // figure
+                              ) // span
+            ) // div
+        })
     }
 }

@@ -31,17 +31,17 @@ public enum ContactPoint {
     var icon: String {
         switch self {
         case .twitter:
-            return "fa-twitter"
+            return "icon brands fa-twitter"
         case .email:
-            return "fa-envelope"
+            return "icon solid fa-envelope"
         case .dev:
-            return "fa-dev"
+            return "icon brands fa-dev"
         case .linkedIn:
-            return "fa-linkedin"
+            return "icon brands fa-linkedin"
         case .gitHub:
-            return "fa-github"
+            return "icon brands fa-github"
         case .stackoverflow:
-            return "fa-stack-overflow"
+            return "icon brands fa-stack-overflow"
         }
     }
 
@@ -56,9 +56,26 @@ public enum ContactPoint {
         case .linkedIn:
             return "Linked In: \(handler)"
         case .gitHub:
-            return "Github: \(handler)"
+            return "GitHub: \(handler)"
         case .stackoverflow:
             return "Stack Overflow: \(handler)"
+        }
+    }
+
+    func label() -> String {
+        switch self {
+        case .twitter:
+            return "Twitter"
+        case .email:
+            return "Email"
+        case .dev:
+            return "Dev.to"
+        case .linkedIn:
+            return "Linked In"
+        case .gitHub:
+            return "GitHub"
+        case .stackoverflow:
+            return "Stack Overflow"
         }
     }
 }

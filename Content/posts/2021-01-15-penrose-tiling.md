@@ -5,16 +5,11 @@ author: Deirdre Saoirse Moen
 path: /penrose-tiling/
 title: Penrose Tiling in Swift
 description: Penrose Tiling in Swift, command-line edition
-image: 
-  img: /assets/images/2021/01/penrose_tiling_sq.png
-  title: Penrose Tiling in Swift Image Output
-  caption: A fun little experiment.
-  
-date: 2021-01-15 16:09:14 -0700
-tags:
-  - Swift
-  - CIImage
-  - Penrose
+imagePath: /assets/images/2021/01/penrose_tiling_sq.png
+imageTitle: Penrose Tiling in Swift Image Output
+imageCaption: A fun little experiment.
+date: 2021-01-15 16:09
+tags: swift, ciimage, penrose, geometry
 ---
 {% include featured-image.html %}
 

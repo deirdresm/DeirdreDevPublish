@@ -6,17 +6,11 @@ layout: post
 path: /unsupported-kvc-in-keypath/
 title: Unsupported KVC in Keypath
 description: I ran into a cryptic error with only two ten-year-old hits on Google. Here's why.
-image: 
-  img: /assets/images/2020/12/unsupported-kvc-aggregate-in-keypath.png
-  title: Xcode asset catalog screenshot
-  caption: I ran into a cryptic error with only two ten-year-old hits on Google.
-  
-date: 2020-12-24 11:29:14 -0700
-tags:
-  - Swift
-  - CoreData
-  - NSPredicate
-  - Xcode
+imagePath: /assets/images/2020/12/unsupported-kvc-aggregate-in-keypath.png
+imageTitle: Xcode asset catalog screenshot
+imageCaption: I ran into a cryptic error with only two ten-year-old hits on Google.
+date: 2020-12-24 11:29
+tags: swift, coredata, nspredicate, xcode
 ---
 {% include featured-image.html %}
 
