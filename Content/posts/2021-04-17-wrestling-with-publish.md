@@ -11,8 +11,6 @@ imageCaption: I learned a lot from reading the source of the Casperish theme for
 date: 2021-04-17 11:26
 tags: swift, publish
 ---
-{% include featured-image.html %}
-
 There's a saying in web dev: when you hit a wall, start or redesign a site.
 
 While I like Jekyll, I've found that, because I no longer spend my days in TextMate, I don't *think* about my website frequently. It's a habit thing.

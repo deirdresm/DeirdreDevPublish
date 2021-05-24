@@ -12,8 +12,6 @@ imageCaption: I ran into a cryptic error with only two ten-year-old hits on Goog
 date: 2020-12-24 11:29
 tags: swift, coredata, nspredicate, xcode
 ---
-{% include featured-image.html %}
-
 Yesterday, I ran into a cryptic error message in Xcode, and there were only two ten-year-old hits on Google.
 
     Unsupported KVC aggregate in keypath

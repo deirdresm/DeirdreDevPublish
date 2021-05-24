@@ -12,8 +12,6 @@ imageCaption: A fun jam for SwiftUI.
 date: 2021-02-21 12:26
 tags: swift, swiftui, swiftuijam
 ---
-{% include featured-image.html %}
-
 Searching for Jam ideas is always interesting. You need something that can reasonably be done in 2-3 days, but also need something you can *show*. Plus, people have lives and things come up. (Or, as you'll hear shortly, can be literally flung up.)
 
 I went through some of the listings of APIs over on [Programmable Web](https://www.programmableweb.com) to see if any ideas stuck.

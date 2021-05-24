@@ -13,9 +13,6 @@ date: 2020-10-27 21:01
 tags: swift, portfolio, coreml, scenekit
 ---
 
-
-{% include featured-image.html %}
-
 A little project I did in Swift last year, partly to learn some things I hadn't ever worked with before: SceneKit, CoreML, and some 3D concepts.
 
 {% include video.html url="/assets/videos/color-sphere-movie.mp4" width="720" height="720" poster="/assets/images/2020/10/color-sphere-still.jpg" %}

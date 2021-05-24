@@ -12,8 +12,6 @@ imageCaption: A fun little experiment.
 date: 2021-01-29 12:26
 categories: swift, blog
 ---
-{% include featured-image.html %}
-
 Over on reddit, [there's a thread on r/swift aimed at people who are C coders](https://www.reddit.com/r/swift/comments/l78v5u/c_developers_gone_swift_do_you_notice_a_gap_in/). It asks the following questions:
 
 1. Do you notice a gap in understanding memory management and low level concepts amongst Swift developers?

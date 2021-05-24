@@ -10,8 +10,6 @@ imagePath: /assets/images/2019/03/machine_learning.jpg
 tags: swift, coreml
 ---
 
-{% include featured-image.html %}
-
 For those who don't know about Swift on Sundays, it's a weekly feature (on Sundays, naturally) where Paul Hudson of Hacking With Swift builds a live app on YouTube, talking through his design choices as he makes them.
 
 <!--Read more-->

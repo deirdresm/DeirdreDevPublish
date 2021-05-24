@@ -11,8 +11,6 @@ imageCaption: A fun little experiment.
 date: 2021-01-15 16:09
 tags: swift, ciimage, penrose, geometry
 ---
-{% include featured-image.html %}
-
 Command-line implementation of [Penrose tiling](https://rosettacode.org/wiki/Penrose_tiling) in Swift. Translated mostly from the Go and Java versions.
 
 [Great explainer on Penrose tiling.](https://preshing.com/20110831/penrose-tiling-explained/)

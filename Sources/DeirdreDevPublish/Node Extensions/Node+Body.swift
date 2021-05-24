@@ -81,7 +81,7 @@ extension Node where Context == HTML.BodyContext {
                 .ul(.class("icons"),
                     .forEach(context.site.contacts) { (contact, handler) in
                         .li(.a(
-                                .class("icon \(contact.icon)"),
+                                .class("\(contact.icon)"),
                                 .href(contact.url(handler))
                             )
                         ) // li
@@ -358,18 +358,18 @@ extension Node where Context == HTML.BodyContext {
     }
 
     static func featuredImage<T: SolidStateWebsite>(for item: Item<T>, on site: T) -> Node {
-        .unwrap(item.imagePath ?? site.imagePath, { path in
-            let url = site.url(for: path)
+        .unwrap(item.metadata.imagePath) { path in
             return .div(.class("4u 12u$(small)"),
                         .role("img"),
-                        .ariaLabel("this is a test"),
+                        .ariaLabel(item.metadata.imageTitle ?? item.title),
                         .span(.class("image fit"),
                               .figure(.class("image"),
                                       .img(.src(path),
-                                           .alt(item.imageTitle ?? item.title))
-                                      ) // figure
-                              ) // span
+                                           .alt(item.metadata.imageTitle ?? item.title)
+                                      ) // img
+                              ) // figure
+                        ) // span
             ) // div
-        })
+        } // path unwrap
     }
 }

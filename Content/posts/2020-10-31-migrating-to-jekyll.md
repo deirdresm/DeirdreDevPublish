@@ -12,8 +12,6 @@ date:   2020-10-31 12:03
 tags: web
 ---
 
-{% include featured-image.html %}
-
 First of all, I don't think it's news to anyone that 2020 has, to be polite, sucked. I lost a good part of my productivity this year (for months!) to COVID-19.
 
 Because it's most illustrative of the kind of thing I've had to recover from, here's one of the challenges I had when COVID was at its worst in late January: rooms changed shape. I don't mean a little bit. I mean [what platonic solid they were: cube to dodecahedron](https://en.wikipedia.org/wiki/Platonic_solid), for example. 🤮 The other was the wall suddenly sliding down the corridor away from me. While I was walking. 🤮

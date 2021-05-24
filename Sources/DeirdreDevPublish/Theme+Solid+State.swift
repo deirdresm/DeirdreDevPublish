@@ -76,6 +76,87 @@ extension Theme where Site == SolidStateSite {
 //    }
 }
 
+/*
+ static func featuredImage<T: SolidStateWebsite>(for item: Item<T>, on site: T) -> Node {
+     .unwrap(item.imagePath ?? site.imagePath, { path in
+         let url = site.url(for: path)
+         return .div(.class("4u 12u$(small)"),
+                     .role("img"),
+                     .ariaLabel("this is a test"),
+                     .span(.class("image fit"),
+                           .figure(.class("image"),
+                                   .img(.src(path),
+                                        .alt(item.imageTitle ?? item.title))
+                                   ) // figure
+                           ) // span
+         ) // div
+     })
+ }
+
+ */
+
+public extension Node where Context: HTML.BodyContext {
+    /// Add a `<figure>` HTML element within the current context.
+    /// - parameter nodes: The element's attributes and child elements.
+    static func figure(_ nodes: Node<HTML.BodyContext>...) -> Node {
+        .element(named: "figure", nodes: nodes)
+    }
+    
+    /// Add a `<figcaption>` HTML element within the current context.
+    /// - parameter nodes: The element's attributes and child elements.
+    static func figcaption(_ nodes: Node<HTML.BodyContext>...) -> Node {
+        .element(named: "figcaption", nodes: nodes)
+    }
+}
+
+public extension ElementDefinitions {
+    /// Definition for the `<figure>` element.
+    enum Figure: ElementDefinition { public static var wrapper = Node.figure }
+    /// Definition for the `<figcaption>` element.
+    enum FigCaption: ElementDefinition { public static var wrapper = Node.figcaption }
+}
+
+///// Component used to render an `<figure>` element for displaying an image.
+//public struct Figure: Component {
+//    public var body: Component {
+//        Node<HTML.BodyContext>.figure()
+//    }
+//}
+//
+///// Component used to render an `<figcaption>` element for displaying an image.
+//public struct FigCaption: Component {
+//    public var body: Component {
+//        Node<HTML.BodyContext>.figcaption()
+//    }
+//}
+
+/// A container component that's rendered using the `<div>` element.
+public typealias Figure = ElementComponent<ElementDefinitions.Figure>
+/// A container component that's rendered using the `<div>` element.
+public typealias FigCaption = ElementComponent<ElementDefinitions.FigCaption>
+
+
+struct InlineImage: Component {
+    var path: URLRepresentable
+    var imageTitle: String
+    var imageCaption: String
+
+    var body: Component {
+        Div(
+            Span(
+                Figure(
+                    Image(url: path, description: imageTitle)
+                )
+                .class("image")
+            )
+            .class("image fit")
+        )
+        .class("4u 12u$(small)")
+//        .ariaLabel(imageTitle)
+//        .role("img")
+    }
+}
+
 struct SolidStateHTMLFactory: HTMLFactory {
     // MARK: makeIndexHTML - generates the front page
     func makeIndexHTML(for index: Index, context: PublishingContext<SolidStateSite>) throws -> HTML {
@@ -85,7 +166,7 @@ struct SolidStateHTMLFactory: HTMLFactory {
                   stylesheetPaths: context.site.stylesheetPaths,
                   noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
             .body(
-                .class("is-preload"),
+//                .class("is-preload"),
                 .pageWrapper(
                     .topHeader(for: context, selectedSection: nil, isHome: true),
 //                    .topMenuBody(for: context, selectedSection: nil),
@@ -132,10 +213,9 @@ struct SolidStateHTMLFactory: HTMLFactory {
                   stylesheetPaths: context.site.stylesheetPaths,
                   noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
             .body(
-                .class("is-preload"),
                 .pageWrapper(
                     .topHeader(for: context, selectedSection: item.sectionID),
-                    .topMenuBody(for: context, selectedSection: item.sectionID),
+//                    .topMenuBody(for: context, selectedSection: item.sectionID),
                     .wrapper(
                         .header(
                             .div(.class("inner"),
@@ -143,19 +223,15 @@ struct SolidStateHTMLFactory: HTMLFactory {
                                  .p(.text(item.description))
                             )
                         ),
+                        .div(.class("wrapper"),
+                        .div(.class("inner"),
                         .featuredImage(for: item,
-                                       on: context.site,
-                                       url: item.imagePath,
-                                       text: item.metadata.title,
-                                       alt: item.description),
-                        .article(
-                            .div(
-                                .class("content"),
-                                .contentBody(item.body)
-                            ),
-                            .span("Tagged with: "),
-                            .tagList(for: item, on: context.site)
-                        )
+                                       on: context.site),
+                        .article(.class("inner"),
+                                .contentBody(item.body),
+                                .span("Tagged with: "),
+                                .tagList(for: item, on: context.site)
+                        )))
                     ),
                     .footer(for: context.site)
                 )
@@ -182,7 +258,7 @@ struct SolidStateHTMLFactory: HTMLFactory {
                             )
                         ),
                         .div(.class("wrapper"),
-                             .div(.class("inner"),
+                             .article(.class("inner"),
                                   .featuredImage(for: page,
                                                  on: context.site,
                                                  url: page.imagePath,

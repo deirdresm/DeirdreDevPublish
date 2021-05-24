@@ -55,7 +55,7 @@ struct SolidStateSite: Website, SolidStateWebsite {
     var featuredPages = ["/about"]
     var featuredPostCount = 5
 
-    var stylesheetPaths: [Path] = ["/assets/css/main.css", "/assets/css/fontawesome-all.min.css" ]
+    var stylesheetPaths: [Path] = ["/assets/css/main.css", "/assets/css/fontawesome-all.min.css", "/assets/css/deirdre.css"]
     var noscriptStylesheetPaths: [Path] = ["/assets/css/noscript.css"]
 
     // front page metadata
