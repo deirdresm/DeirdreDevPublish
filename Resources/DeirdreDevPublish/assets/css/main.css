@@ -4163,6 +4163,26 @@ input, select, textarea {
     padding:0 auto
 }
 
+#banner .logo {
+    margin: 0;
+    display: inline-block;
+}
+
+#banner .logo .icon,
+#banner .logo .image {
+    cursor: default;
+    width: 75%;
+    height: auto;
+    padding: 0 auto
+}
+
+#banner .inner .p {
+    cursor: default;
+    width: 75%;
+    height: auto;
+    padding: 0 auto;
+}
+
 @media screen
 #page-wrapper img {
     max-width: 100%;

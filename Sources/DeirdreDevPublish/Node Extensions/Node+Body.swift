@@ -259,7 +259,7 @@ extension Node where Context == HTML.BodyContext {
     }
 
     static func spotlightAlt(num: Int) -> String {
-        return num % 1 == 0 ? "" : "alt"
+        return num % 1 == 0 ? "" : " alt"
      }
 
     static func showPostCount<T: SolidStateWebsite>(on site: T, num: Int, start: Int = 0) -> Int {
@@ -272,7 +272,6 @@ extension Node where Context == HTML.BodyContext {
             return site.featuredPostCount - site.featuredPages.count
         }
     }
-
 
     // feature section for posts
     static func feature<T: SolidStateWebsite>(for item: Item<T>, on site: T, num: Int, offset: Int) -> Node {
@@ -307,13 +306,12 @@ extension Node where Context == HTML.BodyContext {
         return .forEach(itemsPrefix.enumerated()) { index, item in
             feature(for: item, on: site, num: index, offset: start)
         }
-
     }
 
     // feature section for pages
     func feature<T: SolidStateWebsite>(for pages: [Page], on site: T, num: Int, offset: Int = 0) -> Node {
         return .section(.id("feature-\(num)"),
-                        .class("wrapper \(num % 2 == 0 ? "" : "alt") spotlight style\(num+1)"),
+                        .class("wrapper\(num % 2 == 0 ? "" : "alt") spotlight style\(num+1)"),
                             .a(.class("image"),
                                 .text("Publish"),
                                 .href("https://github.com/johnsundell/publish")
