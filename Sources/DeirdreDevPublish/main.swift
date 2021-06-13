@@ -87,8 +87,8 @@ struct SolidStateSite: Website, SolidStateWebsite {
 try SolidStateSite().publish(withTheme: .solidState,
                              indentation: .tabs(1),
                              additionalSteps: [
-                                .installPlugin(.twitter()),
-                                .addMarkdownFiles(),
+//                                .installPlugin(.twitter()),
+//                                .addMarkdownFiles(),
                                 .copyResources(at: "Resources/DeirdreDevPublish/assets/js",
                                                to: "assets",
                                                includingFolder: true),
@@ -118,7 +118,8 @@ try SolidStateSite().publish(withTheme: .solidState,
 //                                .copyFiles(at: "Resources/DeirdreDevPublish/assets/webfonts", to: "assets", includingFolder: true),
 //                                .copyFiles(at: "Content/assets/icons", to: "assets", includingFolder: true),
 //                                .copyFiles(at: "Content/assets/images", to: "assets", includingFolder: true)
-                             ]
+                             ],
+                             plugins: [.twitter()]
                              //    using: [
 //    .generateHTML(withTheme: .solidState, indentation: .tabs(1)),
 ////    .plugins: [.gist(renderer: MyGistRenderer())],

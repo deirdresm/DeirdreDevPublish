@@ -19,5 +19,4 @@ extension Node {
                                      _ transform: (S.Element) throws -> Node) rethrows -> Node {
         try .group(sequence.map(transform))
     }
-
 }

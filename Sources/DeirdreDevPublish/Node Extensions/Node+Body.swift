@@ -24,20 +24,19 @@ extension Node where Context == HTML.BodyContext {
         selectedSection: T.SectionID?,
         isHome: Bool = false
     ) -> Node {
-        let sectionIDs = T.SectionID.allCases
+        //        let sectionIDs = T.SectionID.allCases
 
         return .header(
-                    .id("header"),
-                    .if(isHome,
-                        .class("alt")),
-                    .h1(.a(.href("/"), .text(context.site.name))),
-                    .if(sectionIDs.count > 1,
-
-                        // note that this theme has a nav with no dropdown items, but then uses JS to connect to a second nav with the dropdowns.
-                             .nav(
-                                .a(.href("#menu"), .text("Menu"))
-                            )
-                ) // if
+            .id("header"),
+            .if(isHome,
+                .class("alt")),
+            .h1(.a(.href("/"), .text(context.site.name)))
+            //                    .if(sectionIDs.count > 1,
+            // note that this theme has a nav with no dropdown items, but then uses JS to connect to a second nav with the dropdowns.
+            //                             .nav(
+            //                                .a(.href("#menu"), .text("Menu"))
+            //                            )
+            //                ) // if
         ) // header
     }
 
@@ -48,23 +47,23 @@ extension Node where Context == HTML.BodyContext {
         let sectionIDs = T.SectionID.allCases
 
         return .if(sectionIDs.count > 1,
-           .nav(
-                .id("menu"),
-                .div(
-                    .class("inner"),
-                    .h2("Menu"),
+                   .nav(
+                    .id("menu"),
+                    .div(
+                        .class("inner"),
+                        .h2("Menu"),
 
-                    .ul(
-                        .class("links"),
-                        .forEach(sectionIDs) { section in
-                        .li(.a(
-                            .class(section == selectedSection ? "selected" : ""),
-                            .href(context.sections[section].path),
-                            .text(context.sections[section].title)
-                        ))
-                    })
-                )
-            )
+                        .ul(
+                            .class("links"),
+                            .forEach(sectionIDs) { section in
+                                .li(.a(
+                                    .class(section == selectedSection ? "selected" : ""),
+                                    .href(context.sections[section].path),
+                                    .text(context.sections[section].title)
+                                ))
+                            })
+                    )
+                   )
         )
     }
 
@@ -72,48 +71,48 @@ extension Node where Context == HTML.BodyContext {
         for context: PublishingContext<T>
     ) -> Node {
         return .section(.id("banner"),
-            .div(.class("inner"),
-                .div(.class("logo"),
-                     .img(.class("image"),
-                          .alt(context.site.logoAlt),
-                          .src(context.site.logo))),
-                .p(.text(context.site.description)),
-                .ul(.class("icons"),
-                    .forEach(context.site.contacts) { (contact, handler) in
-                        .li(.a(
-                                .class("\(contact.icon)"),
-                                .href(contact.url(handler))
-                            )
-                        ) // li
-                }) // foreach, ul
-//                .h2(context.metadata.bannerTitle)
-            ) // top div
+                        .div(.class("inner"),
+                             .div(.class("logo"),
+                                  .img(.class("image"),
+                                       .alt(context.site.logoAlt),
+                                       .src(context.site.logo))),
+                             .p(.text(context.site.description)),
+                             .ul(.class("icons"),
+                                 .forEach(context.site.contacts) { (contact, handler) in
+                                    .li(.a(
+                                        .class("\(contact.icon)"),
+                                        .href(contact.url(handler))
+                                    )
+                                    ) // li
+                                 }) // foreach, ul
+                             //                .h2(context.metadata.bannerTitle)
+                        ) // top div
         ) // section
     }
 
     /*
      <!-- Header -->
-         <header id="header">
-             <h1><a href="index.html">Solid State</a></h1>
-             <nav>
-                 <a href="#menu">Menu</a>
-             </nav>
-         </header>
+     <header id="header">
+     <h1><a href="index.html">Solid State</a></h1>
+     <nav>
+     <a href="#menu">Menu</a>
+     </nav>
+     </header>
 
      <!-- Menu -->
-         <nav id="menu">
-             <div class="inner">
-                 <h2>Menu</h2>
-                 <ul class="links">
-                     <li><a href="index.html">Home</a></li>
-                     <li><a href="generic.html">Generic</a></li>
-                     <li><a href="elements.html">Elements</a></li>
-                     <li><a href="#">Log In</a></li>
-                     <li><a href="#">Sign Up</a></li>
-                 </ul>
-                 <a href="#" class="close">Close</a>
-             </div>
-         </nav>
+     <nav id="menu">
+     <div class="inner">
+     <h2>Menu</h2>
+     <ul class="links">
+     <li><a href="index.html">Home</a></li>
+     <li><a href="generic.html">Generic</a></li>
+     <li><a href="elements.html">Elements</a></li>
+     <li><a href="#">Log In</a></li>
+     <li><a href="#">Sign Up</a></li>
+     </ul>
+     <a href="#" class="close">Close</a>
+     </div>
+     </nav>
 
      */
     static func header<T: SolidStateWebsite>(
@@ -123,19 +122,19 @@ extension Node where Context == HTML.BodyContext {
         let sectionIDs = T.SectionID.allCases
 
         return .header(
-                .id("header"),
-                .a(.class("site-name"), .href("/"), .text(context.site.name)),
-                .if(sectionIDs.count > 1,
-                    .nav(
-                        .ul(.forEach(sectionIDs) { section in
-                            .li(.a(
-                                .class(section == selectedSection ? "selected" : ""),
-                                .href(context.sections[section].path),
-                                .text(context.sections[section].title)
-                            ))
-                        })
-                    )
+            .id("header"),
+            .a(.class("site-name"), .href("/"), .text(context.site.name)),
+            .if(sectionIDs.count > 1,
+                .nav(
+                    .ul(.forEach(sectionIDs) { section in
+                        .li(.a(
+                            .class(section == selectedSection ? "selected" : ""),
+                            .href(context.sections[section].path),
+                            .text(context.sections[section].title)
+                        ))
+                    })
                 )
+            )
         )
     }
 
@@ -166,39 +165,84 @@ extension Node where Context == HTML.BodyContext {
 
     /*
      <section id="footer">
-       <div class="inner">
-         <h2 class="major">Get in touch</h2>
-         <ul class="contact">
-           <li class="fa-linkedin"><a href="https://www.linkedin.com/in/desamo">linkedin.com/in/desamo</a></li>
-           <li class="fa-github"><a href="https://github.com/deirdresm">github.com/deirdresm</a></li>
-         </ul>
-         <ul class="contact">
-           <li class="fa-envelope"><a href="#">deirdre@deirdre.net</a></li>
-           <li class="fa-twitter"><a href="https://twitter.com/deirdresm">twitter.com/deirdresm</a></li>
-         </ul>
-         <ul class="copyright">
-           <li>&copy; Deirdre Saoirse Moen. All rights reserved.</li><li>Apple store staircase photo &copy; by Rick Moen. All rights reserved.</li><li>Theme design: <a href="http://html5up.net">HTML5 UP</a></li>
-         </ul>
-       </div>
+     <div class="inner">
+     <h2 class="major">Get in touch</h2>
+     <ul class="contact">
+     <li class="fa-linkedin"><a href="https://www.linkedin.com/in/desamo">linkedin.com/in/desamo</a></li>
+     <li class="fa-github"><a href="https://github.com/deirdresm">github.com/deirdresm</a></li>
+     </ul>
+     <ul class="contact">
+     <li class="fa-envelope"><a href="#">deirdre@deirdre.net</a></li>
+     <li class="fa-twitter"><a href="https://twitter.com/deirdresm">twitter.com/deirdresm</a></li>
+     </ul>
+     <ul class="copyright">
+     <li>&copy; Deirdre Saoirse Moen. All rights reserved.</li><li>Apple store staircase photo &copy; by Rick Moen. All rights reserved.</li><li>Theme design: <a href="http://html5up.net">HTML5 UP</a></li>
+     </ul>
+     </div>
      </section>
 
      */
 
-    static func contactList<T: SolidStateWebsite>(on site: T) -> Node {
-        return .ul(.class("contact"),
-                   .forEach(site.contacts) { (contact, handler) in
-                        .li(.class("\(contact.icon)"),
-                            .a(.href(contact.url(handler)),
-                                  .span(.class("label"),
-                                        .text(contact.alt(handler))
-                                  )) // span a
-                              ) // li
+//    static func contact<T: SolidStateWebsite>(on site: T, contact: ContactPoint) -> Node { }
 
-                   }
-               ) // ul
+    static func contactList<T: SolidStateWebsite>(on site: T) -> Node {
+
+        var nodes: [Node] = []
+        var slice: [Node<HTML.ListContext>] = []
+
+        site.contacts.forEachSlice(2, { contacts in
+            slice = []
+
+            if let contactPoint = contacts.first {
+                let contact = contactPoint.0
+                let handler = contactPoint.1
+                slice.append(.group(
+                                .li(.class("\(contact.icon)"),
+                                    .a(.href(contact.url(handler)),
+                                       .span(.class("label"),
+                                             .text(contact.alt(handler))
+                                       )) // span a
+                                )) // li group
+                ) // slice
+            }
+
+            // ugh, dry
+            if let contactPoint = contacts.last {
+                let contact = contactPoint.0
+                let handler = contactPoint.1
+
+                slice.append(.group(
+                                .li(.class("\(contact.icon)"),
+                                    .a(.href(contact.url(handler)),
+                                       .span(.class("label"),
+                                             .text(contact.alt(handler))
+                                       )) // span a
+                                )) // li group
+                ) // slice
+            }
+
+            nodes.append(.ul(.class("contact"),
+                             .group(slice)
+            ))
+        })
+
+        return .group(nodes)
+
+        /*
+         .forEach(site.contacts) { (contact, handler) in
+         .li(.class("\(contact.icon)"),
+         .a(.href(contact.url(handler)),
+         .span(.class("label"),
+         .text(contact.alt(handler))
+         )) // span a
+         ) // li
+
+         }
+         */
+        //               ) // ul
     }
 
-   static func footer<T: SolidStateWebsite>(for site: T) -> Node {
+    static func footer<T: SolidStateWebsite>(for site: T) -> Node {
         return //.footer(
             .section(.id("footer"),
                      .div(.class("inner"),
@@ -213,32 +257,32 @@ extension Node where Context == HTML.BodyContext {
                                      .href("https://html5up.net"))
                               ),
                               .li(
-                              .text("Generated using "),
-                              .a(.text("Publish"),
-                                .href("https://github.com/johnsundell/publish")
-                              )),
+                                .text("Generated using "),
+                                .a(.text("Publish"),
+                                   .href("https://github.com/johnsundell/publish")
+                                )),
                               .li(.a(
                                 .text("RSS feed"),
                                 .href("/feed.rss")
                               ))
-                            ) // ul
+                          ) // ul
                      ) // div inner
             ) // section
-//        )
+        //        )
     }
 
     /*
      <div class="{{ include.image_class }} image-wrapper" role="img" aria-label="{{ include.description }}"><span class="image fit">
-       <figure class="image">
-         <img src="{{ include.url }}" alt="{{ include.description }}">
-         <figcaption>{{ include.caption }}</figcaption>
-       </figure>
+     <figure class="image">
+     <img src="{{ include.url }}" alt="{{ include.description }}">
+     <figcaption>{{ include.caption }}</figcaption>
+     </figure>
      </span></div>>
 
      <div class="12u$" role="img" aria-label="{{ include.description }}"><span class="image fit">
      {% figure [caption:include.description] [class:"image"] %}
-       <img src="{{ include.url }}" alt="{{ include.description }}">
-       <figcaption>{{ include.caption }}</figcaption>
+     <img src="{{ include.url }}" alt="{{ include.description }}">
+     <figcaption>{{ include.caption }}</figcaption>
      {% endfigure %}
      </span></div>>
 
@@ -249,18 +293,18 @@ extension Node where Context == HTML.BodyContext {
                                                    imageUrl: String, imageDescrip: String,
                                                    imageCaption: String) -> Node {
         return .div(.class("\(cssClass) image-wrapper"),
-//                           .role("img"),
-                           .span(.class("image fit"),
-                                 .figure(.class("image"),
-                                         .img(.src(imageUrl),
-                                              .alt(imageDescrip))
-                                 )
-                           ))
+                    //                           .role("img"),
+                    .span(.class("image fit"),
+                          .figure(.class("image"),
+                                  .img(.src(imageUrl),
+                                       .alt(imageDescrip))
+                          )
+                    ))
     }
 
     static func spotlightAlt(num: Int) -> String {
         return num % 1 == 0 ? "" : " alt"
-     }
+    }
 
     static func showPostCount<T: SolidStateWebsite>(on site: T, num: Int, start: Int = 0) -> Int {
 
@@ -278,32 +322,33 @@ extension Node where Context == HTML.BodyContext {
         return .section(.id("post-\(num)"),
                         .class("wrapper \(num % 2 == 0 ? "" : "alt") spotlight style\(num+offset)"),
                         .div(.class("inner"),
-                        .a(
-                            .class("image"),
-                            .href(item.path),
-                            .img(.src(item.metadata.imagePath)
-                            )
-                        ),
-                        .div(.class("content"),
-                             .a(.href(item.path),
-                                .h2(.class("major"),
-                                    .text(item.title)
+                             .a(
+                                .class("image"),
+                                .href(item.path),
+                                .img(.src(item.metadata.imagePath)
                                 )
                              ),
-                             .p(text(item.description)
-                             )
-                        ) // div.content
+                             .div(.class("content"),
+                                  .a(.href(item.path),
+                                     .h2(.class("major"),
+                                         .text(item.title)
+                                     )
+                                  ),
+                                  .p(text(item.description)
+                                  )
+                             ) // div.content
                         ) // div.inner
-                )
-     }
+        )
+    }
 
 
     // feature section for posts
     static func features<T: SolidStateWebsite>(for items: [Item<T>], on site: T, num: Int, start: Int = 0) -> Node {
 
+        print("Item count: \(items.count)")
         let itemsPrefix = items.prefix(site.featuredPostCount - site.featuredPages.count)
 
-        return .forEach(itemsPrefix.enumerated()) { index, item in
+        return .forEachEnumerated(itemsPrefix) { (index, item) in
             feature(for: item, on: site, num: index, offset: start)
         }
     }
@@ -311,12 +356,12 @@ extension Node where Context == HTML.BodyContext {
     // feature section for pages
     func feature<T: SolidStateWebsite>(for pages: [Page], on site: T, num: Int, offset: Int = 0) -> Node {
         return .section(.id("feature-\(num)"),
-                        .class("wrapper\(num % 2 == 0 ? "" : "alt") spotlight style\(num+1)"),
-                            .a(.class("image"),
-                                .text("Publish"),
-                                .href("https://github.com/johnsundell/publish")
+                        .class("wrapper \(num % 2 == 0 ? "" : "alt") spotlight style\(num+1)"),
+                        .a(.class("image"),
+                           .text("Publish"),
+                           .href("https://github.com/johnsundell/publish")
                         )
-                )
+        )
     }
 
     // TODO: try to clean up and make a FigureContext
@@ -337,9 +382,9 @@ extension Node where Context == HTML.BodyContext {
 
     // TODO: find a cleaner way that dedups the function.
     static func featuredImage<T: SolidStateWebsite>(for page: Page, on site: T,
-                                   url: Path?,
-                                  text: String,
-                                   alt: String) -> Node {
+                                                    url: Path?,
+                                                    text: String,
+                                                    alt: String) -> Node {
         .unwrap(page.imagePath ?? site.imagePath, { path in
             let url = site.url(for: path)
             return .div(.class("4u 12u$(small)"),
@@ -349,8 +394,8 @@ extension Node where Context == HTML.BodyContext {
                               .figure(.class("image"),
                                       .img(.src(url),
                                            .alt(alt))
-                                      ) // figure
-                              ) // span
+                              ) // figure
+                        ) // span
             ) // div
         })
     }

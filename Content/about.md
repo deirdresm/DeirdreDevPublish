@@ -13,7 +13,7 @@ Hi, I'm Deirdre Saoirse Moen, and I've been a developer for ages.
 
 Recently there was a meme going around to show off the IDE we used when we first started programming.
 
-> tweet https://twitter.com/deirdresm/status/1330211403085606913
+>  tweet https://twitter.com/deirdresm/status/1330211403085606913
 
 Yep, learned back in the paper tape days, and I can still recall the smell of machine oil.
 

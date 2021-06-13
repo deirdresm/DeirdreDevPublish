@@ -160,7 +160,12 @@ struct InlineImage: Component {
 struct SolidStateHTMLFactory: HTMLFactory {
     // MARK: makeIndexHTML - generates the front page
     func makeIndexHTML(for index: Index, context: PublishingContext<SolidStateSite>) throws -> HTML {
-        HTML(
+
+        let posts = context.allItems(sortedBy: \.date,
+                                         order: .descending)
+
+        print("Items Count, makeIndexHTML: \(posts.count) ")
+        return HTML(
             .lang(context.site.language),
             .head(for: index, on: context.site,
                   stylesheetPaths: context.site.stylesheetPaths,
