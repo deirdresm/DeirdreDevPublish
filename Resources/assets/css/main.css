@@ -2662,6 +2662,7 @@ input, select, textarea {
 	ul.contact {
 		list-style: none;
 		padding: 0;
+        margin: 0 0 1em 0;
 	}
 
 		ul.contact li {
@@ -2705,7 +2706,7 @@ input, select, textarea {
 		@media screen and (max-width: 736px) {
 
 			ul.contact li {
-				margin: 1.5em 0 0 0;
+				margin: 1em 0 0 0;
 			}
 
 		}
@@ -4042,8 +4043,8 @@ input, select, textarea {
 		#footer .inner .copyright {
 			border-top: solid 2px rgba(255, 255, 255, 0.125);
 			list-style: none;
-			margin: 4em 0 2em 0;
-			padding: 2em 0 0 0;
+			margin: 1em 0 0em 0;
+			padding: 1em 0 0 0;
 			width: 100%;
 		}
 

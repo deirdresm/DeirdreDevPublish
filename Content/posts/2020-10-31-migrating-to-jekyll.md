@@ -48,13 +48,13 @@ But here's how it's actually being stored in the database:
 
 In text format:
 
-~~~
-<-- wp:paragraph -->
+    ~~~
+    <-- wp:paragraph -->
 
-<p>This is a new post, and my default is set to markdown.</p>
+    <p>This is a new post, and my default is set to markdown.</p>
 
-<-- wp:paragraph -->
-~~~
+    <-- wp:paragraph -->
+    ~~~
 
 While putting HTML comments and paragraphs isn't *forbidden* in Markdown, of course, the idea that you'd *only* store garbage like that in lieu of the plain text you claimed to store is very much not only against the spirit of Markdown, but deceptive to one's customers.
 

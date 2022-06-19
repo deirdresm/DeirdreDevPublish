@@ -8,6 +8,7 @@ import Foundation
 import Plot
 import Publish
 
+/// All the various social media labels, URLs, and so forth that you want in your footer.
 public enum ContactPoint {
     case twitter, email, dev, linkedIn, gitHub, stackoverflow
 

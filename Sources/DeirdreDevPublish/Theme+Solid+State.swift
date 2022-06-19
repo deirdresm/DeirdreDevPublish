@@ -16,6 +16,17 @@ public protocol SolidStateImageMetadata {
     var caption: String? { get }
 }
 
+public protocol SolidStatePageMetadata {
+	var path: String { get }
+	var title: String { get }
+	var description: String { get }
+	var date: String { get }
+	var author: String? { get }
+	var imagePath: String { get }
+	var imageTitle: String? { get }
+	var imageCaption: String? { get }
+}
+
 public protocol SolidStateItemMetadata {
     var layout: String? { get }
     var path: String { get }
@@ -34,7 +45,6 @@ public protocol SolidStateWebsite: Website where ItemMetadata: SolidStateItemMet
     var logoAlt: String { get }
     var bannerTitle: String { get }
     var bannerDescription: String { get }
-    var featuredPages: [String] { get }
     var featuredPostCount: Int { get }
 
     var author: String { get }
@@ -44,28 +54,28 @@ public protocol SolidStateWebsite: Website where ItemMetadata: SolidStateItemMet
     var contacts: [(ContactPoint, String)] { get }
 }
 
-public struct StylesheetInfo: WebsiteItemMetadata {
-    let name: String
-    let noscript: Bool
-    let integrity: String?
-
-    init(_ name: String, _ noscript: Bool = false, _ integrity: String? = nil) {
-        self.name = name
-        self.noscript = noscript
-        self.integrity = integrity
-    }
-
-    var path: Path {
-        return Path("/assets/css/\(name)")
-    }
-}
+//public struct StylesheetInfo: WebsiteItemMetadata {
+//    let name: String
+//    let noscript: Bool
+//    let integrity: String?
+//
+//    init(_ name: String, _ noscript: Bool = false, _ integrity: String? = nil) {
+//        self.name = name
+//        self.noscript = noscript
+//        self.integrity = integrity
+//    }
+//
+//    var path: Path {
+//        return Path("/assets/css/\(name)")
+//    }
+//}
 
 extension Theme where Site == SolidStateSite {
     /// HTML5Up's Solid State, in Publish form.
     static var solidState: Self {
         Theme(
             htmlFactory: SolidStateHTMLFactory(),
-            resourcePaths: Set(["Resources/DeirdreDevPublish/assets/css/main.css"])
+            resourcePaths: Set(["Resources/assets/css/main.css"])
         )
     }
     
@@ -135,6 +145,27 @@ public typealias Figure = ElementComponent<ElementDefinitions.Figure>
 /// A container component that's rendered using the `<div>` element.
 public typealias FigCaption = ElementComponent<ElementDefinitions.FigCaption>
 
+/// Ideally, I want to re-work the Page paradigm to have more page metadata, but this will accomplish what I need (for now).
+struct FeaturedPage: CaseIterable {
+	let 	path: 		String
+	let	title:		String
+	let 	description:	String
+	let imagePath:	String
+	var page:			Page?
+
+	static var allCases: [FeaturedPage] = []
+
+	init(path: String, title: String, description: String, imagePath: String, page: Page? = nil) {
+		self.path = path
+		self.title = title
+		self.description = description
+		self.imagePath = imagePath
+		self.page = page
+
+		FeaturedPage.allCases.append(self)
+	}
+}
+
 
 struct InlineImage: Component {
     var path: URLRepresentable
@@ -163,7 +194,6 @@ struct SolidStateHTMLFactory: HTMLFactory {
 
         let posts = context.allItems(sortedBy: \.date,
                                          order: .descending)
-
         print("Items Count, makeIndexHTML: \(posts.count) ")
         return HTML(
             .lang(context.site.language),
@@ -178,6 +208,11 @@ struct SolidStateHTMLFactory: HTMLFactory {
                     .indexTopBanner(for: context),
                     .wrapper(
                         .features(
+                            pages: FeaturedPage.allCases,
+                            on: context.site,
+                            context: context,
+                            start: 1),
+                       .features(
                             for: context.allItems(
                             sortedBy: \.date,
                             order: .descending
@@ -221,24 +256,26 @@ struct SolidStateHTMLFactory: HTMLFactory {
                 .pageWrapper(
                     .topHeader(for: context, selectedSection: item.sectionID),
 //                    .topMenuBody(for: context, selectedSection: item.sectionID),
-                    .wrapper(
-                        .header(
-                            .div(.class("inner"),
-                                 .h2(.text(item.title)),
-                                 .p(.text(item.description))
-                            )
-                        ),
-                        .div(.class("wrapper"),
-                        .div(.class("inner"),
-                        .featuredImage(for: item,
-                                       on: context.site),
-                        .article(.class("inner"),
-                                .contentBody(item.body),
-                                .span("Tagged with: "),
-                                .tagList(for: item, on: context.site)
-                        )))
-                    ),
-                    .footer(for: context.site)
+					.wrapper(
+						.header(
+							.div(.class("inner"),
+								 .h2(.text(item.title)),
+								 .p(.text(item.description))
+							)
+						),
+						.div(.class("wrapper"),
+							 .div(.class("inner"),
+								  .featuredImage(for: item,
+												 on: context.site),
+								  .article(.class("inner"),
+										   .contentBody(item.body),
+										   .span(.strong("Tagged with: ")),
+										   .tagList(for: item, on: context.site)
+								  )
+							 )
+						)
+					),
+					.footer(for: context.site)
                 )
             )
         )
@@ -246,104 +283,123 @@ struct SolidStateHTMLFactory: HTMLFactory {
 
     public func makePageHTML(for page: Page,
                       context: PublishingContext<SolidStateSite>) throws -> HTML {
-        HTML(
-            .lang(context.site.language),
-            .head(for: page, on: context.site,
-                  stylesheetPaths: context.site.stylesheetPaths,
-                  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
-            .body(
-                .pageWrapper(
-                    .topHeader(for: context, selectedSection: nil),
-//                    .topMenuBody(for: context, selectedSection: nil),
-                    .wrapper(
-                        .header(
-                            .div(.class("inner"),
-                                 .h2(.text(page.title)),
-                                 .p(.text(page.description))
-                            )
-                        ),
-                        .div(.class("wrapper"),
-                             .article(.class("inner"),
-                                  .featuredImage(for: page,
-                                                 on: context.site,
-                                                 url: page.imagePath,
-                                                 text: page.title,
-                                                 alt: page.description),
-                                  .contentBody(page.body)
-                            )
-                       )
-                    ),
-                    .footer(for: context.site)
-                ))
-            )
+		HTML(
+			.lang(context.site.language),
+			.head(for: page, on: context.site,
+				  stylesheetPaths: context.site.stylesheetPaths,
+				  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
+			.body(
+				.pageWrapper(
+					.topHeader(for: context, selectedSection: nil),
+					//                    .topMenuBody(for: context, selectedSection: nil),
+					.wrapper(
+						.header(
+							.div(.class("inner"),
+								 .h2(.text(page.title)),
+								 .p(.text(page.description))
+							)
+						),
+						.div(.class("wrapper"),
+							 .div(.class("inner"),
+								  .article(.class("inner"),
+									   .featuredImage(for: page,
+										  on: context.site,
+										  url: page.imagePath,
+										  text: page.title,
+										  alt: page.description),
+									   .contentBody(page.body)
+								  )
+							 )
+						)
+					),
+					.footer(for: context.site)
+				)
+			)
+		)
     }
 
     public func makeTagListHTML(for page: TagListPage,
                          context: PublishingContext<SolidStateSite>) throws -> HTML? {
-        HTML(
-            .lang(context.site.language),
-            .head(for: page, on: context.site,
-                  stylesheetPaths: context.site.stylesheetPaths,
-                  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
-            .body(
-                .pageWrapper(
-                    .header(for: context, selectedSection: nil),
-                    .topHeader(for: context, selectedSection: nil),
-                    .topMenuBody(for: context, selectedSection: nil),
-                    .wrapper(
-                        .h1("Browse all tags"),
-                        .ul(
-                            .class("all-tags"),
-                            .forEach(page.tags.sorted()) { tag in
-                                .li(
-                                    .class("tag"),
-                                    .a(
-                                        .href(context.site.path(for: tag)),
-                                        .text(tag.string)
-                                    )
-                                )
-                            }
-                        )
-                    ),
-                    .footer(for: context.site)
-                )
-            )
-        )
+		HTML(
+			.lang(context.site.language),
+			.head(for: page, on: context.site,
+				  stylesheetPaths: context.site.stylesheetPaths,
+				  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
+			.body(
+				.pageWrapper(
+					.topHeader(for: context, selectedSection: nil),
+					//                    .topMenuBody(for: context, selectedSection: nil),
+					.wrapper(
+						.header(
+							.div(.class("inner"),
+								 .h2(.text("Browse all tags"))
+							)
+						),
+						.div(.class("wrapper"),
+							 .div(.class("inner"),
+								  .ul(
+									.class("all-tags"),
+									.forEach(page.tags.sorted()) { tag in
+											.li(
+												.class("tag"),
+												.a(
+													.href(context.site.path(for: tag)),
+													.text(tag.string)
+												)
+											)
+									}
+								  )
+
+							 )
+						)
+					),
+					.footer(for: context.site)
+				)
+			)
+		)
     }
 
     public func makeTagDetailsHTML(for page: TagDetailsPage,
                             context: PublishingContext<SolidStateSite>) throws -> HTML? {
-        HTML(
-            .lang(context.site.language),
-            .head(for: page, on: context.site,
-                  stylesheetPaths: context.site.stylesheetPaths,
-                  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
-            .body(
-                .header(for: context, selectedSection: nil),
-                .topHeader(for: context, selectedSection: nil),
-                .topMenuBody(for: context, selectedSection: nil),
-                .wrapper(
-                    .h1(
-                        "Tagged with ",
-                        .span(.class("tag"), .text(page.tag.string))
-                    ),
-                    .a(
-                        .class("browse-all"),
-                        .text("Browse all tags"),
-                        .href(context.site.tagListPath)
-                    ),
-                    .itemList(
-                        for: context.items(
-                            taggedWith: page.tag,
-                            sortedBy: \.date,
-                            order: .descending
-                        ),
-                        on: context.site
-                    )
-                ),
-                .footer(for: context.site)
-            )
-        )
+		HTML(
+			.lang(context.site.language),
+			.head(for: page, on: context.site,
+				  stylesheetPaths: context.site.stylesheetPaths,
+				  noscriptStylesheetPaths: context.site.noscriptStylesheetPaths),
+			.body(
+				.pageWrapper(
+					.topHeader(for: context, selectedSection: nil),
+					.wrapper(
+					.header(
+							.div(.class("inner"),
+								 .h2("Posts tagged with ",
+									 .span(.class("tag"), .text(page.tag.string))
+								 )
+							)
+						),
+						.div(.class("wrapper"),
+							 .div(.class("inner"),
+								  .itemList(
+									for: context.items(
+										taggedWith: page.tag,
+										sortedBy: \.date,
+										order: .descending
+									),
+									on: context.site
+								  ),
+								  .p(.a(
+									.class("browse-all"),
+									.text("Browse all tags"),
+									.href(context.site.tagListPath)
+								  )
+								  )
+							 )
+						)
+					),
+					.footer(for: context.site)
+				)
+			)
+		)
     }
 }
 

@@ -72,4 +72,3 @@ public extension Node where Context == HTML.DocumentContext {
         )
     }
 }
-

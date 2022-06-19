@@ -9,15 +9,36 @@ import Foundation
 import Plot
 import Publish
 
+
+/*private struct ItemList<Site: Website>: Component {
+	var items: [Item<Site>]
+	var site: Site
+
+	var body: Component {
+		List(items) { item in
+			Article {
+				H3(Link(item.title, url: item.path.absoluteString))
+				ItemTagList(item: item, site: site)
+				Paragraph(item.description)
+			}
+		}
+		.class("item-list")
+	}
+}
+*/
+
 extension Node where Context == HTML.BodyContext {
 
+	/// Outer page wrapper for this theme. This wraps the header, other body content, and footer.
     static func pageWrapper(_ nodes: Node...) -> Node {
         .div(.id("page-wrapper"), .group(nodes))
     }
 
+	/// Inner wrapper, e.g., for the page/post exerpts on the front page. IOW, after the header but before the footer.
     static func wrapper(_ nodes: Node...) -> Node {
         .section(.id("wrapper"), .group(nodes))
     }
+
 
     static func topHeader<T: SolidStateWebsite>(
         for context: PublishingContext<T>,
@@ -30,6 +51,7 @@ extension Node where Context == HTML.BodyContext {
             .id("header"),
             .if(isHome,
                 .class("alt")),
+			.a(.href("#content"), .class("skip"), .text("Skip to main content")),
             .h1(.a(.href("/"), .text(context.site.name)))
             //                    .if(sectionIDs.count > 1,
             // note that this theme has a nav with no dropdown items, but then uses JS to connect to a second nav with the dropdowns.
@@ -61,11 +83,12 @@ extension Node where Context == HTML.BodyContext {
                                     .href(context.sections[section].path),
                                     .text(context.sections[section].title)
                                 ))
-                            })
-                    )
-                   )
-        )
-    }
+                            }
+						)
+					)
+				)
+			)
+	}
 
     static func indexTopBanner<T: SolidStateWebsite>(
         for context: PublishingContext<T>
@@ -139,20 +162,38 @@ extension Node where Context == HTML.BodyContext {
     }
 
     static func itemList<T: SolidStateWebsite>(for items: [Item<T>], on site: T, index: Bool = false) -> Node {
-        return .ul(
+        return .div(
             .class("item-list"),
             .forEach(items) { item in
-                .li(.article(
-                    .h1(.a(
-                        .href(item.path),
+					.article(
+						.h2(.a(.href(item.path),
                         .text(item.title)
                     )),
-                    .tagList(for: item, on: site),
-                    .p(.text(item.description))
-                ))
+					.p(.text(item.description)),
+                    .tagList(for: item, on: site)
+                )
+
             }
         )
     }
+
+/*	private struct ItemList<Site: Website>: Component {
+		var items: [Item<Site>]
+		var site: Site
+
+		var body: Component {
+			List(items) { item in
+				Article {
+					H1(Link(item.title, url: item.path.absoluteString))
+					ItemTagList(item: item, site: site)
+					Paragraph(item.description)
+				}
+			}
+			.class("item-list")
+		}
+	}
+
+*/
 
     static func tagList<T: SolidStateWebsite>(for item: Item<T>, on site: T) -> Node {
         return .ul(.class("tag-list"), .forEach(item.tags) { tag in
@@ -168,7 +209,7 @@ extension Node where Context == HTML.BodyContext {
      <div class="inner">
      <h2 class="major">Get in touch</h2>
      <ul class="contact">
-     <li class="fa-linkedin"><a href="https://www.linkedin.com/in/desamo">linkedin.com/in/desamo</a></li>
+     <li class="fa-linkedin"><a href="https://www.linkedin.com/in/deirdresm">linkedin.com/in/deirdresm</a></li>
      <li class="fa-github"><a href="https://github.com/deirdresm">github.com/deirdresm</a></li>
      </ul>
      <ul class="contact">
@@ -308,19 +349,26 @@ extension Node where Context == HTML.BodyContext {
 
     static func showPostCount<T: SolidStateWebsite>(on site: T, num: Int, start: Int = 0) -> Int {
 
-        // return featuredPostCount - featuredPages.count or 1, whichever is >
+        // return featuredPostCount - FeaturedPage.allCases.count or 1, whichever is >
 
-        if (site.featuredPostCount - site.featuredPages.count) < 1 {
+		if (site.featuredPostCount - FeaturedPage.allCases.count) < 1 {
             return 1
         } else {
-            return site.featuredPostCount - site.featuredPages.count
+            return site.featuredPostCount - FeaturedPage.allCases.count
         }
     }
 
-    // feature section for posts
+    /// Feature for the home page for a post (an `item` in Publish parlance).
+    /// - Parameters:
+    ///   - item: website post
+    ///   - site: your website
+    ///   - num: what post # this is (in a sequence)
+    ///   - offset: offset for starting the sequence defined in num (e.g., if items are after pages)
+    /// - Returns: <#description#>
     static func feature<T: SolidStateWebsite>(for item: Item<T>, on site: T, num: Int, offset: Int) -> Node {
-        return .section(.id("post-\(num)"),
-                        .class("wrapper \(num % 2 == 0 ? "" : "alt") spotlight style\(num+offset)"),
+        return .section(.id("post-\(num+offset)"),
+						// TODO: fix hacky for odd/even
+                        .class("wrapper \((num+offset+1) % 2 == 0 ? "alt" : "") spotlight style\(num+offset+1)"),
                         .div(.class("inner"),
                              .a(
                                 .class("image"),
@@ -342,27 +390,76 @@ extension Node where Context == HTML.BodyContext {
     }
 
 
-    // feature section for posts
+
+
+    /// <#Description#>
+    /// - Parameters:
+    ///   - items: List of all items for the website (which will then be prefixed)
+    ///   - site: your website
+    ///   - num: <#num description#>
+    ///   - start: <#start description#>
+    /// - Returns: <#description#>
     static func features<T: SolidStateWebsite>(for items: [Item<T>], on site: T, num: Int, start: Int = 0) -> Node {
 
-        print("Item count: \(items.count)")
-        let itemsPrefix = items.prefix(site.featuredPostCount - site.featuredPages.count)
+		let itemsPrefix = items.prefix(site.featuredPostCount)
 
         return .forEachEnumerated(itemsPrefix) { (index, item) in
-            feature(for: item, on: site, num: index, offset: start)
+            feature(for: item, on: site, num: index, offset: FeaturedPage.allCases.count)
         }
     }
 
-    // feature section for pages
-    func feature<T: SolidStateWebsite>(for pages: [Page], on site: T, num: Int, offset: Int = 0) -> Node {
-        return .section(.id("feature-\(num)"),
-                        .class("wrapper \(num % 2 == 0 ? "" : "alt") spotlight style\(num+1)"),
-                        .a(.class("image"),
-                           .text("Publish"),
-                           .href("https://github.com/johnsundell/publish")
-                        )
+//		<section id="feature-1" class="wrapper spotlight style1">
+//		  <div class="inner">
+//			<a href="/features/about.html" class="image"><img src="/assets/images/rocket-square.png" alt="" /></a>
+//			<div class="content">
+//			   <a href="/features/about.html"><h2 class="major">Welcome to deirdre.dev</h2></a>
+//			  <p>iOS and Apple technologies developer (iPadOS, watchOS, tvOS, macOS, etc.) Previously a Senior Software Engineer on Apple's Safari team.</p>
+//			</div>
+//		  </div>
+//		</section>
+
+
+	/// Featured pages, by default, go above the post.
+    static func feature<T: SolidStateWebsite>(for featured: FeaturedPage, on site: T, num: Int, offset: Int = 0) -> Node {
+
+		guard let page = featured.page else { return Node(stringLiteral: "oops, no page")}
+		let imagePath = featured.imagePath
+
+        return .section(.id("feature-\(num+offset)"),
+                        .class("wrapper \((num+offset+1) % 2 == 0 ? "" : "alt") spotlight style\(num+1)"),
+						.div(.class("inner"),
+							 .a(
+								.class("image"),
+								.href(page.path),
+								.img(.src(imagePath)
+								)
+							 ),
+							 .div(.class("content"),
+								  .a(.href(page.path),
+									 .h2(.class("major"),
+										 .text(page.title)
+									 )
+								  ),
+								  .p(text(page.description))
+							 ) // div.content
+						) // div.inner
         )
     }
+
+    // feature section for pages
+    static func features<T: SolidStateWebsite>(pages: [FeaturedPage], on site: T, context: PublishingContext<SolidStateSite>, start: Int = 0) -> Node {
+
+        return .forEachEnumerated(pages) { (index, featuredPage) in
+			let page = context.page(Path(featuredPage.path))
+
+			// hacky way to get around this
+			var featured = featuredPage
+			featured.page = page
+
+			let pageFeature = feature(for: featured, on: site, num: index, offset: start)
+			return pageFeature
+        }
+     }
 
     // TODO: try to clean up and make a FigureContext
 
@@ -387,7 +484,7 @@ extension Node where Context == HTML.BodyContext {
                                                     alt: String) -> Node {
         .unwrap(page.imagePath ?? site.imagePath, { path in
             let url = site.url(for: path)
-            return .div(.class("4u 12u$(small)"),
+            return .div(.class("4u 12u$(small) col-4"),
                         .role("img"),
                         .ariaLabel("this is a test"),
                         .span(.class("image fit"),
@@ -399,10 +496,11 @@ extension Node where Context == HTML.BodyContext {
             ) // div
         })
     }
+//	<div class="col-12"><span class="image fit"><img src="/assets/images/pic08.jpg" alt="" /></span></div>
 
     static func featuredImage<T: SolidStateWebsite>(for item: Item<T>, on site: T) -> Node {
         .unwrap(item.metadata.imagePath) { path in
-            return .div(.class("4u 12u$(small)"),
+            return .div(.class("4u 12u$(small) col-4"),
                         .role("img"),
                         .ariaLabel(item.metadata.imageTitle ?? item.title),
                         .span(.class("image fit"),

@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "CollectionConcurrencyKit",
+        "repositoryURL": "https://github.com/johnsundell/collectionConcurrencyKit.git",
+        "state": {
+          "branch": null,
+          "revision": "b4f23e24b5a1bff301efc5e70871083ca029ff95",
+          "version": "0.2.0"
+        }
+      },
+      {
         "package": "Files",
         "repositoryURL": "https://github.com/johnsundell/files.git",
         "state": {
@@ -42,8 +51,8 @@
         "repositoryURL": "https://github.com/johnsundell/publish.git",
         "state": {
           "branch": null,
-          "revision": "1402af3cbe18df03fb6df701fdcf51471f98d0ff",
-          "version": "0.8.0"
+          "revision": "1c8ad00d39c985cb5d497153241a2f1b654e0d40",
+          "version": "0.9.0"
         }
       },
       {
@@ -53,6 +62,24 @@
           "branch": null,
           "revision": "e1577acf2b6e90086d01a6d5e2b8efdaae033568",
           "version": "2.3.0"
+        }
+      },
+      {
+        "package": "Splash",
+        "repositoryURL": "https://github.com/johnsundell/splash.git",
+        "state": {
+          "branch": null,
+          "revision": "7f4df436eb78fe64fe2c32c58006e9949fa28ad8",
+          "version": "0.16.0"
+        }
+      },
+      {
+        "package": "SplashPublishPlugin",
+        "repositoryURL": "https://github.com/johnsundell/splashpublishplugin",
+        "state": {
+          "branch": null,
+          "revision": "4fe79070f51e288bc8ba31934a3018cbe099d5f7",
+          "version": "0.2.0"
         }
       },
       {
@@ -66,11 +93,11 @@
       },
       {
         "package": "TwitterPublishPlugin",
-        "repositoryURL": "https://github.com/insidegui/TwitterPublishPlugin.git",
+        "repositoryURL": "https://github.com/deirdresm/TwitterPublishPlugin.git",
         "state": {
           "branch": null,
-          "revision": "fe089ae9425b61601b7aaceed22dd02c1d476d44",
-          "version": "0.1.0"
+          "revision": "aeab82144b3c300d0a9c1cb139ee2defbb88f708",
+          "version": "0.1.1"
         }
       }
     ]

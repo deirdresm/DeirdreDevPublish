@@ -1,5 +1,5 @@
 ---
-title: Greetings!
+title: Posts
 imagePath: /assets/images/banner.jpg
 ---
 

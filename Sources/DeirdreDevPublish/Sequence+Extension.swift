@@ -1,24 +1,9 @@
 //
 //  Sequence+Extension.swift
 //
-//
 //  Created by Deirdre Saoirse Moen on 4/25/21.
 
-//  extension Sequence {
-//      func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
-//          return sorted { a, b in
-//              return a[keyPath: keyPath] < b[keyPath: keyPath]
-//          }
-//      }
-//  
-//      func sortDescending<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
-//          return sorted { a, b in
-//              return a[keyPath: keyPath] > b[keyPath: keyPath]
-//          }
-//      }
-//  }
-
-// yanked from CasperishTheme
+// yanked from CasperishTheme for the 2-up stuff on the bottom of each page.
 extension Array {
     /*
      [1,2,3,4,5].forEachSlice(2, { print($0) })

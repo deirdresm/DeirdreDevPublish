@@ -1,11 +1,11 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.5
 
 import PackageDescription
 
 let package = Package(
     name: "DeirdreDevPublish",
     platforms: [
-        .macOS(.v10_15),
+		.macOS(.v12),
     ],
     products: [
         .executable(
@@ -15,14 +15,18 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "Publish", url: "https://github.com/johnsundell/publish.git", from: "0.8.0"),
-        .package(name: "TwitterPublishPlugin", url: "https://github.com/insidegui/TwitterPublishPlugin.git", from: "0.1.0")
+        .package(name: "TwitterPublishPlugin", url: "https://github.com/deirdresm/TwitterPublishPlugin.git", from: "0.1.1"),
+		.package(name: "SplashPublishPlugin", url: "https://github.com/johnsundell/splashpublishplugin", from: "0.2.0")
+
 //        .package(url: "https://github.com/thomaslupo/GistPublishPlugin", from: "0.1.0"),
 //        .package(url: "https://github.com/finestructure/ImageAttributesPublishPlugin", from: "0.1.1")
     ],
     targets: [
         .target(
             name: "DeirdreDevPublish",
-            dependencies: ["Publish", "TwitterPublishPlugin"
+            dependencies: ["Publish",
+						   "TwitterPublishPlugin",
+						   "SplashPublishPlugin"
                            // ,                 "ImageAttributesPublishPlugin"
 
             ]

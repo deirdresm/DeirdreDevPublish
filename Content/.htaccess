@@ -1,0 +1,16 @@
+RedirectMatch 404 /\.git
+
+<ifModule mod_headers.c>
+
+	# Security improvements
+	Header unset Server
+	#Header unset X-Pingback
+	Header unset Accept-Ranges
+	#
+	<FilesMatch "\.html>
+		Header set X-Frame-Options "SAMEORIGIN"
+	#
+		Header set Content-Security-Policy "media-src 'self' http://player.vimeo.com; frame-src 'self' http://player.vimeo.com https://*.vimeocdn.com https://widgets.wp.com http://www.youtube.com https://www.youtube.com https://twitter.com http://akismet.com http://society6.com http://widgets.wp.com https://public-api.wordpress.com http://w.soundcloud.com https://w.soundcloud.com;"
+	</FilesMatch>
+</IfModule>
+

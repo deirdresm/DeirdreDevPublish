@@ -32,6 +32,7 @@ struct SolidStateSite: Website, SolidStateWebsite {
         var imagePath: String
         var imageTitle: String?
         var imageCaption: String?
+		var imageSize: Int?
     }
 
     enum SectionID: String, WebsiteSectionID {
@@ -52,8 +53,13 @@ struct SolidStateSite: Website, SolidStateWebsite {
     var author = "Deirdre Saoirse Moen"
     var avatar = "/asssets/images/avatar.jpg"
     var icon = "/assets/images/favicon.png"
-    var featuredPages = ["/about"]
-    var featuredPostCount = 5
+
+	// TODO: figure out how to pull the featured ones in programmatically
+	let aboutPage = FeaturedPage(path: "about",
+					title: "About Deirdre",
+					description: "macOS, iOS, and Apple technologies developer. Apple, TiVo, Be, Synclavier alum.",
+					imagePath: "/assets/images/rocket-square.png")
+    var featuredPostCount = 6
 
     var stylesheetPaths: [Path] = ["/assets/css/main.css", "/assets/css/fontawesome-all.min.css", "/assets/css/deirdre.css"]
     var noscriptStylesheetPaths: [Path] = ["/assets/css/noscript.css"]
@@ -70,98 +76,51 @@ struct SolidStateSite: Website, SolidStateWebsite {
     var contacts: [(ContactPoint, String)] { [
         // phone, email, facebook
         (.twitter, "deirdresm"),
-        (.linkedIn, "desamo"),
+        (.linkedIn, "deirdresm"),
         (.gitHub, "deirdresm"),
         (.email, "deirdre@deirdre.net")
     ]}
 }
 
-//public var styleFiles = [
-//    StylesheetInfo("main.css"),
-//    StylesheetInfo("noscript.css", true),
-//    StylesheetInfo("fontawesome-all.min.css")
-//]
-//
-
+do {
 // This will generate your website using the built-in Foundation theme:
 try SolidStateSite().publish(withTheme: .solidState,
-                             indentation: .tabs(1),
-                             additionalSteps: [
-//                                .installPlugin(.twitter()),
-//                                .addMarkdownFiles(),
-                                .copyResources(at: "Resources/DeirdreDevPublish/assets/js",
-                                               to: "assets",
-                                               includingFolder: true),
-                                .copyResources(at: "Resources/DeirdreDevPublish/assets/css",
-                                               to: "assets",
-                                               includingFolder: true),
-                                .copyResources(at: "Resources/DeirdreDevPublish/assets/webfonts",
-                                               to: "assets",
-                                               includingFolder: true),
-//                                .copyResources(at: "Resources/DeirdreDevPublish/assets/images",
-//                                               to: "assets",
-//                                               includingFolder: true),
-                                .copyFiles(at: "Content/assets/icons",
-                                                   to: "assets",
-                                                   includingFolder: true),
-                                .copyFiles(at: "Content/assets/images",
-                                                   to: "assets",
-                                                   includingFolder: true),
-//                                .copyFiles(at: "Content/assets/js",
-//                                                   to: "assets",
-//                                                   includingFolder: true),
-                                .copyFiles(at: "Content/assets/videos",
-                                                   to: "assets",
-                                                   includingFolder: true)
-//                                .copyFiles(at: "Resources/DeirdreDevPublish/assets/js", to: "assets", includingFolder: true),
-//                                .copyFiles(at: "Resources/DeirdreDevPublish/assets/css", to: "assets", includingFolder: true),
-//                                .copyFiles(at: "Resources/DeirdreDevPublish/assets/webfonts", to: "assets", includingFolder: true),
-//                                .copyFiles(at: "Content/assets/icons", to: "assets", includingFolder: true),
-//                                .copyFiles(at: "Content/assets/images", to: "assets", includingFolder: true)
+							indentation: .tabs(1),
+							additionalSteps: [
+
+/*							.copyResources(at: "assets/js",
+										   to: "assets",
+										   includingFolder: true),
+							.copyResources(at: "assets/css",
+										   to: "assets",
+										   includingFolder: true),
+							.copyResources(at: "assets/webfonts",
+										   to: "assets",
+										   includingFolder: true),
+
+							.copyResources(at: "assets/icons",
+											   to: "assets",
+											   includingFolder: true),
+							.copyResources(at: "assets/images",
+											   to: "assets",
+											   includingFolder: true),
+
+							.copyResources(at: "assets/videos",
+											   to: "assets",
+											   includingFolder: true),
+*/
+								// extra crap
+								.copyFile(at: "Content/googleb623f102bcdb53ec.html"),
+								.copyFile(at: "Content/robots.txt"),
+								.copyFile(at: "Content/.htaccess"),
+
+
                              ],
                              plugins: [.twitter()]
-                             //    using: [
-//    .generateHTML(withTheme: .solidState, indentation: .tabs(1)),
-////    .plugins: [.gist(renderer: MyGistRenderer())],
-//    .copyResources(),
-//    .copyFiles(at: "Resources/DeirdreDevPublish/assets/js", to: "assets", includingFolder: true),
-//    .copyFiles(at: "Resources/DeirdreDevPublish/assets/css", to: "assets", includingFolder: true),
-//    .copyFiles(at: "Resources/DeirdreDevPublish/assets/webfonts", to: "assets", includingFolder: true),
-//    .copyFiles(at: "Content/assets/icons", to: "assets", includingFolder: true),
-//    .copyFiles(at: "Content/assets/images", to: "assets", includingFolder: true)
-//    ]
-//    additionalSteps: [
-//        // Add an item programmatically
-//        .addPage(),
-//        .addItem(Item(
-//            path: "my-favorite-recipe",
-//            sectionID: .recipes,
-//            metadata: DeliciousRecipes.ItemMetadata(
-//                ingredients: ["Chocolate", "Coffee", "Flour"],
-//                preparationTime: 10 * 60
-//            ),
-//            tags: ["favorite", "featured"],
-//            content: Content(
-//                title: "Check out my favorite recipe!"
-//            )
-//        )),
-//        // Add default titles to all sections
-//        .step(named: "Default section titles") { context in
-//            context.mutateAllSections { section in
-//                guard section.title.isEmpty else { return }
-//
-//                switch section.id {
-//                case .recipes:
-//                    section.title = "My recipes"
-//                case .links:
-//                    section.title = "External links"
-//                case .about:
-//                    section.title = "About this site"
-//                }
-//            }
-//        }
-//    ]
-)
+ )
+} catch let error {
+	print("error: \(error)")
+}
 
 /*     static func copyResources(
  at originPath: Path = "Resources",
