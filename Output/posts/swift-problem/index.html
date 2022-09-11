@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="og:site_name" content="deirdre.dev"/>
+		<link rel="canonical" href="https://deirdre.dev/posts/swift-problem"/>
+		<meta name="twitter:url" content="https://deirdre.dev/posts/swift-problem"/>
+		<meta name="og:url" content="https://deirdre.dev/posts/swift-problem"/>
+		<title>
+The Swift Problem | deirdre.dev</title>
+		<meta name="twitter:title" content="The Swift Problem | deirdre.dev"/>
+		<meta name="og:title" content="The Swift Problem | deirdre.dev"/>
+		<meta name="description" content="How much deeper-level understanding do we really need?"/>
+		<meta name="twitter:description" content="How much deeper-level understanding do we really need?"/>
+		<meta name="og:description" content="How much deeper-level understanding do we really need?"/>
+		<meta name="twitter:card" content="summary"/>
+		<link rel="stylesheet" href="/assets/css/main.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/deirdre.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/splash.css" type="text/css"/>
+		<noscript>
+			<link rel="stylesheet" href="/assets/css/noscript.css" type="text/css"/>
+		</noscript>
+		<script src="/assets/js/skel.min.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+		<link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to deirdre.dev"/>
+	</head>
+	<body>
+		<div id="page-wrapper">
+			<header id="header">
+				<a href="#content" class="skip">
+Skip to main content</a>
+				<h1>
+					<a href="/">
+deirdre.dev</a>
+				</h1>
+			</header>
+			<section id="wrapper">
+				<header>
+					<div class="inner">
+						<h2>
+The Swift Problem</h2>
+						<p class="above-date">
+How much deeper-level understanding do we really need?</p>
+						<p class="post-date">
+29 Jan 2021</p>
+					</div>
+				</header>
+				<div class="wrapper">
+					<div class="inner">
+						<div class="row">
+							<div class="col-4" role="img" aria-label="The Swift Logo">
+								<span class="image fit">
+									<figure class="image">
+										<img src="/assets/images/2021/01/swift-spotlight-logo.png" alt="The Swift Logo"/>
+									</figure>
+								</span>
+							</div>
+						</div>
+						<article class="content">
+<p>Over on reddit, <a href="https://www.reddit.com/r/swift/comments/l78v5u/c_developers_gone_swift_do_you_notice_a_gap_in/">there's a thread on r/swift aimed at people who are C coders</a>. It asks the following questions:</p><ol><li>Do you notice a gap in understanding memory management and low level concepts amongst Swift developers?</li><li>Do most Swift developers pay attention to their code quality and how it pans out to performance?</li></ol><p>As someone who's done a lot of C coding (though not in quite a while): yes and no, respectively.</p><p>However, I don't think this is unique to Swift, nor is it more of a problem in Swift.</p><p>Case in point… <em>opens a web page</em>.</p><p>Now this is a web page that reproducibly, <em>once it has rendered</em>, continues to use 16-32% CPU for as long as the page is open, unless I minimize the tab. It's also using 116 MB of memory, even when minimized, growing to 167 MB once it's brought back to the front.</p><p>There is nothing special about this web page: it's basically your bog standard landing page with sections: four large links across the top, one long bar beneath them linking to a different page, and then several sections with links. It's a WordPress blog (so, written in PHP). Yet, most WordPress blogs, while large, aren't like this.</p><p>What makes the difference?</p><h3>Programming in Ye Olden Dayz</h3><p>Before I get into the answer, let me point out that I started developing for the Mac in 1986, back when all code had to be stuffed, chunk-wise, into 32k (not megs, k) chunks into the resource fork, and any calls outside of the current chunk had to use a long jump instead of a regular jump. And you had to know which was which at all times, as well as keep track of what, precisely, was/wasn't loaded so you didn't just jump into the void and crash the entire machine.</p><p>No pressure. :)</p><p>So I find the concept that someone would write a purportedly helpful web page that consumes <em>so much</em> CPU and memory just…beyond all ken.</p><h3>The Answer</h3><p>Trackers and advertising and their crappy code is the answer.</p><p>Much has been made lately about <a href="https://www.bbc.com/news/technology-56012952">how much energy Bitcoin's consuming</a>, but I notice no one's tackling how much global energy advertising and tracking is consuming.</p><p>I'm not going to hold my breath, either, because the very people who might report on it are some of the companies using some of the worst offenders.</p><h3>Part of the Reason</h3><p>My husband (<a href="http://linuxmafia.com">Rick Moen</a>) has a saying: "If you're not the customer, you're the product." The problem with things like trackers and ads is: you're not the customer, so they're not optimized <em>for you</em>. (Arguably, the ones I'm talking about aren't optimized for the actual customer either, but that's another story.)</p><p>Companies install them because of features, and wanting to know certain things. Those things are hard without JavaScript (which, btw, try browsing with JavaScript turned off for a day, quite illuminating). And it's entirely too easy to get into trouble with bad JS. Which isn't a language problem. It's a quality problem.</p><h3>"The Web Is an Error Condition"</h3><p>The above quote is from one of my former coworkers, and it's apt. Web pages render despite broken HTML, CSS, and JavaScript, so there's little incentive for the average person to do a better job, or for the average tool to become more efficient.</p><p>But people think Swift is a problem.</p><p>Okay then.</p><p>At least we have a compiler that checks for errors. :P</p><p>Not every problem needs to be solved by every developer. <em>*cough</em>* sort algorithms <em>*cough</em>*</p>
+							<span>
+								<strong>
+Tagged with: </strong>
+							</span>
+							<ul class="tag-list">
+								<li>
+									<a href="/tags/swift">
+swift</a>
+								</li>
+								<li>
+									<a href="/tags/blog">
+blog</a>
+								</li>
+							</ul>
+						</article>
+					</div>
+				</div>
+			</section>
+			<section id="footer">
+				<div class="inner">
+					<h2 class="major">
+Get in touch</h2>
+					<ul class="contact">
+						<li class="icon brands fa-twitter">
+							<a href="https://twitter.com/deirdresm">
+								<span class="label">
+Twitter: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon brands fa-linkedin">
+							<a href="https://www.linkedin.com/in/deirdresm/">
+								<span class="label">
+Linked In: deirdresm</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="contact">
+						<li class="icon brands fa-github">
+							<a href="https://github.com/deirdresm">
+								<span class="label">
+GitHub: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon solid fa-envelope">
+							<a href="mailto:deirdre@deirdre.net">
+								<span class="label">
+Email: deirdre@deirdre.net</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="copyright">
+						<li>
+&copy; Deirdre Saoirse Moen.</li>
+						<li>
+Apple store staircase photo &copy; by Rick Moen.</li>
+						<li>
+Theme design: 
+							<a href="https://html5up.net">
+HTML5 UP</a>
+						</li>
+						<li>
+Generated using 
+							<a href="https://github.com/johnsundell/publish">
+Publish</a>
+						</li>
+						<li>
+							<a href="/feed.rss">
+RSS feed</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

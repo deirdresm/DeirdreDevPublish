@@ -2,6 +2,8 @@ import Foundation
 import Publish
 import Plot
 import TwitterPublishPlugin
+import SplashPublishPlugin
+//import ImageAttributesPublishPlugin
 //import GistPublishPlugin
 
 // https://github.com/tanabe1478/YoutubePublishPlugin
@@ -11,6 +13,12 @@ import TwitterPublishPlugin
 
 // This type acts as the configuration for your website.
 struct SolidStateSite: Website, SolidStateWebsite {
+
+	var dateFormatter: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "dd MMM YYYY"
+		return formatter
+	}()
 
     struct ImageMetadata: SolidStateImageMetadata, WebsiteItemMetadata {
         var path: String // note: img in existing data from prior site
@@ -30,15 +38,17 @@ struct SolidStateSite: Website, SolidStateWebsite {
         var date: String
         var author: String?
         var imagePath: String
+		var spotlightImage: String?
         var imageTitle: String?
         var imageCaption: String?
 		var imageSize: Int?
+		var inscribeImage: Bool? = false
     }
 
     enum SectionID: String, WebsiteSectionID {
         // Add the sections that you want your website to contain here:
         case posts
-        case projects
+//		case projects
         case about
     }
 
@@ -61,7 +71,7 @@ struct SolidStateSite: Website, SolidStateWebsite {
 					imagePath: "/assets/images/rocket-square.png")
     var featuredPostCount = 6
 
-    var stylesheetPaths: [Path] = ["/assets/css/main.css", "/assets/css/fontawesome-all.min.css", "/assets/css/deirdre.css"]
+    var stylesheetPaths: [Path] = ["/assets/css/main.css", "/assets/css/fontawesome-all.min.css", "/assets/css/deirdre.css", "/assets/css/splash.css"]
     var noscriptStylesheetPaths: [Path] = ["/assets/css/noscript.css"]
 
     // front page metadata
@@ -116,7 +126,7 @@ try SolidStateSite().publish(withTheme: .solidState,
 
 
                              ],
-                             plugins: [.twitter()]
+							 plugins: [.twitter(), .splash(withClassPrefix: "")]
  )
 } catch let error {
 	print("error: \(error)")

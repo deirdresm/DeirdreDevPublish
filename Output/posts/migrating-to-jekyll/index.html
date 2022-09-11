@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="og:site_name" content="deirdre.dev"/>
+		<link rel="canonical" href="https://deirdre.dev/posts/migrating-to-jekyll"/>
+		<meta name="twitter:url" content="https://deirdre.dev/posts/migrating-to-jekyll"/>
+		<meta name="og:url" content="https://deirdre.dev/posts/migrating-to-jekyll"/>
+		<title>
+Migrating to Jekyll | deirdre.dev</title>
+		<meta name="twitter:title" content="Migrating to Jekyll | deirdre.dev"/>
+		<meta name="og:title" content="Migrating to Jekyll | deirdre.dev"/>
+		<meta name="description" content="This site had a 2020 in migrating from WordPress (php-based dynamic site) to Jekyll (ruby-based static site generator). Let me tell you all about it."/>
+		<meta name="twitter:description" content="This site had a 2020 in migrating from WordPress (php-based dynamic site) to Jekyll (ruby-based static site generator). Let me tell you all about it."/>
+		<meta name="og:description" content="This site had a 2020 in migrating from WordPress (php-based dynamic site) to Jekyll (ruby-based static site generator). Let me tell you all about it."/>
+		<meta name="twitter:card" content="summary"/>
+		<link rel="stylesheet" href="/assets/css/main.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/deirdre.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/splash.css" type="text/css"/>
+		<noscript>
+			<link rel="stylesheet" href="/assets/css/noscript.css" type="text/css"/>
+		</noscript>
+		<script src="/assets/js/skel.min.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+		<link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to deirdre.dev"/>
+	</head>
+	<body>
+		<div id="page-wrapper">
+			<header id="header">
+				<a href="#content" class="skip">
+Skip to main content</a>
+				<h1>
+					<a href="/">
+deirdre.dev</a>
+				</h1>
+			</header>
+			<section id="wrapper">
+				<header>
+					<div class="inner">
+						<h2>
+Migrating to Jekyll</h2>
+						<p class="above-date">
+This site had a 2020 in migrating from WordPress (php-based dynamic site) to Jekyll (ruby-based static site generator). Let me tell you all about it.</p>
+						<p class="post-date">
+31 Oct 2020</p>
+					</div>
+				</header>
+				<div class="wrapper">
+					<div class="inner">
+						<div class="row">
+							<div class="col-4" role="img" aria-label="Migrating Monarch Butterflies">
+								<span class="image fit">
+									<figure class="image">
+										<img src="/assets/images/2020/10/monarch_butterflies.jpg" alt="Migrating Monarch Butterflies"/>
+									</figure>
+								</span>
+							</div>
+						</div>
+						<article class="content">
+<p>First of all, I don't think it's news to anyone that 2020 has, to be polite, sucked. I lost a good part of my productivity this year (for months!) to COVID-19.</p><p>Because it's most illustrative of the kind of thing I've had to recover from, here's one of the challenges I had when COVID was at its worst in late January: rooms changed shape. I don't mean a little bit. I mean <a href="https://en.wikipedia.org/wiki/Platonic_solid">what platonic solid they were: cube to dodecahedron</a>, for example. 🤮 The other was the wall suddenly sliding down the corridor away from me. While I was walking. 🤮</p><p>It's amazingly disconcerting not knowing how far walls, doors, floors are from you. I <em>knew</em> it was an illusion, and I knew I was ill and reported the symptom, but it was not of significant enough concern at that point to go to the ER. (This spatial distortion also happened in COVID-19 hospitalized and ICU patients on occasion, but sometimes they <em>didn't</em> know it was an illusion.)</p><h3>Thoughts on WordPress</h3><p>I wanted to move my site off WordPress, and managed to not have as good a backup as I'd hoped. I had a database backup that didn't import correctly, and I'd already canceled the hosting before double checking.</p><p>One of the things I relied on for my main site, which goes back to 1998, is that I'd converted it all to Markdown around 2006 when I first realized there were Markdown plugins for WordPress. Those plugins saved Markdown in a separate field and then the HTML-ified version in the main editing field.</p><p>Almost all third-party WordPress development on Markdown plugins stopped once Jetpack (an Automattic plugin) supported Markdown. Versions crept along, databases were converted from one major revision to the next.</p><p>I found that every time I'd log into my site to write a post, I'd spend enough time fussing with WordPress that I wouldn't actually <em>write the entries I went there for</em>. While WordPress had gotten out of my way oh so many years ago, now it was always in my way, and in very annoying ways. I stopped posting to my blog for over a year (extremely unusual).</p><h3>And Then There's Migration</h3><p>So I dumped my data, and then shut off my WordPress hosting. (Note: I knew better than to do this before the migration was final. I was just tired of the hassle, not to mention the cost.) I was unprepared for the annoyance of migration.</p><p>You see, the migration tools suck, and the import tools suck. The WordPress import tools have never imported images correctly, even from a WordPress export. That's just so broken.</p><p>And then I was hamstrung by something that's just…gobsmacking to me.</p><h3>The Markdown That Isn't</h3><p>First, let's look at a very simple WordPress post draft as it's being composed.</p><div class="12u$ image-wrapper" aria-label="WordPress Post Draft"><span class="image fit">
+  <figure class="image">
+
+    <a href="/assets/images/2020/10/wordpress-post-draft.jpg" title="WordPress Post Draft" target="_blank">
+
+        <img src="https://deirdre.dev//assets/images/2020/10/wordpress-post-draft.jpg" alt="WordPress Post Draft" />
+
+    </a>
+
+
+      <figcaption>WordPress editor window view of post being composed. Edited text reads: This is a new post, and my default is set to markdown.</figcaption>
+
+  </figure>
+</span></div><p>But here's how it's actually being stored in the database:</p><div class="12u$ image-wrapper" aria-label="WordPress Post Draft in MySQL"><span class="image fit">
+  <figure class="image">
+
+    <a href="/assets/images/2020/10/wordpress-post-draft-db.jpg" title="WordPress Post Draft in MySQL" target="_blank">
+
+        <img src="https://deirdre.dev//assets/images/2020/10/wordpress-post-draft-db.jpg" alt="WordPress Post Draft in MySQL" />
+
+    </a>
+
+
+      <figcaption>WordPress Post Draft in MySQL shows that this is HTML wrapped in comments, *not markdown*.</figcaption>
+
+  </figure>
+</span></div><p>In text format:</p><pre><code>&lt;-- wp:paragraph --&gt;
+
+&lt;p&gt;<span class="type">This</span> <span class="keyword">is</span> a new post, and my <span class="keyword">default is set</span> to markdown.&lt;/p&gt;
+
+&lt;-- wp:paragraph --&gt;
+</code></pre><p>While putting HTML comments and paragraphs isn't <em>forbidden</em> in Markdown, of course, the idea that you'd <em>only</em> store garbage like that in lieu of the plain text you claimed to store is very much not only against the spirit of Markdown, but deceptive to one's customers.</p><h3>And Here We Are</h3><p>Despite all that, I did get the site migrated, and glad to be migrated. Looking forward to writing more, now that I won't be quite so annoyed by my blog any more. :P</p><h4><em>Photo Credit</em></h4><figcaption>Monarch Butterflies on tree branch in blue sky background, photo by JHVEPhoto/Depositphotos, used with permission</figcaption>
+							<span>
+								<strong>
+Tagged with: </strong>
+							</span>
+							<ul class="tag-list">
+								<li>
+									<a href="/tags/web">
+web</a>
+								</li>
+							</ul>
+						</article>
+					</div>
+				</div>
+			</section>
+			<section id="footer">
+				<div class="inner">
+					<h2 class="major">
+Get in touch</h2>
+					<ul class="contact">
+						<li class="icon brands fa-twitter">
+							<a href="https://twitter.com/deirdresm">
+								<span class="label">
+Twitter: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon brands fa-linkedin">
+							<a href="https://www.linkedin.com/in/deirdresm/">
+								<span class="label">
+Linked In: deirdresm</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="contact">
+						<li class="icon brands fa-github">
+							<a href="https://github.com/deirdresm">
+								<span class="label">
+GitHub: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon solid fa-envelope">
+							<a href="mailto:deirdre@deirdre.net">
+								<span class="label">
+Email: deirdre@deirdre.net</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="copyright">
+						<li>
+&copy; Deirdre Saoirse Moen.</li>
+						<li>
+Apple store staircase photo &copy; by Rick Moen.</li>
+						<li>
+Theme design: 
+							<a href="https://html5up.net">
+HTML5 UP</a>
+						</li>
+						<li>
+Generated using 
+							<a href="https://github.com/johnsundell/publish">
+Publish</a>
+						</li>
+						<li>
+							<a href="/feed.rss">
+RSS feed</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

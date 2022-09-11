@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+	<url>
+		<loc>
+https://deirdre.dev/about</loc>
+		<changefreq>
+daily</changefreq>
+		<priority>
+1.0</priority>
+		<lastmod>
+2022-06-20</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts</loc>
+		<changefreq>
+daily</changefreq>
+		<priority>
+1.0</priority>
+		<lastmod>
+2022-06-19</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/publish-is-live</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-20</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/month-with-publish</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-19</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/wrestling-with-publish</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-19</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/swiftuijam-experience</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-19</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/swift-problem</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-20</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/penrose-tiling</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-20</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/unsupported-kvc-in-keypath</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-19</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/migrating-to-jekyll</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-20</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/color-sphere</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-20</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/visualizing-4d-in-three-dimensions</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-19</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/swift-on-sundays-march-17-2019</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-20</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/Drafts/2021-06-09-getting-into-programming</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2021-06-10</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/Drafts/2022-02-04-homage-to-my-dad</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-12</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/Drafts/2022-06-17-publish-theme-development</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-19</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/Drafts/2022-06-17-publish-transition</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-19</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/about</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2021-06-09</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/elements</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-13</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/generic</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2021-05-15</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/robots</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-18</lastmod>
+	</url>
+</urlset>

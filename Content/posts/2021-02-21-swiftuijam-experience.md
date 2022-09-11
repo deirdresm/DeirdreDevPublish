@@ -3,7 +3,7 @@ id: 10
 layout: post
 author: Deirdre Saoirse Moen
 layout: post
-path: /swiftuijam-experience/
+path: swiftuijam-experience
 title: The SwiftUIJam Experience
 description: Went to my first SwiftUI jam, here's what happened.
 imagePath: /assets/images/2021/02/SwiftUI-Jam-Logo.png

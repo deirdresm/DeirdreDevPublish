@@ -2,7 +2,7 @@
 id: 11
 layout: post
 author: Deirdre Saoirse Moen
-path: /wrestling-with-publish/
+path: wrestling-with-publish
 title: Wrestling With Publish
 description: I've been working on converting this site from Jekyll to Publish, and here's a few cool sites I've found so far.
 imagePath: /assets/images/2021/04/CasperishTheme.png
@@ -54,12 +54,14 @@ Seriously, John Sundell's done an excellent job of making tests easy to understa
 
 Here's one of the stylesheet tests:
 
+```swift
     func testCSSStylesheet() {
         let html = HTML(.head(.stylesheet("styles.css")))
         assertEqualHTMLContent(html, """
         <head><link rel="stylesheet" href="styles.css" type="text/css"/></head>
         """)
     }
+```
 
 It will help you when you (almost inevitably) want to refactor later.
 

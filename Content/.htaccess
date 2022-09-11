@@ -14,3 +14,13 @@ RedirectMatch 404 /\.git
 	</FilesMatch>
 </IfModule>
 
+Redirect 301 https://deirdre.dev/color-sphere https://deirdre.dev/posts/color-sphere
+Redirect 301 https://deirdre.dev/migrating-to-jekyll https://deirdre.dev/posts/migrating-to-jekyll
+Redirect 301 https://deirdre.dev/month-with-publish https://deirdre.dev/posts/month-with-publish
+Redirect 301 https://deirdre.dev/penrose-tiling https://deirdre.dev/posts/penrose-tiling
+Redirect 301 https://deirdre.dev/swift-blog-problem https://deirdre.dev/posts/swift-problem
+Redirect 301 https://deirdre.dev/swift-on-sundays-march-17-2019 https://deirdre.dev/posts/swift-on-sundays-march-17-2019
+Redirect 301 https://deirdre.dev/swiftuijam-experience https://deirdre.dev/posts/swiftuijam-experience
+Redirect 301 https://deirdre.dev/unsupported-kvc-in-keypath https://deirdre.dev/posts/unsupported-kvc-in-keypath
+Redirect 301 https://deirdre.dev/visualizing-4d-in-three-dimensions https://deirdre.dev/posts/visualizing-4d-in-three-dimensions
+Redirect 301 https://deirdre.dev/wrestling-with-publish https://deirdre.dev/posts/wrestling-with-publish

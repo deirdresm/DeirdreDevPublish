@@ -35,8 +35,21 @@ public protocol SolidStateItemMetadata {
     var date: String { get }
     var author: String? { get }
     var imagePath: String { get }
+	var spotlightImage: String? { get }
     var imageTitle: String? { get }
     var imageCaption: String? { get }
+	var imageSize: Int? { get }
+	var inscribeImage: Bool? { get }
+}
+
+extension SolidStateItemMetadata {
+	/// add a default of false 
+	var inscribeImage: Bool {
+		get {
+			return false
+		}
+		set { }
+	}
 }
 
 public protocol SolidStateWebsite: Website where ItemMetadata: SolidStateItemMetadata {
@@ -182,7 +195,7 @@ struct InlineImage: Component {
             )
             .class("image fit")
         )
-        .class("4u 12u$(small)")
+        .class("col-4")
 //        .ariaLabel(imageTitle)
 //        .role("img")
     }
@@ -247,7 +260,8 @@ struct SolidStateHTMLFactory: HTMLFactory {
 
     public func makeItemHTML(for item: Item<SolidStateSite>,
                       context: PublishingContext<SolidStateSite>) throws -> HTML {
-        HTML(
+
+        return HTML(
             .lang(context.site.language),
             .head(for: item, on: context.site,
                   stylesheetPaths: context.site.stylesheetPaths,
@@ -260,14 +274,17 @@ struct SolidStateHTMLFactory: HTMLFactory {
 						.header(
 							.div(.class("inner"),
 								 .h2(.text(item.title)),
-								 .p(.text(item.description))
+								 .p(.class("above-date"), .text(item.description)),
+								 .p(.class("post-date"), .text(context.site.dateFormatter.string(from: item.date)))
 							)
 						),
 						.div(.class("wrapper"),
 							 .div(.class("inner"),
+								  .div(.class("row"),
 								  .featuredImage(for: item,
-												 on: context.site),
-								  .article(.class("inner"),
+												 on: context.site)
+								  ),
+								  .article(.class("content"),
 										   .contentBody(item.body),
 										   .span(.strong("Tagged with: ")),
 										   .tagList(for: item, on: context.site)

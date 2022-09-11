@@ -2,7 +2,7 @@
 id: 8
 layout: post
 author: Deirdre Saoirse Moen
-path: /penrose-tiling/
+path: penrose-tiling
 title: Penrose Tiling in Swift
 description: Penrose Tiling in Swift, command-line edition
 imagePath: /assets/images/2021/01/penrose_tiling_sq.png
@@ -15,7 +15,17 @@ Command-line implementation of [Penrose tiling](https://rosettacode.org/wiki/Pen
 
 [Great explainer on Penrose tiling.](https://preshing.com/20110831/penrose-tiling-explained/)
 
-{% include image.html url="/assets/images/2021/01/penrose_tiling.png" title='Penrose Tiling in Swift' caption="A fun little experiment" image_class="12u" %}
+<div class="12u image-wrapper" aria-label="Penrose Tiling in Swift"><span class="image fit">
+  <figure class="image">
+
+    <a href="/assets/images/2021/01/penrose_tiling.png" title="Penrose Tiling in Swift" target="_blank">
+
+        <img src="https://deirdre.dev//assets/images/2021/01/penrose_tiling.png" alt="Penrose Tiling in Swift" />
+    </a>
+      <figcaption>A fun little experiment</figcaption>
+
+  </figure>
+</span></div>
 
 ## Reddit r/Swift Thread
 

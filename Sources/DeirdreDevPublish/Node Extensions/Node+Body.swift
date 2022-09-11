@@ -180,7 +180,8 @@ extension Node where Context == HTML.BodyContext {
 /*	private struct ItemList<Site: Website>: Component {
 		var items: [Item<Site>]
 		var site: Site
-
+		var dateFormatter: DateFormatter
+ 
 		var body: Component {
 			List(items) { item in
 				Article {
@@ -373,7 +374,7 @@ extension Node where Context == HTML.BodyContext {
                              .a(
                                 .class("image"),
                                 .href(item.path),
-                                .img(.src(item.metadata.imagePath)
+								.img(.src(item.metadata.spotlightImage ?? item.metadata.imagePath)
                                 )
                              ),
                              .div(.class("content"),
@@ -484,23 +485,29 @@ extension Node where Context == HTML.BodyContext {
                                                     alt: String) -> Node {
         .unwrap(page.imagePath ?? site.imagePath, { path in
             let url = site.url(for: path)
-            return .div(.class("4u 12u$(small) col-4"),
-                        .role("img"),
-                        .ariaLabel("this is a test"),
-                        .span(.class("image fit"),
-                              .figure(.class("image"),
-                                      .img(.src(url),
-                                           .alt(alt))
-                              ) // figure
-                        ) // span
-            ) // div
+			return .div(.class("box"),
+						.div(.class("row"),
+							 .div(.class("col-4"),
+									 .role("img"),
+									 .ariaLabel("this is a test"),
+									 .span(.class("image fit"),
+										   .figure(.class("image"),
+												   .img(.src(url),
+														.alt(alt))
+										   ) // figure
+									 ) // span
+						 ) // div
+					)
+			)
+
+
         })
     }
 //	<div class="col-12"><span class="image fit"><img src="/assets/images/pic08.jpg" alt="" /></span></div>
 
     static func featuredImage<T: SolidStateWebsite>(for item: Item<T>, on site: T) -> Node {
-        .unwrap(item.metadata.imagePath) { path in
-            return .div(.class("4u 12u$(small) col-4"),
+        .unwrap(item.metadata.spotlightImage ?? item.metadata.imagePath) { path in
+            return .div(.class("col-4"),
                         .role("img"),
                         .ariaLabel(item.metadata.imageTitle ?? item.title),
                         .span(.class("image fit"),

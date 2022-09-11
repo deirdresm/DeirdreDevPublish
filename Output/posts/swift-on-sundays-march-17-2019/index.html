@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="og:site_name" content="deirdre.dev"/>
+		<link rel="canonical" href="https://deirdre.dev/posts/swift-on-sundays-march-17-2019"/>
+		<meta name="twitter:url" content="https://deirdre.dev/posts/swift-on-sundays-march-17-2019"/>
+		<meta name="og:url" content="https://deirdre.dev/posts/swift-on-sundays-march-17-2019"/>
+		<title>
+Swift on Sundays, March 17, 2019 | deirdre.dev</title>
+		<meta name="twitter:title" content="Swift on Sundays, March 17, 2019 | deirdre.dev"/>
+		<meta name="og:title" content="Swift on Sundays, March 17, 2019 | deirdre.dev"/>
+		<meta name="description" content="Short entry about a Swift on Sundays episode featuring CreateML and CoreML and how to integrate them into your project."/>
+		<meta name="twitter:description" content="Short entry about a Swift on Sundays episode featuring CreateML and CoreML and how to integrate them into your project."/>
+		<meta name="og:description" content="Short entry about a Swift on Sundays episode featuring CreateML and CoreML and how to integrate them into your project."/>
+		<meta name="twitter:card" content="summary"/>
+		<link rel="stylesheet" href="/assets/css/main.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/deirdre.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/splash.css" type="text/css"/>
+		<noscript>
+			<link rel="stylesheet" href="/assets/css/noscript.css" type="text/css"/>
+		</noscript>
+		<script src="/assets/js/skel.min.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+		<link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to deirdre.dev"/>
+	</head>
+	<body>
+		<div id="page-wrapper">
+			<header id="header">
+				<a href="#content" class="skip">
+Skip to main content</a>
+				<h1>
+					<a href="/">
+deirdre.dev</a>
+				</h1>
+			</header>
+			<section id="wrapper">
+				<header>
+					<div class="inner">
+						<h2>
+Swift on Sundays, March 17, 2019</h2>
+						<p class="above-date">
+Short entry about a Swift on Sundays episode featuring CreateML and CoreML and how to integrate them into your project.</p>
+						<p class="post-date">
+17 Mar 2019</p>
+					</div>
+				</header>
+				<div class="wrapper">
+					<div class="inner">
+						<div class="row">
+							<div class="col-4" role="img" aria-label="Swift on Sundays, March 17, 2019">
+								<span class="image fit">
+									<figure class="image">
+										<img src="/assets/images/2019/03/machine_learning.jpg" alt="Swift on Sundays, March 17, 2019"/>
+									</figure>
+								</span>
+							</div>
+						</div>
+						<article class="content">
+<p>For those who don't know about Swift on Sundays, it's a weekly feature (on Sundays, naturally) where Paul Hudson of Hacking With Swift builds a live app on YouTube, talking through his design choices as he makes them.</p><p>Today's revolves around machine learning, specifically CreateML.</p><p><a href="http://www.youtube.com/watch?v=x9_BG2q7XYw "Today's Swift on Sunday Project""><img src="http://img.youtube.com/vi/x9_BG2q7XYw/0.jpg" alt="CreateML Project"/></a></p><h3>"CreateML creates the models; CoreML consumes the models."</h3><p>Paul's created test JSON data about recommended sleep time, number of cups of coffee, etc. to use as testing and training data. When run through CreateML with root mean square to test it, the recommendations are off by a mere three minutes, so quite close. In some cases, you'd want to train more, but we're off onto making an app to use the model.</p><p>Paul talks about the difference between loadView and viewDidLoad. Start loading your view in <a href="https://developer.apple.com/documentation/uikit/uiviewcontroller/1621454-loadview">loadView</a>, not <a href="https://developer.apple.com/documentation/uikit/uiviewcontroller/1621495-viewdidload">viewDidLoad</a>, but over and over he sees examples of people putting view loading code in the latter that shoud go in the former.</p><p>Overall, an interesting episode if you want to have a primer on machine learning and incorporating a simple example into an app.</p><p><a href="https://www.youtube.com/playlist?list=PLuoeXyslFTuZNAZKB3FAYqiJZKigjC3VG">The full Swift on Sundays playlist can be found here.</a></p>
+							<span>
+								<strong>
+Tagged with: </strong>
+							</span>
+							<ul class="tag-list">
+								<li>
+									<a href="/tags/swift">
+swift</a>
+								</li>
+								<li>
+									<a href="/tags/coreml">
+coreml</a>
+								</li>
+							</ul>
+						</article>
+					</div>
+				</div>
+			</section>
+			<section id="footer">
+				<div class="inner">
+					<h2 class="major">
+Get in touch</h2>
+					<ul class="contact">
+						<li class="icon brands fa-twitter">
+							<a href="https://twitter.com/deirdresm">
+								<span class="label">
+Twitter: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon brands fa-linkedin">
+							<a href="https://www.linkedin.com/in/deirdresm/">
+								<span class="label">
+Linked In: deirdresm</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="contact">
+						<li class="icon brands fa-github">
+							<a href="https://github.com/deirdresm">
+								<span class="label">
+GitHub: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon solid fa-envelope">
+							<a href="mailto:deirdre@deirdre.net">
+								<span class="label">
+Email: deirdre@deirdre.net</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="copyright">
+						<li>
+&copy; Deirdre Saoirse Moen.</li>
+						<li>
+Apple store staircase photo &copy; by Rick Moen.</li>
+						<li>
+Theme design: 
+							<a href="https://html5up.net">
+HTML5 UP</a>
+						</li>
+						<li>
+Generated using 
+							<a href="https://github.com/johnsundell/publish">
+Publish</a>
+						</li>
+						<li>
+							<a href="/feed.rss">
+RSS feed</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

@@ -325,7 +325,7 @@ input, select, textarea {
 		padding: 0.5em 0 0.5em 2em;
 	}
 
-	code {
+/*	code {
 		background: rgba(255, 255, 255, 0.025);
 		border-radius: 5px;
 		border: solid 2px rgba(255, 255, 255, 0.125);
@@ -334,7 +334,7 @@ input, select, textarea {
 		margin: 0 0.25em;
 		padding: 0.25em 0.65em;
 	}
-
+*/
 	pre {
 		-webkit-overflow-scrolling: touch;
 		font-family: "Courier New", monospace;
@@ -3805,6 +3805,7 @@ input, select, textarea {
 				width: 22em;
 				overflow: hidden;
 				-ms-flex: 1;
+				border 2px solid #14192e;
 			}
 
 				.wrapper.spotlight .image img {

@@ -1,0 +1,26 @@
+RedirectMatch 404 /\.git
+
+<ifModule mod_headers.c>
+
+	# Security improvements
+	Header unset Server
+	#Header unset X-Pingback
+	Header unset Accept-Ranges
+	#
+	<FilesMatch "\.html>
+		Header set X-Frame-Options "SAMEORIGIN"
+	#
+		Header set Content-Security-Policy "media-src 'self' http://player.vimeo.com; frame-src 'self' http://player.vimeo.com https://*.vimeocdn.com https://widgets.wp.com http://www.youtube.com https://www.youtube.com https://twitter.com http://akismet.com http://society6.com http://widgets.wp.com https://public-api.wordpress.com http://w.soundcloud.com https://w.soundcloud.com;"
+	</FilesMatch>
+</IfModule>
+
+Redirect 301 https://deirdre.dev/color-sphere https://deirdre.dev/posts/color-sphere
+Redirect 301 https://deirdre.dev/migrating-to-jekyll https://deirdre.dev/posts/migrating-to-jekyll
+Redirect 301 https://deirdre.dev/month-with-publish https://deirdre.dev/posts/month-with-publish
+Redirect 301 https://deirdre.dev/penrose-tiling https://deirdre.dev/posts/penrose-tiling
+Redirect 301 https://deirdre.dev/swift-blog-problem https://deirdre.dev/posts/swift-problem
+Redirect 301 https://deirdre.dev/swift-on-sundays-march-17-2019 https://deirdre.dev/posts/swift-on-sundays-march-17-2019
+Redirect 301 https://deirdre.dev/swiftuijam-experience https://deirdre.dev/posts/swiftuijam-experience
+Redirect 301 https://deirdre.dev/unsupported-kvc-in-keypath https://deirdre.dev/posts/unsupported-kvc-in-keypath
+Redirect 301 https://deirdre.dev/visualizing-4d-in-three-dimensions https://deirdre.dev/posts/visualizing-4d-in-three-dimensions
+Redirect 301 https://deirdre.dev/wrestling-with-publish https://deirdre.dev/posts/wrestling-with-publish

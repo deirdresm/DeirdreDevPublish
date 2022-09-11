@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="og:site_name" content="deirdre.dev"/>
+		<link rel="canonical" href="https://deirdre.dev/posts/unsupported-kvc-in-keypath"/>
+		<meta name="twitter:url" content="https://deirdre.dev/posts/unsupported-kvc-in-keypath"/>
+		<meta name="og:url" content="https://deirdre.dev/posts/unsupported-kvc-in-keypath"/>
+		<title>
+Unsupported KVC in Keypath | deirdre.dev</title>
+		<meta name="twitter:title" content="Unsupported KVC in Keypath | deirdre.dev"/>
+		<meta name="og:title" content="Unsupported KVC in Keypath | deirdre.dev"/>
+		<meta name="description" content="I ran into a cryptic error with only two ten-year-old hits on Google. Here's why."/>
+		<meta name="twitter:description" content="I ran into a cryptic error with only two ten-year-old hits on Google. Here's why."/>
+		<meta name="og:description" content="I ran into a cryptic error with only two ten-year-old hits on Google. Here's why."/>
+		<meta name="twitter:card" content="summary"/>
+		<link rel="stylesheet" href="/assets/css/main.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/deirdre.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/splash.css" type="text/css"/>
+		<noscript>
+			<link rel="stylesheet" href="/assets/css/noscript.css" type="text/css"/>
+		</noscript>
+		<script src="/assets/js/skel.min.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+		<link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to deirdre.dev"/>
+	</head>
+	<body>
+		<div id="page-wrapper">
+			<header id="header">
+				<a href="#content" class="skip">
+Skip to main content</a>
+				<h1>
+					<a href="/">
+deirdre.dev</a>
+				</h1>
+			</header>
+			<section id="wrapper">
+				<header>
+					<div class="inner">
+						<h2>
+Unsupported KVC in Keypath</h2>
+						<p class="above-date">
+I ran into a cryptic error with only two ten-year-old hits on Google. Here's why.</p>
+						<p class="post-date">
+24 Dec 2020</p>
+					</div>
+				</header>
+				<div class="wrapper">
+					<div class="inner">
+						<div class="row">
+							<div class="col-4" role="img" aria-label="Xcode asset catalog screenshot">
+								<span class="image fit">
+									<figure class="image">
+										<img src="/assets/images/2020/12/unsupported-kvc-aggregate-in-keypath.png" alt="Xcode asset catalog screenshot"/>
+									</figure>
+								</span>
+							</div>
+						</div>
+						<article class="content">
+<p>Yesterday, I ran into a cryptic error message in Xcode, and there were only two ten-year-old hits on Google.</p><p><code>Unsupported KVC aggregate in keypath</code></p><p>So, in case future you runs into this problem, here's another, different cause.</p><p>The short version was that I was trying to do an NSPredicate comparison for Core Data, meaning ==, and I'd accidentally typed = instead. I'd been working in SQL earlier in the day where = is used as a comparison operator, so an easy mistake to make in context.</p><p>So:</p><pre><code>  <span class="keyword">let</span> predicate = <span class="type">NSPredicate</span>(format: <span class="string">"id = %i"</span>, buildingData.<span class="property">id</span>)
+</code></pre><p>…instead of:</p><pre><code><span class="keyword">let</span> predicate = <span class="type">NSPredicate</span>(format: <span class="string">"id == %i"</span>, buildingData.<span class="property">id</span>)
+</code></pre><p>It was initially confusing because I wasn't specifically trying to aggregate anything, but Xcode was clearly confused about what, exactly, I was trying to do.<br>Hope this helps!</p>
+							<span>
+								<strong>
+Tagged with: </strong>
+							</span>
+							<ul class="tag-list">
+								<li>
+									<a href="/tags/swift">
+swift</a>
+								</li>
+								<li>
+									<a href="/tags/coredata">
+coredata</a>
+								</li>
+								<li>
+									<a href="/tags/nspredicate">
+nspredicate</a>
+								</li>
+								<li>
+									<a href="/tags/xcode">
+xcode</a>
+								</li>
+							</ul>
+						</article>
+					</div>
+				</div>
+			</section>
+			<section id="footer">
+				<div class="inner">
+					<h2 class="major">
+Get in touch</h2>
+					<ul class="contact">
+						<li class="icon brands fa-twitter">
+							<a href="https://twitter.com/deirdresm">
+								<span class="label">
+Twitter: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon brands fa-linkedin">
+							<a href="https://www.linkedin.com/in/deirdresm/">
+								<span class="label">
+Linked In: deirdresm</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="contact">
+						<li class="icon brands fa-github">
+							<a href="https://github.com/deirdresm">
+								<span class="label">
+GitHub: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon solid fa-envelope">
+							<a href="mailto:deirdre@deirdre.net">
+								<span class="label">
+Email: deirdre@deirdre.net</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="copyright">
+						<li>
+&copy; Deirdre Saoirse Moen.</li>
+						<li>
+Apple store staircase photo &copy; by Rick Moen.</li>
+						<li>
+Theme design: 
+							<a href="https://html5up.net">
+HTML5 UP</a>
+						</li>
+						<li>
+Generated using 
+							<a href="https://github.com/johnsundell/publish">
+Publish</a>
+						</li>
+						<li>
+							<a href="/feed.rss">
+RSS feed</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

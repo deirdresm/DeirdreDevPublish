@@ -2,7 +2,7 @@
 id: 1
 layout: post
 author: Deirdre Saoirse Moen
-path: /swift-on-sundays-march-17-2019/
+path: swift-on-sundays-march-17-2019
 title: Swift on Sundays, March 17, 2019
 date: 2019-03-17 20:46
 description: Short entry about a Swift on Sundays episode featuring CreateML and CoreML and how to integrate them into your project.
@@ -11,8 +11,6 @@ tags: swift, coreml
 ---
 
 For those who don't know about Swift on Sundays, it's a weekly feature (on Sundays, naturally) where Paul Hudson of Hacking With Swift builds a live app on YouTube, talking through his design choices as he makes them.
-
-<!--Read more-->
 
 Today's revolves around machine learning, specifically CreateML.
 

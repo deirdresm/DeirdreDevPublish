@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="og:site_name" content="deirdre.dev"/>
+		<link rel="canonical" href="https://deirdre.dev/posts/wrestling-with-publish"/>
+		<meta name="twitter:url" content="https://deirdre.dev/posts/wrestling-with-publish"/>
+		<meta name="og:url" content="https://deirdre.dev/posts/wrestling-with-publish"/>
+		<title>
+Wrestling With Publish | deirdre.dev</title>
+		<meta name="twitter:title" content="Wrestling With Publish | deirdre.dev"/>
+		<meta name="og:title" content="Wrestling With Publish | deirdre.dev"/>
+		<meta name="description" content="I've been working on converting this site from Jekyll to Publish, and here's a few cool sites I've found so far."/>
+		<meta name="twitter:description" content="I've been working on converting this site from Jekyll to Publish, and here's a few cool sites I've found so far."/>
+		<meta name="og:description" content="I've been working on converting this site from Jekyll to Publish, and here's a few cool sites I've found so far."/>
+		<meta name="twitter:card" content="summary"/>
+		<link rel="stylesheet" href="/assets/css/main.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/deirdre.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/splash.css" type="text/css"/>
+		<noscript>
+			<link rel="stylesheet" href="/assets/css/noscript.css" type="text/css"/>
+		</noscript>
+		<script src="/assets/js/skel.min.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+		<link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to deirdre.dev"/>
+	</head>
+	<body>
+		<div id="page-wrapper">
+			<header id="header">
+				<a href="#content" class="skip">
+Skip to main content</a>
+				<h1>
+					<a href="/">
+deirdre.dev</a>
+				</h1>
+			</header>
+			<section id="wrapper">
+				<header>
+					<div class="inner">
+						<h2>
+Wrestling With Publish</h2>
+						<p class="above-date">
+I've been working on converting this site from Jekyll to Publish, and here's a few cool sites I've found so far.</p>
+						<p class="post-date">
+17 Apr 2021</p>
+					</div>
+				</header>
+				<div class="wrapper">
+					<div class="inner">
+						<div class="row">
+							<div class="col-4" role="img" aria-label="Casperish Theme Description">
+								<span class="image fit">
+									<figure class="image">
+										<img src="/assets/images/2021/04/CasperishTheme.png" alt="Casperish Theme Description"/>
+									</figure>
+								</span>
+							</div>
+						</div>
+						<article class="content">
+<p>There's a saying in web dev: when you hit a wall, start or redesign a site.</p><p>While I like Jekyll, I've found that, because I no longer spend my days in TextMate, I don't <em>think</em> about my website frequently. It's a habit thing.</p><p>So I've been looking into Publish (given that I live in Xcode), and there's really very little information about how to build your own site theme if it needs anything more than the most basic of website function.</p><p>Also, while Markdown is fantastic for laying out prose <em>within</em> a document, it doesn't represent the semantic parts of a page newly available in HTML5 (e.g., article, figure, figcaption, header, footer, nav, section) that help accessibility as well as search engines. Granted, Publish does have at least most of those, but you'd have to create code to inject them into your page.</p><h2>Themes</h2><p>Publish developer John Sundell suggested that everyone write their own theme for their site. While, yes, that is ideal (with limitations), having at least one medium complex good example can really help speed up a first implementation.</p><p>Here are the ones that were most useful, with commentary.</p><ul><li><a href="https://github.com/sowenjub/CasperishTheme">Casperish port of Ghost's Casper theme by sowenjub and aure.</a> This isn't strictly a Publish theme, though, because of the extras it brings in, but some of how it solves some issues are worth looking at. One notable downside is the utter lack of tests. <a href="https://paraside.in">Deployed site here.</a> One of the technically interesthing things is that there's a protocol for the theme, rather than the usual way of just having the struct conform to Website, it also has to conform to CasperishWebsite.</li><li><a href="https://github.com/Goosse/SearaPublishTheme">Radio Seara by Goosse.</a> New theme with <a href="https://radioseara.fm">deployed site here</a>. Reasonably simple, but clean looking. Love the aesthetic of it! (No tests, though.)</li><li><a href="https://github.com/CoolONEOfficial/personal_site">CoolOneOfficial's personal site theme</a> has nice layered metadata handling. <a href="https://coolone.ru">Deployed here</a> (in Russian). Site also uses several plugins, which may be useful. And no tests.</li><li><a href="https://github.com/pvzig/bytesized.co/">pvzig's theme swaps out Sundell's Markdown parser for Common Mark.</a> <a href="https://www.bytesized.co">Site is deployed here.</a> I really like the grey/green combo. No tests.</li><li><a href="https://github.com/yusufozgul/yusufozgul.com">Yusuf Özgül's theme for his site</a>, which is mostly in Turkish. Despite the relatively simple theme, he's got a fairly intricate set of conditionals, which may help you sort out how to write your own theme. No tests. Also interesting is a loader class that creates the static pages of the site.</li><li><a href="https://github.com/billdonner/BandSite">Bill Donner has written several band sites with variants on his theme.</a> And, guess what? There are tests! o/ Seriously, folks, John Sundell's got an excellent test suite for Publish and its dependencies, and y'all should take the time to level up on tests.</li><li><a href="https://github.com/Demacia5635/demacia5635.github.io">Demacia's theme is interesting in that it uses a lot of plugins and…wait for it…many are npm.</a> <a href="https://demacia5635.github.io">Site deployed here</a> for an Israeli robot club. No tests (again).</li><li><a href="https://github.com/leontedev/Publish-leonte.dev">Leonte.dev's theme</a> has some custom publishing steps, including rewriting. <a href="https://www.leonte.dev">Deployed here.</a> No tests.</li><li><a href="https://github.com/crelies/christianelies.de">Christian Elies's theme</a> isn't particularly complex, but the way the meta data and tags are broken out is very orderly. Also has some nice examples of how to do card elements on a page. No tests.</li><li><a href="https://github.com/weissazool/weissazool">Weissazool has a minimalist photo blog theme.</a> <a href="https://weissazool.github.io/">Deployed here.</a> Not super duper different than the default, but a nice example of image and post together and how to do that. No tests.</li><li><a href="https://github.com/joeblau/blau-theme/">Joe Blau's got a really old skool retro theme that is very winning at the end.</a> It's the kind of site you can make when you know your experience and chops are so good that you can just…retro it. <a href="https://joeblau.com">Deployed here.</a> No tests.</li><li><a href="https://github.com/fatbobman/PublishThemeForFatbobmanBlog">Fatbobman's theme isn't super revolutionary, but there are some interesting plugins written for it.</a> <a href="https://www.fatbobman.com">Deployed here</a> (note: site's in Chinese, and so are the code comments). No tests.</li><li><a href="https://github.com/nitesuit/Blog">Several people have used a variant of this theme; the earliest version I found was from Lithuanian dev Povilas Staškus.</a> <a href="https://www.staskus.io">It's a really nice clean-looking theme, deployed here</a>. No tests.</li><li><a href="https://github.com/sharpfive/oliva">Oliva isn't a theme in the traditional sense.</a> It instead generates fantasy baseball team game data. It does use Publish, though, and it uses it in an interesting way. No tests.</li></ul><p>Others:</p><ul><li><a href="https://github.com/sanengineer/san-publish-theme">SanTheme</a>, though I couldn't find a deployed site. No tests.</li><li><a href="https://github.com/SwiftVietnam/SwiftVietnam">SwiftVietnam's theme</a>, deployed at <a href="https://swiftvietnam.com">SwiftVietnam.com</a>. Basic Foundation-style theme, but may be of interest to Vietnamese readers. No tests.</li><li><a href="https://github.com/mastermakrela/JustABunchOfGrapes">Just a Bunch of Grapes</a> has some interesting metadata, but I didn't see it deployed anywhere. No tests.</li></ul><p>So…1 out of 17 had tests.</p><h2>Why No, I haven't Said Enough On That Topic</h2><p>Seriously, John Sundell's done an excellent job of making tests easy to understand and write.</p><p>Here's one of the stylesheet tests:</p><pre><code>     <span class="keyword">func</span> testCSSStylesheet() {
+        <span class="keyword">let</span> html = <span class="type">HTML</span>(.<span class="call">head</span>(.<span class="call">stylesheet</span>(<span class="string">"styles.css"</span>)))
+        <span class="call">assertEqualHTMLContent</span>(html, <span class="string">"""
+        &lt;head&gt;&lt;link rel="stylesheet" href="styles.css" type="text/css"/&gt;&lt;/head&gt;
+        """</span>)
+    }
+</code></pre><p>It will help you when you (almost inevitably) want to refactor later.</p><h2>Did I Leave You Out?</h2><p>I have looked at <em>a ton</em> of Publish sites over the last couple of weeks, enough so that my eyes melted more than once. ;)</p><p>Generally, I was looking for something specific, so if I didn't see it, I may not have kept that tab open long enough to get around to writing this post. Also, I only looked on Github, so those hosting their themes on Gitlab or other platforms were left out.</p><p>Please feel free to ping me if you've got a site that you think shows some interesting use of Publish, especially if it has tests. I'm mostly interested in one of two kinds of sites:</p><ol><li>Sites that have more complex markup, e.g., a port of a commercial-quality theme like those found at <a href="https://HTML5Up.net">HTML5Up.net</a>. (I'm currently working on <a href="https://html5up.net/solid-state">Solid State</a>, thus wanted to find more examples on that order of complexity.)</li><li>Sites that are using plugins or unusual publishing pipelines. However, apart from the single example above, sites that use JS steps need not apply.</li></ol>
+							<span>
+								<strong>
+Tagged with: </strong>
+							</span>
+							<ul class="tag-list">
+								<li>
+									<a href="/tags/swift">
+swift</a>
+								</li>
+								<li>
+									<a href="/tags/publish">
+publish</a>
+								</li>
+							</ul>
+						</article>
+					</div>
+				</div>
+			</section>
+			<section id="footer">
+				<div class="inner">
+					<h2 class="major">
+Get in touch</h2>
+					<ul class="contact">
+						<li class="icon brands fa-twitter">
+							<a href="https://twitter.com/deirdresm">
+								<span class="label">
+Twitter: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon brands fa-linkedin">
+							<a href="https://www.linkedin.com/in/deirdresm/">
+								<span class="label">
+Linked In: deirdresm</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="contact">
+						<li class="icon brands fa-github">
+							<a href="https://github.com/deirdresm">
+								<span class="label">
+GitHub: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon solid fa-envelope">
+							<a href="mailto:deirdre@deirdre.net">
+								<span class="label">
+Email: deirdre@deirdre.net</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="copyright">
+						<li>
+&copy; Deirdre Saoirse Moen.</li>
+						<li>
+Apple store staircase photo &copy; by Rick Moen.</li>
+						<li>
+Theme design: 
+							<a href="https://html5up.net">
+HTML5 UP</a>
+						</li>
+						<li>
+Generated using 
+							<a href="https://github.com/johnsundell/publish">
+Publish</a>
+						</li>
+						<li>
+							<a href="/feed.rss">
+RSS feed</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

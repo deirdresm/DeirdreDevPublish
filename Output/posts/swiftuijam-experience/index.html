@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="og:site_name" content="deirdre.dev"/>
+		<link rel="canonical" href="https://deirdre.dev/posts/swiftuijam-experience"/>
+		<meta name="twitter:url" content="https://deirdre.dev/posts/swiftuijam-experience"/>
+		<meta name="og:url" content="https://deirdre.dev/posts/swiftuijam-experience"/>
+		<title>
+The SwiftUIJam Experience | deirdre.dev</title>
+		<meta name="twitter:title" content="The SwiftUIJam Experience | deirdre.dev"/>
+		<meta name="og:title" content="The SwiftUIJam Experience | deirdre.dev"/>
+		<meta name="description" content="Went to my first SwiftUI jam, here's what happened."/>
+		<meta name="twitter:description" content="Went to my first SwiftUI jam, here's what happened."/>
+		<meta name="og:description" content="Went to my first SwiftUI jam, here's what happened."/>
+		<meta name="twitter:card" content="summary"/>
+		<link rel="stylesheet" href="/assets/css/main.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/deirdre.css" type="text/css"/>
+		<link rel="stylesheet" href="/assets/css/splash.css" type="text/css"/>
+		<noscript>
+			<link rel="stylesheet" href="/assets/css/noscript.css" type="text/css"/>
+		</noscript>
+		<script src="/assets/js/skel.min.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link rel="shortcut icon" href="/images/favicon.png" type="image/png"/>
+		<link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to deirdre.dev"/>
+	</head>
+	<body>
+		<div id="page-wrapper">
+			<header id="header">
+				<a href="#content" class="skip">
+Skip to main content</a>
+				<h1>
+					<a href="/">
+deirdre.dev</a>
+				</h1>
+			</header>
+			<section id="wrapper">
+				<header>
+					<div class="inner">
+						<h2>
+The SwiftUIJam Experience</h2>
+						<p class="above-date">
+Went to my first SwiftUI jam, here's what happened.</p>
+						<p class="post-date">
+21 Feb 2021</p>
+					</div>
+				</header>
+				<div class="wrapper">
+					<div class="inner">
+						<div class="row">
+							<div class="col-4" role="img" aria-label="SwiftUI Jam Logo">
+								<span class="image fit">
+									<figure class="image">
+										<img src="/assets/images/2021/02/SwiftUI-Jam-Logo.png" alt="SwiftUI Jam Logo"/>
+									</figure>
+								</span>
+							</div>
+						</div>
+						<article class="content">
+<p>Searching for Jam ideas is always interesting. You need something that can reasonably be done in 2-3 days, but also need something you can <em>show</em>. Plus, people have lives and things come up. (Or, as you'll hear shortly, can be literally flung up.)</p><p>I went through some of the listings of APIs over on <a href="https://www.programmableweb.com">Programmable Web</a> to see if any ideas stuck.</p><p><a href="http://api.artic.edu/docs/">The Art Institute of Chicago has a fantastic API.</a> It's unfortunately so rich that it's not particularly well documented, though it does offer elastic search. One of the parameters offered is color, which I thought, "Huh, what if you could search based on color?"</p><p>Spoiler alert: It turns out you can't search on color (or colorfulness, another parameter). <em>heavy sigh</em></p><p>I did find someone on GitHub had essentially looked at and abandoned the same approach.</p><p>That was one full day. :P</p><h2>Day Two</h2><p>So, let's suck a bunch of data in, overfetching, then filter client side, right?</p><p>I'm trying to plan this as my cat Lily is literally flinging a bird around in the back yard. Yes, an actual bird. <em>facepalm</em></p><p>Meanwhile, Tianna has gotten a nice couple of screens done despite having a super busy weekend.</p><p>Pete, team lead has gotten some work done too.</p><p>By midnight, I had the JSON sucking written (on a background thread), I was just trying to figure out where made the most sense to hook it up. Lots of people do it in the .onAppear, which seems too late for an API that may need multiple calls. I'd been working in document applications on macOS, where the data suck is tied to the opening of the document, but this wasn't the same paradigm, so I needed to think about where made sense. Historically, things like CoreData were instantiated from the AppDelegate (or, more commonly, something invoked by the AppDelegate) before the rest of the app was launched.</p><p>In SwiftUI 2.0, though, the equivalent of an AppDelegate is…a view.</p><p>I was tired, so I deferred it for the next morning.</p><h2>Day Three</h2><p>I've just finished breakfast and am about to write more code when we get the familiar "Do you have a cat named Lily?" phone call. (Number 35 in a series. Seriously. <a href="/assets/images/2020/11/lily-the-cat.jpg">ObCatTax</a>)</p><p>Long story short, didn't get everything I wanted to do done, then realized it'd have been better in CoreData anyway. I'd been avoiding that because it seemed like it might add complexity, but I think ultimately it'd have reduced it (partly because I've been working in it more of late).</p><h2>A Few Comments</h2><p>Based on a few things I saw:</p><ol><li>One of the hardest concepts in SwiftUI is how much everything-is-a-struct affects everything that flows from there. You can occasionally just add one more layer in your layout and…suddenly the compiler's complaining about something that was a var now being a const. Once your layouts start getting more complex, you can hit the wall fairly easily, especially if you're not yet practiced enough to know where and how to simplify. Why no, I didn't spend <em>embarrassingly long time interval</em> on this recently. Nope.</li><li>Make sure the repo owner knows how to grant access. (I had to look it up, as I've submitted pull requests before, but not managed a multi-dev repo that I started from scratch.)</li><li>When you've got a group project that has newer people on it who may not have submitted commits or pull requests to multi-dev repositories before, make sure they know how to check out a repo so they don't create a new one and try to commit that. It's a very easy mistake to download (rather than checkout) a repo. I've done this before, but not everyone will know what to do.</li><li>Understand the repo before committing. I saw a few cases of confusion; different devs will have different naming conventions in mind (especially when you're talking devs from different continents who may not be native English speakers.) This is hard, especially in an established repo, and it's one reason I haven't been submitting as many pull requests as I'd like.</li><li>Smaller commits are better. This is almost always true anyway, but especially in a small project on a short deadline.</li></ol><p>It'd have been helpful to get people's GitHub experience up front, because some of these I hadn't thought about deeply before. While I'm not new to git, I'm relatively new to GitHub, and it has its own quirks.</p><h2>A Comedy Wrapup</h2><ol><li>The #iOSDevHappyHour took place on Saturday afternoon, and <a href="https://twitter.com/rungxanh2901/status/1363283240455450626">shoutout to the guy painting his ceiling during the meetup</a>. You go, Mitch!</li></ol><ol start="2"><li><a href="/assets/images/2021/02/not-so-greedy-GeometryReader.png">GeometryReader inside a LazyVGrid can be hilarious</a> if you're thinking you can use it to set an item's size. Width was fine, height not so much.</li></ol>
+							<span>
+								<strong>
+Tagged with: </strong>
+							</span>
+							<ul class="tag-list">
+								<li>
+									<a href="/tags/swift">
+swift</a>
+								</li>
+								<li>
+									<a href="/tags/swiftui">
+swiftui</a>
+								</li>
+								<li>
+									<a href="/tags/swiftuijam">
+swiftuijam</a>
+								</li>
+							</ul>
+						</article>
+					</div>
+				</div>
+			</section>
+			<section id="footer">
+				<div class="inner">
+					<h2 class="major">
+Get in touch</h2>
+					<ul class="contact">
+						<li class="icon brands fa-twitter">
+							<a href="https://twitter.com/deirdresm">
+								<span class="label">
+Twitter: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon brands fa-linkedin">
+							<a href="https://www.linkedin.com/in/deirdresm/">
+								<span class="label">
+Linked In: deirdresm</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="contact">
+						<li class="icon brands fa-github">
+							<a href="https://github.com/deirdresm">
+								<span class="label">
+GitHub: deirdresm</span>
+							</a>
+						</li>
+						<li class="icon solid fa-envelope">
+							<a href="mailto:deirdre@deirdre.net">
+								<span class="label">
+Email: deirdre@deirdre.net</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="copyright">
+						<li>
+&copy; Deirdre Saoirse Moen.</li>
+						<li>
+Apple store staircase photo &copy; by Rick Moen.</li>
+						<li>
+Theme design: 
+							<a href="https://html5up.net">
+HTML5 UP</a>
+						</li>
+						<li>
+Generated using 
+							<a href="https://github.com/johnsundell/publish">
+Publish</a>
+						</li>
+						<li>
+							<a href="/feed.rss">
+RSS feed</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

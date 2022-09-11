@@ -2,7 +2,7 @@
 id: 12
 layout: post
 author: Deirdre Saoirse Moen
-path: /month-with-publish/
+path: month-with-publish
 canonical_url: https://deirdre.dev/month-with-publish/
 title: A Month With Publish
 description: Here's an update on the site conversion and how it's going.

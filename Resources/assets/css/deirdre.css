@@ -183,8 +183,14 @@ article p.minor {
 text-transform: none;
 }
 
+.spotlight h2 {
+	text-align: end;
+}
+.spotlight.alt h2 {
+	text-align: start;
+}
 .wrapper.spotlight .image {
-	border-radius: 100%;
+	aspect-ratio: 1 / 1;
 }
 
 .wrapper.spotlight .image img {
@@ -192,6 +198,13 @@ text-transform: none;
 	object-fit: cover;
 }
 
+.row > .col-4 {
+	width: 33.33333%;
+}
+
+
+
+/*
 section#feature-1 .wrapper.spotlight .image {
 	border-radius: 100%;
 }
@@ -199,4 +212,12 @@ section#feature-1 .wrapper.spotlight .image {
 section#feature-1 .wrapper.spotlight .image img {
 	border-radius: 100%;
 }
+*/
 
+#wrapper > header p.above-date {
+	margin: 0 0 0.5em 0;
+}
+
+#wrapper > header p.post-date {
+	text-transform: none;
+}

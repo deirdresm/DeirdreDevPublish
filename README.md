@@ -3,6 +3,12 @@ title: DeirdreDevPublish Readme
 
 ---
 
+x 1. Do the inscribed code for front page images. x not needed
+x 2. Fix the image size on posts because that Swift is ginormous.
+x 3. Redirect for .htaccess
+x 4. Damn video link fix (and any other liquid tags).
+x 5. Post dates.
+
 # Publish theme for deirdre.dev
 
 Some interesting challenges in porting this theme, where I tried to be faithful to the [original theme](https://html5up.net/solid-state) up until the point where I didn't care about that detail. :) Given that my site already used [the unofficial Jekyll port of the free version of this theme](https://github.com/andrewbanchich/Solid-State-Jekyll-Theme), it's essentially a straight port of that port.

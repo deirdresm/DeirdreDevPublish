@@ -2,7 +2,7 @@
 id: 4
 layout: post
 author: Deirdre Saoirse Moen
-path: /migrating-to-jekyll/
+path: migrating-to-jekyll
 title:  Migrating to Jekyll
 description: This site had a 2020 in migrating from WordPress (php-based dynamic site) to Jekyll (ruby-based static site generator). Let me tell you all about it.
 imagePath: /assets/images/2020/10/monarch_butterflies.jpg
@@ -40,21 +40,47 @@ And then I was hamstrung by something that's just…gobsmacking to me.
 
 First, let's look at a very simple WordPress post draft as it's being composed.
 
-{% include image.html url="/assets/images/2020/10/wordpress-post-draft.jpg" title='WordPress Post Draft' caption="WordPress editor window view of post being composed. Edited text reads: This is a new post, and my default is set to markdown." image_class="12u$" %}
+<div class="12u$ image-wrapper" aria-label="WordPress Post Draft"><span class="image fit">
+  <figure class="image">
+
+    <a href="/assets/images/2020/10/wordpress-post-draft.jpg" title="WordPress Post Draft" target="_blank">
+
+        <img src="https://deirdre.dev//assets/images/2020/10/wordpress-post-draft.jpg" alt="WordPress Post Draft" />
+
+    </a>
+
+
+      <figcaption>WordPress editor window view of post being composed. Edited text reads: This is a new post, and my default is set to markdown.</figcaption>
+
+  </figure>
+</span></div>
 
 But here's how it's actually being stored in the database:
 
-{% include image.html url="/assets/images/2020/10/wordpress-post-draft-db.jpg" title='WordPress Post Draft in MySQL' caption="WordPress Post Draft in MySQL shows that this is HTML wrapped in comments, *not markdown*." image_class="12u$" %}
+<div class="12u$ image-wrapper" aria-label="WordPress Post Draft in MySQL"><span class="image fit">
+  <figure class="image">
+
+    <a href="/assets/images/2020/10/wordpress-post-draft-db.jpg" title="WordPress Post Draft in MySQL" target="_blank">
+
+        <img src="https://deirdre.dev//assets/images/2020/10/wordpress-post-draft-db.jpg" alt="WordPress Post Draft in MySQL" />
+
+    </a>
+
+
+      <figcaption>WordPress Post Draft in MySQL shows that this is HTML wrapped in comments, *not markdown*.</figcaption>
+
+  </figure>
+</span></div>
 
 In text format:
 
-    ~~~
-    <-- wp:paragraph -->
+``` html
+<-- wp:paragraph -->
 
-    <p>This is a new post, and my default is set to markdown.</p>
+<p>This is a new post, and my default is set to markdown.</p>
 
-    <-- wp:paragraph -->
-    ~~~
+<-- wp:paragraph -->
+```
 
 While putting HTML comments and paragraphs isn't *forbidden* in Markdown, of course, the idea that you'd *only* store garbage like that in lieu of the plain text you claimed to store is very much not only against the spirit of Markdown, but deceptive to one's customers.
 
@@ -62,6 +88,6 @@ While putting HTML comments and paragraphs isn't *forbidden* in Markdown, of cou
 
 Despite all that, I did get the site migrated, and glad to be migrated. Looking forward to writing more, now that I won't be quite so annoyed by my blog any more. :P
 
-###### *Photo Credit*
+#### *Photo Credit*
 
-<figcaption>{{ page.image.caption }}</figcaption>
+<figcaption>Monarch Butterflies on tree branch in blue sky background, photo by JHVEPhoto/Depositphotos, used with permission</figcaption>
