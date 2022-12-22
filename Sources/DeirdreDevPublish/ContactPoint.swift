@@ -10,10 +10,12 @@ import Publish
 
 /// All the various social media labels, URLs, and so forth that you want in your footer.
 public enum ContactPoint {
-    case twitter, email, dev, linkedIn, gitHub, stackoverflow
+    case mastodon, twitter, email, dev, linkedIn, gitHub, stackoverflow
 
     func url(_ handler: String) -> String {
         switch self {
+		case .mastodon:
+			return "\(handler)"
         case .twitter:
             return "https://twitter.com/\(handler)"
         case .email:
@@ -31,6 +33,8 @@ public enum ContactPoint {
 
     var icon: String {
         switch self {
+		case .mastodon:
+			return "icon brands fa-mastodon"
         case .twitter:
             return "icon brands fa-twitter"
         case .email:
@@ -48,6 +52,8 @@ public enum ContactPoint {
 
     func alt(_ handler: String) -> String {
         switch self {
+		case .mastodon:
+			return "Mastodon: \(handler)"
         case .twitter:
             return "Twitter: \(handler)"
         case .email:
@@ -65,6 +71,8 @@ public enum ContactPoint {
 
     func label() -> String {
         switch self {
+		case .mastodon:
+			return "Mastodon"
         case .twitter:
             return "Twitter"
         case .email:
