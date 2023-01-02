@@ -63,7 +63,9 @@ After life got a table flip last year, finally got back to migrating this site.<
 							</div>
 						</div>
 						<article class="content">
-<h1>Publish Is Live</h1><p>Last year I was almost done migrating this site. My father took a turn for the worse (and died), so lots of life this past year has been about things other than technical blogs.</p><p>Anyhow, this site has been migrated from Jekyll (ruby) to <a href="https://github.com/johnsundell/Publish">Publish, a static site generator written in Swift</a>.</p><p>The theme is from <a href="https://html5up.net/solid-state">HTML5Up</a>, and I will write about the process of migration, not to mention which parts of migrating that particular theme were challenging and what I learned in the process. I will also release my version of the theme, just not immediately. Now that I have a working copy, I want to pare down an example and create a new repository for that.</p><p>After, I may incorporate some of the <a href="https://pixelarity.com/solid-state">changes in the Pixelarity version of the theme.</a> and diverge my site further from the free theme.</p><h2>Publish Theme Development Tips</h2><p>Since I've just ported the theme I was using in Jekyll to Publish, I thought I'd mention a few tips I have for what makes a theme easier or more difficult to port.</p><h2>Index and Posts Focused</h2><p>Publish is very much designed around the paradigm that the site consists of:</p><ul><li>A front page, which has a different format</li><li>Other pages, which may be in sections, which have an amorphous format</li><li>Posts, which may have tags, and are dated (once published)</li><li>Pages for each tag and a tag index</li></ul><p>This basically follows the early WordPress concept of sites (except WordPress used categories instead of tags). So if your site format follows that generally, Publish will be easier to adapt, especially given how few themes are currently available that showcase more complex formats.</p><p>In the early days, people mostly used pages to create silos (portions of a website that link within that category, but mimize outside links, as this increases relevance on that one topic, and thus ranking—that was the theory, anyway).</p><h2>Some Common Formats That Are More Work</h2><p>One-page themes, especially those with multiple different kinds of feature blocks, each with its own content, are harder to do. The way Jekyll does these is to have the content in each feature block be in a separate Markdown file, then have those render into the feature blocks that comprise the page. Often, there's metadata in front that orders the sections.</p><p>Or, the other way Jekyll does it is to load the next block based on <a href="https://jekyllrb.com/docs/liquid/tags/">{% liquid tags %}</a>, which Publish doesn't support. But that means you can put almost any arbitrary thing dynamically on a page. While that has some cool aspects, it does mean your Markdown gets a lot more complex.</p><p>There's always the ugly hack (which I have in fact done)</p>
+<h1><#Title#>
+
+</h1>
 							<span>
 								<strong>
 Tagged with: </strong>
@@ -87,24 +89,38 @@ publish</a>
 					<h2 class="major">
 Get in touch</h2>
 					<ul class="contact">
+						<li class="icon brands fa-mastodon">
+							<a href="https://hachyderm.io/@deirdresm">
+								<span class="label">
+Mastodon: https://hachyderm.io/@deirdresm</span>
+							</a>
+						</li>
 						<li class="icon brands fa-twitter">
 							<a href="https://twitter.com/deirdresm">
 								<span class="label">
 Twitter: deirdresm</span>
 							</a>
 						</li>
+					</ul>
+					<ul class="contact">
 						<li class="icon brands fa-linkedin">
 							<a href="https://www.linkedin.com/in/deirdresm/">
 								<span class="label">
 Linked In: deirdresm</span>
 							</a>
 						</li>
-					</ul>
-					<ul class="contact">
 						<li class="icon brands fa-github">
 							<a href="https://github.com/deirdresm">
 								<span class="label">
 GitHub: deirdresm</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="contact">
+						<li class="icon solid fa-envelope">
+							<a href="mailto:deirdre@deirdre.net">
+								<span class="label">
+Email: deirdre@deirdre.net</span>
 							</a>
 						</li>
 						<li class="icon solid fa-envelope">

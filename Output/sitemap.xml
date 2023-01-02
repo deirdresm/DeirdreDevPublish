@@ -8,7 +8,7 @@ daily</changefreq>
 		<priority>
 1.0</priority>
 		<lastmod>
-2022-06-20</lastmod>
+2023-01-01</lastmod>
 	</url>
 	<url>
 		<loc>
@@ -19,6 +19,16 @@ daily</changefreq>
 1.0</priority>
 		<lastmod>
 2022-06-19</lastmod>
+	</url>
+	<url>
+		<loc>
+https://deirdre.dev/posts/8-things-i-wish-i-knew</loc>
+		<changefreq>
+monthly</changefreq>
+		<priority>
+0.5</priority>
+		<lastmod>
+2022-06-23</lastmod>
 	</url>
 	<url>
 		<loc>
@@ -178,7 +188,7 @@ monthly</changefreq>
 		<priority>
 0.5</priority>
 		<lastmod>
-2021-06-09</lastmod>
+2023-01-01</lastmod>
 	</url>
 	<url>
 		<loc>
@@ -188,7 +198,7 @@ monthly</changefreq>
 		<priority>
 0.5</priority>
 		<lastmod>
-2022-06-13</lastmod>
+2022-12-21</lastmod>
 	</url>
 	<url>
 		<loc>
