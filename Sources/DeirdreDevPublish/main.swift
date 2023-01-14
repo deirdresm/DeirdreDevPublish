@@ -86,7 +86,6 @@ struct SolidStateSite: Website, SolidStateWebsite {
     var contacts: [(ContactPoint, String)] { [
         // phone, email, facebook
 		(.mastodon, "https://hachyderm.io/@deirdresm"),
-        (.twitter, "deirdresm"),
         (.linkedIn, "deirdresm"),
         (.gitHub, "deirdresm"),
         (.email, "deirdre@deirdre.net")
