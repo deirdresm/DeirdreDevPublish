@@ -15,7 +15,6 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "Publish", url: "https://github.com/johnsundell/publish.git", from: "0.8.0"),
-        .package(name: "TwitterPublishPlugin", url: "https://github.com/deirdresm/TwitterPublishPlugin.git", from: "0.1.1"),
 		.package(name: "SplashPublishPlugin", url: "https://github.com/johnsundell/splashpublishplugin", from: "0.2.0"),
 //		.package(url: "https://github.com/deirdresm/ImageAttributesPublishPlugin", from: "0.1.2")
 
@@ -25,7 +24,6 @@ let package = Package(
         .target(
             name: "DeirdreDevPublish",
             dependencies: ["Publish",
-						   "TwitterPublishPlugin",
 						   "SplashPublishPlugin"
 //						   ,"ImageAttributesPublishPlugin"
             ]

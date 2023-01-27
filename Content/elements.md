@@ -62,7 +62,6 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
             <h4>Icons</h4>
             <ul class="icons">
                 <li><a href="#" class="icon brands fa-mastodon"><span class="label">Mastodon</span></a></li>
-                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
                 <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
                 <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
                 <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>

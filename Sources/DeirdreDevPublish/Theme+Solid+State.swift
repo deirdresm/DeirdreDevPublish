@@ -8,7 +8,6 @@
 import Foundation
 import Publish
 import Plot
-import TwitterPublishPlugin
 
 public protocol SolidStateImageMetadata {
     var path: String { get }

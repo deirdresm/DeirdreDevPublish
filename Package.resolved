@@ -90,15 +90,6 @@
           "revision": "801c2878e4c6c5baf32fe132e1f3f3af6f9fd1b0",
           "version": "0.4.0"
         }
-      },
-      {
-        "package": "TwitterPublishPlugin",
-        "repositoryURL": "https://github.com/deirdresm/TwitterPublishPlugin.git",
-        "state": {
-          "branch": null,
-          "revision": "aeab82144b3c300d0a9c1cb139ee2defbb88f708",
-          "version": "0.1.1"
-        }
       }
     ]
   },

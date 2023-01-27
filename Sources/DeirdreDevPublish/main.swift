@@ -1,14 +1,12 @@
 import Foundation
 import Publish
 import Plot
-import TwitterPublishPlugin
 import SplashPublishPlugin
 //import ImageAttributesPublishPlugin
 //import GistPublishPlugin
 
 // https://github.com/tanabe1478/YoutubePublishPlugin
 // https://github.com/alexito4/ItemPosterPublishPlugin
-// https://github.com/insidegui/TwitterPublishPlugin
 // https://github.com/tgymnich/FaviconPublishPlugin
 
 // This type acts as the configuration for your website.
@@ -126,7 +124,7 @@ try SolidStateSite().publish(withTheme: .solidState,
 
 
                              ],
-							 plugins: [.twitter(), .splash(withClassPrefix: "")]
+							 plugins: [.splash(withClassPrefix: "")]
  )
 } catch let error {
 	print("error: \(error)")
